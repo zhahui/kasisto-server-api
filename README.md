@@ -7,7 +7,8 @@ This page describes the Kasisto Integration API version 1.0.
 
 ## Overview
 
-Unlike many other REST API specifications, this specifies an API that *your institution must implement on the server*.  This is not bny API that your institition will call, rather this is a way for Kasisto to integrate with your institition in order to provide conversational AI capabilities.
+Unlike many other REST API specifications, this specifies an API that *your institution must implement on the server*.  
+This is ~not~ an API that your institition will call, rather this is a way for Kasisto to integrate with your institition in order to provide conversational AI capabilities.
 
 ## Quick links
 
@@ -19,7 +20,8 @@ Kasisto utilizes <a href="http://swagger.io" target="_blank">Swagger</a> as a wa
 You can turn our API spec into server-side code with <a href="https://github.com/swagger-api/swagger-codegen" target="_blank">Swagger Codegen</a>.
 
 ## Security and Authentication
-The following requirements must be met:
+The following security requirements must be met:
+
 | Type | Requirement |
 | ---- | ----------- |
 | Encryption | All servers must implement HTTPS/TLS end-points |
