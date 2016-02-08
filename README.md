@@ -8,7 +8,7 @@ This page describes the Kasisto Integration API version 1.0.
 ## Overview
 
 Unlike many other REST API specifications, this specifies an API that *your institution must implement on the server*.  
-This is ~not~ an API that your institition will call, rather this is a way for Kasisto to integrate with your institition in order to provide conversational AI capabilities.
+This is not an API that your institition will call, rather this is a way for Kasisto to integrate with your institition in order to provide conversational AI capabilities.
 
 ## Quick links
 

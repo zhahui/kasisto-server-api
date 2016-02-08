@@ -31,6 +31,7 @@
   "paths": {
     "/token": {
       "post": {
+        "x-name":"Token",
         "tags":["Customer"],
         "description": "Get access token for a customer",
         "parameters": [
@@ -66,6 +67,7 @@
     },
     "/validate_otp":{
         "post":{
+        "x-name":"Validate OTP",
         "tags":["Customer"],
             "description":"Validate One-Time Password and return new user token",
             "parameters":[
@@ -116,6 +118,7 @@
     },
     "/customer": {
       "post": {
+        "x-name":"Customer",
         "tags":["Customer"],
         "description": "Get customer object",
         "parameters": [
@@ -168,6 +171,7 @@
     },
     "/accounts": {
       "post": {
+        "x-name":"Accounts",
         "tags":["Accounts"],
         "description": "Get customer accounts",
         "parameters": [
@@ -223,6 +227,7 @@
     },
     "/transactions": {
       "post": {
+        "x-name":"Transactions",
         "tags":["Transactions"],
         "description": "Search customer transactions",
         "parameters": [
@@ -278,6 +283,7 @@
     },
     "/payment":{
         "post":{
+            "x-name":"Payment",
             "tags":["Payments"],
             "description":"Pay funds to a payee",
             "parameters":[
@@ -330,6 +336,7 @@
     },
     "/transfer":{
         "post":{
+        "x-name":"Transfer",
         "tags":["Transfers"],
             "description":"Transfer funds between two accounts",
             "parameters":[
@@ -382,6 +389,7 @@
     
     "/payees": {
       "post": {
+        "x-name":"Payees",
         "tags":["Payments"],
         "description": "Get list of payees for a user",
         "parameters":[
@@ -421,12 +429,19 @@
                     }
                 }
             }
+          },
+          "401": {
+            "description": "Authentication Failed"
+          },
+          "403": {
+            "description": "Access Denied"
           }
         }
       }
     },
     "/categories": {
       "post": {
+        "x-name":"Categories",
         "tags":["Transactions"],
         "description": "Get transaction categories",
         "parameters":[
@@ -466,12 +481,19 @@
                     "required":false
                 }
             }
+          },
+          "401": {
+            "description": "Authentication Failed"
+          },
+          "403": {
+            "description": "Access Denied"
           }
         }
       }
     },
     "/merchants": {
       "post": {
+        "x-name":"Merchants",
         "tags":["Transactions"],
         "description": "Get merchants",
         "parameters":[
@@ -511,6 +533,12 @@
                     "required":false
                 }
             }
+          },
+          "401": {
+            "description": "Authentication Failed"
+          },
+          "403": {
+            "description": "Access Denied"
           }
         }
       }

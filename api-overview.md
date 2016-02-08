@@ -21,8 +21,7 @@ Version 1.0
   * [/payees](#/payees)
 
 ## Authentication
-The Kasisto API requires all requests to include a secret key header value to authenticate the requests.  Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
-In addition, Kasisto server will create a special header value which is the SHA1 hash of the JSON payload using the secret key value.  Server implementations should validate that this matches the same value generated from the JSON payload, to validate the payload has not been modified.
+The Kasisto API requires all requests to include a secret key header value used for request authentication.  Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
 Server implementations should return a 401 HTTP status code response if authentication fails.
 
 ## Authorization
@@ -33,6 +32,8 @@ Server implementations should return a 403 HTTP status code response if authoriz
 All API access must be over HTTPS.  All data is sent and received as JSON.
 
 ### Customer Methods
+
+#### Validate OTP
 
 ```
 POST /validate_otp
@@ -59,6 +60,8 @@ Validate One-Time Password and return new user token
 | 452 | Expired One-Time Password |
 | 453 | Too Many One-Time Password Failures |
 
+#### Customer
+
 ```
 POST /customer
 ```
@@ -81,6 +84,8 @@ Get customer object
 | 401 | Authentication Failed |
 | 403 | Access Denied |
 | 450 | One-Time Password is required |
+
+#### Token
 
 ```
 POST /token
@@ -105,6 +110,8 @@ Get access token for a customer
 
 
 ### Accounts Methods
+
+#### Accounts
 
 ```
 POST /accounts
@@ -132,6 +139,8 @@ Get customer accounts
 
 ### Transactions Methods
 
+#### Merchants
+
 ```
 POST /merchants
 ```
@@ -151,6 +160,10 @@ Get merchants
 | Status | Description |
 | ------ | ----------- |
 | 200 | merchants response |
+| 401 | Authentication Failed |
+| 403 | Access Denied |
+
+#### Transactions
 
 ```
 POST /transactions
@@ -175,6 +188,8 @@ Search customer transactions
 | 403 | Access Denied |
 | 450 | One-Time Password is required |
 
+#### Categories
+
 ```
 POST /categories
 ```
@@ -194,9 +209,13 @@ Get transaction categories
 | Status | Description |
 | ------ | ----------- |
 | 200 | categories response |
+| 401 | Authentication Failed |
+| 403 | Access Denied |
 
 
 ### Transfers Methods
+
+#### Transfer
 
 ```
 POST /transfer
@@ -224,6 +243,8 @@ Transfer funds between two accounts
 
 ### Payments Methods
 
+#### Payment
+
 ```
 POST /payment
 ```
@@ -247,6 +268,8 @@ Pay funds to a payee
 | 403 | Access Denied |
 | 450 | One-Time Password is required |
 
+#### Payees
+
 ```
 POST /payees
 ```
@@ -266,5 +289,7 @@ Get list of payees for a user
 | Status | Description |
 | ------ | ----------- |
 | 200 | payees response |
+| 401 | Authentication Failed |
+| 403 | Access Denied |
 
 
