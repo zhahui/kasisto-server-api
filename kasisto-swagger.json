@@ -1,0 +1,1036 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Kasisto API",
+    "description": "Kasisto Integration API",
+    "contact": {
+      "name": "Kasisto API team",
+      "email": "info@kasisto.com",
+      "url": "http://kasisto.com"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags":[
+    {"name":"Customer"},
+    {"name":"Accounts"},
+    {"name":"Transactions"},
+    {"name":"Transfers"},
+    {"name":"Payments"}
+    ],
+  "paths": {
+    "/token": {
+      "post": {
+        "tags":["Customer"],
+        "description": "Get access token for a customer",
+        "parameters": [
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name": "token_credentials",
+            "in":"body",
+            "schema":{
+                "$ref":"#/definitions/token_credentials"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "token response",
+            "schema": {
+                "$ref":"#/definitions/token_response"
+              }
+           },
+          "401": {
+            "descripton": "Authentication Failed"
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/validate_otp":{
+        "post":{
+        "tags":["Customer"],
+            "description":"Validate One-Time Password and return new user token",
+            "parameters":[
+                  {
+                    "name":"secret",
+                    "in":"header",
+                    "required":true,
+                    "type":"string"
+                  },
+                  {
+                    "name":"token",
+                    "in":"header",
+                    "required":true,
+                    "type":"string"
+                  },
+                  {
+                      "name":"validate_otp_request",
+                      "in":"body",
+                      "schema":{
+                        "$ref":"#/definitions/validate_otp_request"
+                      }
+                  }
+            ],
+            "responses": {
+              "200": {
+                "description": "token response",
+                "schema": {
+                    "$ref":"#/definitions/validate_otp_response"
+                }
+              },
+              "401": {
+                "descripton": "Authentication Failed"
+              },
+              "403": {
+                "description": "Access Denied"
+              },
+              "451":{
+                "description":"Invalid One-Time Password"
+              },
+              "452":{
+                "description":"Expired One-Time Password"
+              },
+              "453":{
+                "description":"Too Many One-Time Password Failures"
+              }
+            }
+        }
+    },
+    "/customer": {
+      "post": {
+        "tags":["Customer"],
+        "description": "Get customer object",
+        "parameters": [
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name": "customer_request",
+            "in":"body",
+            "required": true,
+            "schema":{
+                "$ref":"#/definitions/customer_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "customer response",
+            "schema": {
+              "$ref": "#/definitions/customer"
+            },
+            "headers":{
+                "token":{
+                    "description":"Valid auth token for subsequent requests if using SSO tokens",
+                    "type":"string",
+                    "required":false
+                }
+            }
+          },
+          "401": {
+            "descripton": "Authentication Failed"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "450":{
+              "description":"One-Time Password is required"
+          }
+        }
+      }
+    },
+    "/accounts": {
+      "post": {
+        "tags":["Accounts"],
+        "description": "Get customer accounts",
+        "parameters": [
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name": "accounts_request",
+            "in":"body",
+            "required": true,
+            "schema":{
+                "$ref":"#/definitions/accounts_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "accounts response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/account"
+              }
+            },
+            "headers":{
+                "token":{
+                    "description":"Valid auth token for subsequent requests if using SSO tokens",
+                    "type":"string",
+                    "required":false
+                }
+            }
+          },
+          "401": {
+            "descripton": "Authentication Failed"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "450":{
+              "description":"One-Time Password is required"
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "post": {
+        "tags":["Transactions"],
+        "description": "Search customer transactions",
+        "parameters": [
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+              "name":"transaction_criteria",
+              "in":"body",
+              "required":true,
+              "schema":{
+                "$ref":"#/definitions/transaction_criteria"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "transactions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/transaction"
+              }
+            },
+            "headers":{
+                "token":{
+                    "description":"Valid auth token for subsequent requests if using SSO tokens",
+                    "type":"string",
+                    "required":false
+                }
+            }
+          },
+          "401": {
+            "descripton": "Authentication Failed"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "450":{
+              "description":"One-Time Password is required"
+          }
+        }
+      }
+    },
+    "/payment":{
+        "post":{
+            "tags":["Payments"],
+            "description":"Pay funds to a payee",
+            "parameters":[
+                  {
+                    "name":"secret",
+                    "in":"header",
+                    "required":true,
+                    "type":"string"
+                  },
+                  {
+                    "name":"token",
+                    "in":"header",
+                    "required":true,
+                    "type":"string"
+                  },
+                  {
+                      "name":"payment_request",
+                      "in":"body",
+                      "schema":{
+                        "$ref":"#/definitions/payment_request"
+                      }
+                  }
+
+            ],
+            "responses": {
+              "200": {
+                "description": "payment response",
+                "schema": {
+                    "$ref": "#/definitions/payment"
+                },
+                "headers":{
+                    "token":{
+                        "description":"Valid auth token for subsequent requests if using SSO tokens",
+                        "type":"string",
+                        "required":false
+                    }
+                }
+              },
+              "401": {
+                "descripton": "Authentication Failed"
+              },
+              "403": {
+                "description": "Access Denied"
+              },
+              "450":{
+                  "description":"One-Time Password is required"
+              }
+            }
+        }
+    },
+    "/transfer":{
+        "post":{
+        "tags":["Transfers"],
+            "description":"Transfer funds between two accounts",
+            "parameters":[
+                  {
+                    "name":"secret",
+                    "in":"header",
+                    "required":true,
+                    "type":"string"
+                  },
+                  {
+                    "name":"token",
+                    "in":"header",
+                    "required":true,
+                    "type":"string"
+                  },
+                  {
+                      "name":"transfer_request",
+                      "in":"body",
+                      "schema":{
+                        "$ref":"#/definitions/transfer_request"
+                      }
+                  }
+            ],
+            "responses": {
+              "200": {
+                "description": "transfer response",
+                "schema": {
+                    "$ref": "#/definitions/transfer"
+                },
+                "headers":{
+                    "token":{
+                        "description":"Valid auth token for subsequent requests if using SSO tokens",
+                        "type":"string",
+                        "required":false
+                    }
+                }
+              },
+              "401": {
+                "descripton": "Authentication Failed"
+              },
+              "403": {
+                "description": "Access Denied"
+              },
+              "450":{
+                  "description":"One-Time Password is required"
+              }
+            }
+        }
+    },
+    
+    "/payees": {
+      "post": {
+        "tags":["Payments"],
+        "description": "Get list of payees for a user",
+        "parameters":[
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+              "name":"payees_request",
+              "in":"body",
+              "schema":{
+                "$ref":"#/definitions/payees_request"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "payees response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/payee"
+              },
+                "headers":{
+                    "token":{
+                        "description":"Valid auth token for subsequent requests if using SSO tokens",
+                        "type":"string",
+                        "required":false
+                    }
+                }
+            }
+          }
+        }
+      }
+    },
+    "/categories": {
+      "post": {
+        "tags":["Transactions"],
+        "description": "Get transaction categories",
+        "parameters":[
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+              "name":"categories_request",
+              "in":"body",
+              "schema":{
+                "$ref":"#/definitions/categories_request"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "categories response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/category"
+              }
+            },
+            "headers":{
+                "token":{
+                    "description":"Valid auth token for subsequent requests if using SSO tokens",
+                    "type":"string",
+                    "required":false
+                }
+            }
+          }
+        }
+      }
+    },
+    "/merchants": {
+      "post": {
+        "tags":["Transactions"],
+        "description": "Get merchants",
+        "parameters":[
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+              "name":"merchants_request",
+              "in":"body",
+              "schema":{
+                "$ref":"#/definitions/merchants_request"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "merchants response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/merchant"
+              }
+            },
+            "headers":{
+                "token":{
+                    "description":"Valid auth token for subsequent requests if using SSO tokens",
+                    "type":"string",
+                    "required":false
+                }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+      "merchants_request":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            }
+        }
+      },
+      "payees_request":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            }
+        }
+      },
+      "categories_request":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            }
+        }
+      },
+      "transfer_request":{
+          "type":"object",
+          "properties":{
+                "source_account_id":{
+                     "description": "source account of transfer",
+                    "required": true,
+                    "type": "string"
+                  },
+                "dest_account_id":{
+                     "description": "destination account of transfer",
+                    "required": true,
+                    "type": "string"
+                  },
+                    "amount":{
+                     "description": "amount of transfer",
+                    "required": true,
+                    "type":"number",
+                    "format":"float"
+                  },
+                     "currency_code":{
+                     "description": "currency of amounts (USD, etc.)",
+                     "required": false,
+                     "type": "string"
+                  },
+                    "date":{
+                     "description": "date of transfer",
+                    "required": false,
+                    "type":"string",
+                    "format":"date"
+                  }
+          }
+      },
+        "payment_request":
+        {
+            "type":"object",
+            "properties":{
+              "source_account_id":
+              {
+                 "description": "source account of payment",
+                "required": true,
+                "type": "string"
+              },
+              "payee_id":{
+                 "description": "destination payee of payment",
+                "required": true,
+                "type": "string"
+              },
+              "amount":{
+                 "description": "amount of transfer",
+                "required": true,
+                "type":"number",
+                "format":"float"
+              },
+              "currency_code":{
+                 "description": "currency of amounts (USD, etc.)",
+                 "required": false,
+                 "type": "string"
+              },
+              "date":{
+                 "description": "date of payment",
+                "required": false,
+                "type":"string",
+                "format":"date"
+              }
+            }
+        },
+      "accounts_request":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            },
+            "account_id":{
+                "type":"string"
+            }
+        }
+    },
+    "customer_request":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            }
+        }
+    },
+    "validate_otp_request":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            },
+            "otp":{
+                "type":"string"
+            }
+        }
+    },
+    "validate_otp_response":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            },
+            "token":{
+                "type":"string"
+            }
+        }
+    },
+    "token_credentials":{
+        "type":"object",
+        "properties":{
+            "username":{
+                "type":"string"
+            },
+            "password":{
+                "type":"string"
+            }
+        }
+    },
+    "token_response":{
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "transaction_criteria":{
+        "type":"object",
+        "properties":{
+            "user_id":{
+                "type":"string"
+            },
+            "account_ids":{
+                "type":"array",
+                "items":{
+                    "type":"string"
+                }
+            },
+            "limit":{
+                "type":"integer",
+                "format":"int32"
+            }
+        }
+    },
+     "meta_field":{ 
+          "type":"object",
+          "properties":{
+            "name":{
+                "description":"Name of data field",
+                "type":"string",
+                "required":true
+            },
+            "value":{
+                "description":"Value of data field",
+                "type":"string",
+                "required":true
+            }
+          }
+     },
+     "auth_info":{
+        "type":"object",
+        "properties":{
+            "token":{
+                "type":"string",
+                "description":"New valid token if using SSO tokens"
+            },
+            "meta": {
+              "description": "Optional data if needed for application",
+              "required": false,
+              "type": "array",
+              "items":{
+                    "$ref": "#/definitions/meta_field"
+                  }
+              }
+        }
+    },
+    "transfer_response":{
+        "type":"object",
+        "properties":{
+            "auth_info":{
+                "$ref":"#/definitions/auth_info"
+            },
+            "transfer":{
+                "$ref":"#/definitions/transfer"
+            }
+        }
+    }, 
+    "customer": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
+      }
+    },
+    "transfer": {
+      "type": "object",
+      "properties": {
+        "transfer_id": {
+          "type": "string"
+        },
+        "reference_number": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+                "processed",
+                "pending",
+                "cancelled",
+                "failed",
+                "unspecified"
+            ]
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
+      }
+    },
+    "payment": {
+      "type": "object",
+      "properties": {
+        "payment_id": {
+          "type": "string"
+        },
+        "reference_number": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+                "processed",
+                "pending",
+                "cancelled",
+                "failed",
+                "unspecified"
+            ]
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
+      }
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "description": "internal ID used by bank for transaction search API",
+          "type": "string"
+        },
+        "account_number": {
+          "description": "number used by kasisto - may be masked",
+          "type": "string"
+        },
+        "account_name": {
+          "description": "account name or nickname",
+          "type": "string"
+        },
+        "account_type": {
+          "description": "checking,savings,loan,credit_card",
+          "type": "string",
+          "enum": [
+                "cd",
+                "checking",
+                "credit_card",
+                "heloc",
+                "ira",
+                "investment",
+                "loc",
+                "loan",
+                "money_market",
+                "mortgage",
+                "overdraft_protection",
+                "sloc",
+                "savings",
+                "wire",
+                "unspecified"
+          ]
+        },
+        "currency_code": {
+          "description": "currency of amounts (USD, etc.)",
+          "type": "string"
+        },
+        "available_balance": {
+          "type": "number",
+          "format":"float"
+        },
+        "current_balance": {
+          "type": "number",
+          "format":"float"
+        },
+        "available_credit": {
+          "description": "(for credit_card only)",
+          "type": "string"
+        },
+        "payment_due_date": {
+          "description": "(for credit_card and loan)",
+          "type": "string",
+          "format":"date"
+        },
+        "payment_due_amount": {
+          "description": "(for credit_card and loan)",
+          "type": "number",
+          "format":"float"
+        },
+        "interest_rate": {
+          "description": "Interest rate if applicable",
+          "type": "number",
+          "format":"float"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
+        }
+      },
+    "transaction": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "description": "ID of account transaction is from",
+          "type": "string"
+        },
+        "transaction_id": {
+          "description": "ID of this transaction",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of transaction"
+        },
+        "transaction_type": {
+          "description": "Type of transaction",
+          "type": "string",
+          "enum": [
+            "atm",
+            "cash",
+            "check",
+            "check_deposit",
+            "credit",
+            "debit",
+            "fee",
+            "dividend",
+            "interest",
+            "unspecified"
+          ]
+        },
+        "amount": {
+          "description": "Amount of transaction (can be positive or negative)",
+          "type": "number",
+          "format":"float"
+        },
+        "currency_code": {
+          "description": "Currency type of the amount",
+          "type": "string"
+        },
+        "category": {
+          "description": "Category of transaction if provided",
+          "required": false,
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of transaction",
+          "type": "string",
+          "enum": [
+            "posted",
+            "pending",
+            "cancelled",
+            "unspecified"
+          ]
+        },
+        "check_number": {
+          "description": "Check number of transaction is a check",
+          "required": false,
+          "type": "integer",
+          "format":"int32"
+        },
+        "transaction_date": {
+          "description": "Date of transaction",
+          "type": "string",
+          "format":"date"
+        },
+        "post_date": {
+          "description": "Date of transaction",
+          "type": "string",
+          "format":"date"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
+        }
+    },
+
+    "merchant": {
+      "type": "object",
+      "properties": {
+        "merchant_id": {
+          "description": "ID of merchant",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of merchant",
+          "type": "string"
+        },
+        "alias":{
+            "description":"Optional alternative names for this merchant",
+            "type":"array",
+            "items":{
+                "type":"string"
+                }
+            }
+          }
+        },
+    "category": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "description": "ID of transaction category",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of transaction category",
+          "type": "string"
+        },
+        "alias":{
+            "description":"Optional alternative names for this category",
+            "type":"array",
+            "items":{
+                "type":"string"
+                }
+            }
+          }
+        },
+    "payee": {
+      "type": "object",
+      "properties": {
+        "payee_id": {
+          "description": "ID of payee",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of payee",
+          "type": "string"
+        },
+        "alias":{
+            "description":"Optional alternative names for this payee",
+            "type":"array",
+            "items":{
+                "type":"string"
+                }
+            }
+          }
+        }
+  }
+}
