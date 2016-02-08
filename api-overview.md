@@ -4,11 +4,21 @@ Version 1.0
 - [Authentication](#authentication)
 - [Authorization](#authorization)
 - [Schema](#schema)
-- [Customer Methods](#Customer Methods)
-- [Accounts Methods](#Accounts Methods)
-- [Transactions Methods](#Transactions Methods)
-- [Transfers Methods](#Transfers Methods)
-- [Payments Methods](#Payments Methods)
+- [Customer Methods](#customer-methods)
+  * [/validate_otp](#/validate_otp)
+  * [/customer](#/customer)
+  * [/token](#/token)
+- [Accounts Methods](#accounts-methods)
+  * [/accounts](#/accounts)
+- [Transactions Methods](#transactions-methods)
+  * [/merchants](#/merchants)
+  * [/transactions](#/transactions)
+  * [/categories](#/categories)
+- [Transfers Methods](#transfers-methods)
+  * [/transfer](#/transfer)
+- [Payments Methods](#payments-methods)
+  * [/payment](#/payment)
+  * [/payees](#/payees)
 
 ## Authentication
 The Kasisto API requires all requests to include a secret key header value to authenticate the requests.  Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
@@ -34,10 +44,10 @@ Validate One-Time Password and return new user token
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | validate_otp_request | body | False |  |
+
 ##### Responses
 
 | Status | Description |
@@ -59,10 +69,10 @@ Get customer object
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | customer_request | body | True |  |
+
 ##### Responses
 
 | Status | Description |
@@ -82,9 +92,9 @@ Get access token for a customer
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token_credentials | body | False |  |
+
 ##### Responses
 
 | Status | Description |
@@ -106,10 +116,10 @@ Get customer accounts
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | accounts_request | body | True |  |
+
 ##### Responses
 
 | Status | Description |
@@ -132,10 +142,10 @@ Get merchants
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | merchants_request | body | False |  |
+
 ##### Responses
 
 | Status | Description |
@@ -152,10 +162,10 @@ Search customer transactions
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | transaction_criteria | body | True |  |
+
 ##### Responses
 
 | Status | Description |
@@ -175,10 +185,10 @@ Get transaction categories
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | categories_request | body | False |  |
+
 ##### Responses
 
 | Status | Description |
@@ -198,10 +208,10 @@ Transfer funds between two accounts
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | transfer_request | body | False |  |
+
 ##### Responses
 
 | Status | Description |
@@ -224,10 +234,10 @@ Pay funds to a payee
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | payment_request | body | False |  |
+
 ##### Responses
 
 | Status | Description |
@@ -247,10 +257,10 @@ Get list of payees for a user
 
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
-
 | secret | header | True |  |
 | token | header | True |  |
 | payees_request | body | False |  |
+
 ##### Responses
 
 | Status | Description |
