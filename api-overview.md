@@ -53,11 +53,11 @@ Validate One-Time Password and return new user token
 | Status | Description |
 | ------ | ----------- |
 | 200 | token response |
+| 401 | Authentication Failed |
+| 403 | Access Denied |
 | 451 | Invalid One-Time Password |
 | 452 | Expired One-Time Password |
 | 453 | Too Many One-Time Password Failures |
-| 403 | Access Denied |
-| 401 | Authentication Failed |
 
 ```
 POST /customer
@@ -77,10 +77,10 @@ Get customer object
 
 | Status | Description |
 | ------ | ----------- |
-| 450 | One-Time Password is required |
 | 200 | customer response |
-| 403 | Access Denied |
 | 401 | Authentication Failed |
+| 403 | Access Denied |
+| 450 | One-Time Password is required |
 
 ```
 POST /token
@@ -100,8 +100,8 @@ Get access token for a customer
 | Status | Description |
 | ------ | ----------- |
 | 200 | token response |
-| 403 | Access Denied |
 | 401 | Authentication Failed |
+| 403 | Access Denied |
 
 
 ### Accounts Methods
@@ -124,10 +124,10 @@ Get customer accounts
 
 | Status | Description |
 | ------ | ----------- |
-| 450 | One-Time Password is required |
 | 200 | accounts response |
-| 403 | Access Denied |
 | 401 | Authentication Failed |
+| 403 | Access Denied |
+| 450 | One-Time Password is required |
 
 
 ### Transactions Methods
@@ -170,10 +170,10 @@ Search customer transactions
 
 | Status | Description |
 | ------ | ----------- |
-| 450 | One-Time Password is required |
 | 200 | transactions |
-| 403 | Access Denied |
 | 401 | Authentication Failed |
+| 403 | Access Denied |
+| 450 | One-Time Password is required |
 
 ```
 POST /categories
@@ -216,10 +216,10 @@ Transfer funds between two accounts
 
 | Status | Description |
 | ------ | ----------- |
-| 450 | One-Time Password is required |
 | 200 | transfer response |
-| 403 | Access Denied |
 | 401 | Authentication Failed |
+| 403 | Access Denied |
+| 450 | One-Time Password is required |
 
 
 ### Payments Methods
@@ -242,10 +242,10 @@ Pay funds to a payee
 
 | Status | Description |
 | ------ | ----------- |
-| 450 | One-Time Password is required |
 | 200 | payment response |
-| 403 | Access Denied |
 | 401 | Authentication Failed |
+| 403 | Access Denied |
+| 450 | One-Time Password is required |
 
 ```
 POST /payees
