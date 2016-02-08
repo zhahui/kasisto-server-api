@@ -1,16 +1,28 @@
 # Kasisto Integration API Overview
 
-## Customer Methods
-### POST /validate_otp
+## Authentication
+The Kasisto API requires all requests to include a secret key header value to authenticate the requests.  Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
+In addition, Kasisto server will create a special header value which is the SHA1 hash of the JSON payload using the secret key value.  Server implementations should validate that this matches the same value generated from the JSON payload, to validate the payload has not been modified.
+Server implementations should return a 401 HTTP status code response if authentication fails.
+
+## Authorization
+The Kasisto API allows requests to include a user authorization token header value.  This token should be validated on the server implementation to match the provided user_id value and that is has the neccessary privilages to access the requested information.
+Server implementations should return a 403 HTTP status code response if authorization fails.
+
+## Schema
+All API access must be over HTTPS.  All data is sent and received as JSON.
+
+### Customer Methods
+#### POST /validate_otp
 Validate One-Time Password and return new user token
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | validate_otp_request | body | False |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 200 | token response |
@@ -19,48 +31,48 @@ Validate One-Time Password and return new user token
 | 453 | Too Many One-Time Password Failures |
 | 403 | Access Denied |
 | 401 | Authentication Failed |
-### POST /customer
+#### POST /customer
 Get customer object
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | customer_request | body | True |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 450 | One-Time Password is required |
 | 200 | customer response |
 | 403 | Access Denied |
 | 401 | Authentication Failed |
-### POST /token
+#### POST /token
 Get access token for a customer
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token_credentials | body | False |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 200 | token response |
 | 403 | Access Denied |
 | 401 | Authentication Failed |
 
-## Accounts Methods
-### POST /accounts
+### Accounts Methods
+#### POST /accounts
 Get customer accounts
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | accounts_request | body | True |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 450 | One-Time Password is required |
@@ -68,61 +80,61 @@ Get customer accounts
 | 403 | Access Denied |
 | 401 | Authentication Failed |
 
-## Transactions Methods
-### POST /merchants
+### Transactions Methods
+#### POST /merchants
 Get merchants
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | merchants_request | body | False |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 200 | merchants response |
-### POST /transactions
+#### POST /transactions
 Search customer transactions
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | transaction_criteria | body | True |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 450 | One-Time Password is required |
 | 200 | transactions |
 | 403 | Access Denied |
 | 401 | Authentication Failed |
-### POST /categories
+#### POST /categories
 Get transaction categories
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | categories_request | body | False |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 200 | categories response |
 
-## Transfers Methods
-### POST /transfer
+### Transfers Methods
+#### POST /transfer
 Transfer funds between two accounts
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | transfer_request | body | False |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 450 | One-Time Password is required |
@@ -130,33 +142,33 @@ Transfer funds between two accounts
 | 403 | Access Denied |
 | 401 | Authentication Failed |
 
-## Payments Methods
-### POST /payment
+### Payments Methods
+#### POST /payment
 Pay funds to a payee
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | payment_request | body | False |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 450 | One-Time Password is required |
 | 200 | payment response |
 | 403 | Access Denied |
 | 401 | Authentication Failed |
-### POST /payees
+#### POST /payees
 Get list of payees for a user
 
-#### Request Parameters
+##### Request Parameters
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
 | payees_request | body | False |  |
-#### Responses
+##### Responses
 | Status | Description |
 | ------ | ----------- |
 | 200 | payees response |
