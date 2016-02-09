@@ -9,6 +9,7 @@ import com.kasisto.api.model.Category;
 import com.kasisto.api.model.CategoriesRequest;
 
 import java.util.List;
+import java.util.ArrayList;
 import com.kasisto.api.NotFoundException;
 
 import java.io.InputStream;
@@ -25,8 +26,23 @@ public class CategoriesApiServiceImpl extends CategoriesApiService {
       @Override
       public Response categoriesPost(String secret,String token,CategoriesRequest categoriesRequest,SecurityContext securityContext)
       throws NotFoundException {
-      // do some magic!
-      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+      
+      List<Category> categories=new ArrayList<Category>(); 
+     
+      Category category=new Category();
+
+      category.setCategoryId("123");
+      category.setName("Test Category");
+      
+      List<String> aliases=new ArrayList<String>();
+      aliases.add("TestCategory");
+      aliases.add("the test category");
+      
+      category.setAlias(aliases);
+      
+      categories.add(category);
+      
+      return Response.ok().entity(categories).build();
   }
   
 }

@@ -1,0 +1,4 @@
+Added jetty-servlets.jar here to support usage of CrossOriginFilter in web.xml.
+You may or may not require this. 
+You may also require a different version of this file if using a different version of Jetty, etc.
+

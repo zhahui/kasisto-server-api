@@ -18,6 +18,7 @@ public class Transaction   {
   
   private String accountId = null;
   private String transactionId = null;
+  private String description = null;
 
 
   public enum TransactionTypeEnum {
@@ -104,6 +105,18 @@ public class Transaction   {
     this.transactionId = transactionId;
   }
 
+  /**
+   * Description of the transaction 
+   **/
+  
+  @ApiModelProperty(value = "Description of the transaction")
+  @JsonProperty("description")
+  public String getDescription() {
+    return description;
+  }
+  public void setDescription(String description) {
+    this.description=description;
+  }
   
   /**
    * Type of transaction

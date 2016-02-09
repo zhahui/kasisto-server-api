@@ -9,6 +9,7 @@ import com.kasisto.api.model.PayeesRequest;
 import com.kasisto.api.model.Payee;
 
 import java.util.List;
+import java.util.ArrayList;
 import com.kasisto.api.NotFoundException;
 
 import java.io.InputStream;
@@ -25,8 +26,22 @@ public class PayeesApiServiceImpl extends PayeesApiService {
       @Override
       public Response payeesPost(String secret,String token,PayeesRequest payeesRequest,SecurityContext securityContext)
       throws NotFoundException {
-      // do some magic!
-      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+     
+      List<Payee> payees=new ArrayList<Payee>();
+        
+      for(int i=0;i<10;i++)
+      {
+        Payee payee=new Payee();
+        payee.setPayeeId("payee"+i);
+        payee.setName("Joe Payee"+i);
+        List<String> aliases=new ArrayList<String>();
+        aliases.add("Joe"+i);
+        aliases.add("Joseph"+i);
+        payee.setAlias(aliases);
+        payees.add(payee);
+      }
+      
+      return Response.ok().entity(payees).build();
   }
   
 }

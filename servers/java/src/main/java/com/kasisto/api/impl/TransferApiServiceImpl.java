@@ -6,6 +6,7 @@ import com.kasisto.api.model.*;
 import com.sun.jersey.multipart.FormDataParam;
 
 import com.kasisto.api.model.Transfer;
+import com.kasisto.api.model.Transfer.StatusEnum;
 import com.kasisto.api.model.TransferRequest;
 
 import java.util.List;
@@ -25,8 +26,14 @@ public class TransferApiServiceImpl extends TransferApiService {
       @Override
       public Response transferPost(String secret,String token,TransferRequest transferRequest,SecurityContext securityContext)
       throws NotFoundException {
-      // do some magic!
-      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+      
+      Transfer transfer=new Transfer();
+
+     transfer.setTransferId("1231232");
+     transfer.setReferenceNumber("r343334334");
+     transfer.setStatus(StatusEnum.PROCESSED);
+      
+      return Response.ok().entity(transfer).build();
   }
   
 }

@@ -6,6 +6,7 @@ import com.kasisto.api.model.*;
 import com.sun.jersey.multipart.FormDataParam;
 
 import com.kasisto.api.model.Payment;
+import com.kasisto.api.model.Payment.StatusEnum;
 import com.kasisto.api.model.PaymentRequest;
 
 import java.util.List;
@@ -25,8 +26,15 @@ public class PaymentApiServiceImpl extends PaymentApiService {
       @Override
       public Response paymentPost(String secret,String token,PaymentRequest paymentRequest,SecurityContext securityContext)
       throws NotFoundException {
-      // do some magic!
-      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+      
+      Payment payment=new Payment();
+
+      payment.setPaymentId("1234567");
+      payment.setReferenceNumber("1234523423");
+      payment.setStatus(StatusEnum.PROCESSED);
+      
+      
+      return Response.ok().entity(payment).build();
   }
   
 }

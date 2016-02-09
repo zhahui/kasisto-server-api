@@ -892,7 +892,8 @@
         },
         "available_credit": {
           "description": "(for credit_card only)",
-          "type": "string"
+          "type": "number",
+          "format":"float"
         },
         "payment_due_date": {
           "description": "(for credit_card and loan)",
@@ -931,7 +932,8 @@
           "type": "string"
         },
         "description": {
-          "description": "Description of transaction"
+          "description": "Description of transaction",
+          "type":"string"
         },
         "transaction_type": {
           "description": "Type of transaction",

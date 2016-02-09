@@ -55,7 +55,7 @@ public class Account   {
   private String currencyCode = null;
   private Float availableBalance = null;
   private Float currentBalance = null;
-  private String availableCredit = null;
+  private Float availableCredit = null;
   private Date paymentDueDate = null;
   private Float paymentDueAmount = null;
   private Float interestRate = null;
@@ -164,10 +164,10 @@ public class Account   {
   
   @ApiModelProperty(value = "(for credit_card only)")
   @JsonProperty("available_credit")
-  public String getAvailableCredit() {
+  public Float getAvailableCredit() {
     return availableCredit;
   }
-  public void setAvailableCredit(String availableCredit) {
+  public void setAvailableCredit(Float availableCredit) {
     this.availableCredit = availableCredit;
   }
 

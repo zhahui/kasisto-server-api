@@ -25,8 +25,12 @@ public class ValidateOtpApiServiceImpl extends ValidateOtpApiService {
       @Override
       public Response validateOtpPost(String secret,String token,ValidateOtpRequest validateOtpRequest,SecurityContext securityContext)
       throws NotFoundException {
-      // do some magic!
-      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+      
+      ValidateOtpResponse r=new ValidateOtpResponse();
+      r.setUserId("1234567890");
+      r.setToken("123123-123123123-123123123");
+      
+      return Response.ok().entity(r).build();
   }
   
 }

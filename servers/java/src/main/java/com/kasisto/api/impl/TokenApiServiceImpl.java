@@ -25,8 +25,13 @@ public class TokenApiServiceImpl extends TokenApiService {
       @Override
       public Response tokenPost(String secret,TokenCredentials tokenCredentials,SecurityContext securityContext)
       throws NotFoundException {
-      // do some magic!
-      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+      
+      TokenResponse tokenResponse=new TokenResponse();
+      
+      tokenResponse.setUserId("1234567890");
+      tokenResponse.setToken("12345-56788-434343-131123131");
+      
+      return Response.ok().entity(tokenResponse).build();
   }
   
 }

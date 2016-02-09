@@ -9,6 +9,7 @@ import com.kasisto.api.model.CustomerRequest;
 import com.kasisto.api.model.Customer;
 
 import java.util.List;
+import java.util.ArrayList;
 import com.kasisto.api.NotFoundException;
 
 import java.io.InputStream;
@@ -25,8 +26,23 @@ public class CustomerApiServiceImpl extends CustomerApiService {
       @Override
       public Response customerPost(String secret,String token,CustomerRequest customerRequest,SecurityContext securityContext)
       throws NotFoundException {
-      // do some magic!
-      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+      
+      Customer customer=new Customer();
+    
+      customer.setUserId("1234567890");
+      customer.setFullName("Joe Tester");
+      customer.setFirstName("Joe");
+      customer.setLastName("Tester");
+
+      List<MetaField> meta=new ArrayList<MetaField>();
+      
+      MetaField field=new MetaField();
+      field.setName("email");
+      field.setValue("joe.tester@someplace.net");
+      meta.add(field);
+
+      customer.setMeta(meta); 
+      
+      return Response.ok().entity(customer).build();
   }
-  
 }
