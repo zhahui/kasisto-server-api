@@ -33,7 +33,6 @@ Kasisto provides server code samples which implement a server stub to get you st
 
 ### The code for these languages are up-to-date with support for all major functionality
 - [Java](servers/java)
-- [Python](servers/python)
 - [C#](servers/dotnet)
 
 ### Additional server code can be generated using the Swagger code generator
