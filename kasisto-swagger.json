@@ -57,10 +57,28 @@
               }
            },
           "401": {
-            "description": "Authentication Failed"
+            "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "403": {
-            "description": "Access Denied"
+            "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           }
         }
       }
@@ -99,19 +117,46 @@
                 }
               },
               "401": {
-                "description": "Authentication Failed"
+                "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "403": {
-                "description": "Access Denied"
+                "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "451":{
-                "description":"Invalid One-Time Password"
+                "description":"Invalid One-Time Password",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "452":{
-                "description":"Expired One-Time Password"
+                "description":"Expired One-Time Password",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "453":{
-                "description":"Too Many One-Time Password Failures"
+                "description":"Too Many One-Time Password Failures",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+              },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
               }
             }
         }
@@ -158,14 +203,35 @@
             }
           },
           "401": {
-            "description": "Authentication Failed"
+            "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "403": {
-            "description": "Access Denied"
+            "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "450":{
-              "description":"One-Time Password is required"
-          }
+              "description":"One-Time Password is required",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              }
         }
       }
     },
@@ -214,14 +280,35 @@
             }
           },
           "401": {
-            "description": "Authentication Failed"
+            "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "403": {
-            "description": "Access Denied"
+            "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "450":{
-              "description":"One-Time Password is required"
-          }
+              "description":"One-Time Password is required",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              }
         }
       }
     },
@@ -270,14 +357,35 @@
             }
           },
           "401": {
-            "description": "Authentication Failed"
+            "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "403": {
-            "description": "Access Denied"
+            "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "450":{
-              "description":"One-Time Password is required"
-          }
+              "description":"One-Time Password is required",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              }
         }
       }
     },
@@ -323,13 +431,34 @@
                 }
               },
               "401": {
-                "description": "Authentication Failed"
+                "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "403": {
-                "description": "Access Denied"
+                "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "450":{
-                  "description":"One-Time Password is required"
+                  "description":"One-Time Password is required",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+              },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
               }
             }
         }
@@ -375,13 +504,34 @@
                 }
               },
               "401": {
-                "description": "Authentication Failed"
+                "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "403": {
-                "description": "Access Denied"
+                "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
               },
               "450":{
-                  "description":"One-Time Password is required"
+                  "description":"One-Time Password is required",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+              },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
               }
             }
         }
@@ -431,11 +581,29 @@
             }
           },
           "401": {
-            "description": "Authentication Failed"
+            "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "403": {
-            "description": "Access Denied"
-          }
+            "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              }
         }
       }
     },
@@ -483,11 +651,29 @@
             }
           },
           "401": {
-            "description": "Authentication Failed"
+            "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "403": {
-            "description": "Access Denied"
-          }
+            "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              }
         }
       }
     },
@@ -535,16 +721,47 @@
             }
           },
           "401": {
-            "description": "Authentication Failed"
+            "description": "Authentication Failed",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
           },
           "403": {
-            "description": "Access Denied"
-          }
+            "description": "Access Denied",
+            "schema":{
+                "$ref":"#/definitions/error_response"
+            }
+          },
+              "500": {
+                "description": "Server Error",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              },
+              "501": {
+                "description": "Not Implemented",
+                "schema":{
+                    "$ref":"#/definitions/error_response"
+                }
+              }
         }
       }
     }
   },
   "definitions": {
+      "error_response":{
+        "type":"object",
+        "properties":{
+            "message":{
+                "type":"string",
+                "required":false
+            },
+            "code":{
+                "type":"string",
+                "required":false
+            }
+        }
+      },
       "merchants_request":{
         "type":"object",
         "properties":{
@@ -962,6 +1179,11 @@
         },
         "category": {
           "description": "Category of transaction if provided",
+          "required": false,
+          "type": "string"
+        },
+        "merchant": {
+          "description": "Merchent or vendor of transaction if provided",
           "required": false,
           "type": "string"
         },
