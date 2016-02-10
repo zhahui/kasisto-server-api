@@ -30,6 +30,7 @@ Server implementations should return a 403 HTTP status code response if authoriz
 
 ## Schema
 All API access must be over HTTPS.  All data is sent and received as JSON.
+Schema definitions are described [here](#schema-definitions).
 
 ### Customer Methods
 
@@ -43,11 +44,11 @@ Validate One-Time Password and return new user token
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [validate_otp_request](#validate_otp_request) | body | False |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [validate_otp_request](#validate_otp_request) | body | 
 
 ##### Responses
 
@@ -72,11 +73,11 @@ Get customer object
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [customer_request](#customer_request) | body | True |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [customer_request](#customer_request) | body | 
 
 ##### Responses
 
@@ -99,10 +100,10 @@ Get access token for a customer
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| [token_credentials](#token_credentials) | body | False |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| [token_credentials](#token_credentials) | body | 
 
 ##### Responses
 
@@ -127,11 +128,11 @@ Get customer accounts
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [accounts_request](#accounts_request) | body | True |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [accounts_request](#accounts_request) | body | 
 
 ##### Responses
 
@@ -157,11 +158,11 @@ Get merchants
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [merchants_request](#merchants_request) | body | False |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [merchants_request](#merchants_request) | body | 
 
 ##### Responses
 
@@ -183,11 +184,11 @@ Search customer transactions
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [transaction_criteria](#transaction_criteria) | body | True |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [transaction_criteria](#transaction_criteria) | body | 
 
 ##### Responses
 
@@ -210,11 +211,11 @@ Get transaction categories
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [categories_request](#categories_request) | body | False |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [categories_request](#categories_request) | body | 
 
 ##### Responses
 
@@ -239,11 +240,11 @@ Transfer funds between two accounts
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [transfer_request](#transfer_request) | body | False |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [transfer_request](#transfer_request) | body | 
 
 ##### Responses
 
@@ -269,11 +270,11 @@ Pay funds to a payee
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [payment_request](#payment_request) | body | False |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [payment_request](#payment_request) | body | 
 
 ##### Responses
 
@@ -296,11 +297,11 @@ Get list of payees for a user
 
 ##### Request Parameters
 
-| Parameter | Location | Required | Description |
-| ------ | ----------- | -------- | ----------- |
-| secret | header | True |  |
-| token | header | True |  |
-| [payees_request](#payees_request) | body | False |  |
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [payees_request](#payees_request) | body | 
 
 ##### Responses
 
@@ -313,7 +314,7 @@ Get list of payees for a user
 | 501 | Not Implemented | [error_response](#error_response) |
 
 
-### Definitions
+### Schema Definitions
 
 #### account
 
