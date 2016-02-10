@@ -10,15 +10,15 @@ Version 1.0
   * [/token](#token)
 - [Accounts Methods](#accounts-methods)
   * [/accounts](#accounts)
-- [Transactions Methods](### transactions-methods)
-  * [/merchants](#### merchants)
-  * [/transactions](#### transactions)
-  * [/categories](#### categories)
-- [Transfers Methods](### transfers-methods)
-  * [/transfer](#### transfer)
-- [Payments Methods](### payments-methods)
-  * [/payment](#### payment)
-  * [/payees](#### payees)
+- [Transactions Methods](#transactions-methods)
+  * [/merchants](#merchants)
+  * [/transactions](#transactions)
+  * [/categories](#categories)
+- [Transfers Methods](#transfers-methods)
+  * [/transfer](#transfer)
+- [Payments Methods](#payments-methods)
+  * [/payment](#payment)
+  * [/payees](#payees)
 
 ## Authentication
 The Kasisto API requires all requests to include a secret key header value used for request authentication.  Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
@@ -47,7 +47,7 @@ Validate One-Time Password and return new user token
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| validate_otp_request | body | False |  |
+| [validate_otp_request](#validate_otp_request) | body | False |  |
 
 ##### Responses
 
@@ -76,7 +76,7 @@ Get customer object
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| customer_request | body | True |  |
+| [customer_request](#customer_request) | body | True |  |
 
 ##### Responses
 
@@ -102,7 +102,7 @@ Get access token for a customer
 | Parameter | Location | Required | Description |
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
-| token_credentials | body | False |  |
+| [token_credentials](#token_credentials) | body | False |  |
 
 ##### Responses
 
@@ -131,7 +131,7 @@ Get customer accounts
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| accounts_request | body | True |  |
+| [accounts_request](#accounts_request) | body | True |  |
 
 ##### Responses
 
@@ -161,7 +161,7 @@ Get merchants
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| merchants_request | body | False |  |
+| [merchants_request](#merchants_request) | body | False |  |
 
 ##### Responses
 
@@ -187,7 +187,7 @@ Search customer transactions
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| transaction_criteria | body | True |  |
+| [transaction_criteria](#transaction_criteria) | body | True |  |
 
 ##### Responses
 
@@ -214,7 +214,7 @@ Get transaction categories
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| categories_request | body | False |  |
+| [categories_request](#categories_request) | body | False |  |
 
 ##### Responses
 
@@ -243,7 +243,7 @@ Transfer funds between two accounts
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| transfer_request | body | False |  |
+| [transfer_request](#transfer_request) | body | False |  |
 
 ##### Responses
 
@@ -273,7 +273,7 @@ Pay funds to a payee
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| payment_request | body | False |  |
+| [payment_request](#payment_request) | body | False |  |
 
 ##### Responses
 
@@ -300,7 +300,7 @@ Get list of payees for a user
 | ------ | ----------- | -------- | ----------- |
 | secret | header | True |  |
 | token | header | True |  |
-| payees_request | body | False |  |
+| [payees_request](#payees_request) | body | False |  |
 
 ##### Responses
 
