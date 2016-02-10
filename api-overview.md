@@ -72,12 +72,17 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "otp": "string", 
+    "user_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 {
     "token": "string", 
@@ -121,12 +126,16 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "user_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 {
     "first_name": "string", 
@@ -175,12 +184,17 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 ```
+```json
+{
+    "password": "string", 
+    "username": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 {
     "token": "string", 
@@ -227,12 +241,17 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "account_id": "string", 
+    "user_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 [{
     "account_id": "string", 
@@ -293,12 +312,16 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "user_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 [{
     "alias": [
@@ -347,12 +370,22 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "account_ids": [
+        {
+            "type": "string"
+        }
+    ], 
+    "limit": "string", 
+    "user_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 [{
     "account_id": "string", 
@@ -411,12 +444,16 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "user_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 [{
     "alias": [
@@ -468,12 +505,20 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "amount": 0, 
+    "currency_code": "string", 
+    "date": "2016-01-30", 
+    "dest_account_id": "string", 
+    "source_account_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 {
     "meta": [
@@ -527,12 +572,20 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "amount": 0, 
+    "currency_code": "string", 
+    "date": "2016-01-30", 
+    "payee_id": "string", 
+    "source_account_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 {
     "meta": [
@@ -582,12 +635,16 @@ Accept: application/json
 secret: string
 token: string
 ```
+```json
+{
+    "user_id": "string"
+}
+```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
-
 ```json
 [{
     "alias": [
