@@ -63,6 +63,22 @@ Validate One-Time Password and return new user token
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
 
+##### Sample Request / Response
+
+```http
+POST /validate_otp HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+{
+    "token": "string", 
+    "user_id": "string"
+}
+```
+
 #### Customer
 
 ```
@@ -90,6 +106,30 @@ Get customer object
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
 
+##### Sample Request / Response
+
+```http
+POST /customer HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+{
+    "first_name": "string", 
+    "full_name": "string", 
+    "last_name": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "user_id": "string"
+}
+```
+
 #### Token
 
 ```
@@ -114,6 +154,21 @@ Get access token for a customer
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /token HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+
+Content-Type: application/json
+{
+    "token": "string", 
+    "user_id": "string"
+}
+```
 
 
 ### Accounts Methods
@@ -145,6 +200,37 @@ Get customer accounts
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
 
+##### Sample Request / Response
+
+```http
+POST /accounts HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+[{
+    "account_id": "string", 
+    "account_name": "string", 
+    "account_number": "string", 
+    "account_type": "string", 
+    "available_balance": 0, 
+    "available_credit": 0, 
+    "currency_code": "string", 
+    "current_balance": 0, 
+    "interest_rate": 0, 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "payment_due_amount": 0, 
+    "payment_due_date": "2016-01-30"
+}]
+```
+
 
 ### Transactions Methods
 
@@ -174,6 +260,27 @@ Get merchants
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
 
+##### Sample Request / Response
+
+```http
+POST /merchants HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+[{
+    "alias": [
+        {
+            "type": "string"
+        }
+    ], 
+    "merchant_id": "string", 
+    "name": "string"
+}]
+```
+
 #### Transactions
 
 ```
@@ -201,6 +308,38 @@ Search customer transactions
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
 
+##### Sample Request / Response
+
+```http
+POST /transactions HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+[{
+    "account_id": "string", 
+    "amount": 0, 
+    "category": "string", 
+    "check_number": "string", 
+    "currency_code": "string", 
+    "description": "string", 
+    "merchant": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "post_date": "2016-01-30", 
+    "status": "string", 
+    "transaction_date": "2016-01-30", 
+    "transaction_id": "string", 
+    "transaction_type": "string"
+}]
+```
+
 #### Categories
 
 ```
@@ -226,6 +365,27 @@ Get transaction categories
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /categories HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+[{
+    "alias": [
+        {
+            "type": "string"
+        }
+    ], 
+    "category_id": "string", 
+    "name": "string"
+}]
+```
 
 
 ### Transfers Methods
@@ -257,6 +417,29 @@ Transfer funds between two accounts
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
 
+##### Sample Request / Response
+
+```http
+POST /transfer HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+{
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "reference_number": "string", 
+    "status": "string", 
+    "transfer_id": "string"
+}
+```
+
 
 ### Payments Methods
 
@@ -287,6 +470,29 @@ Pay funds to a payee
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
 
+##### Sample Request / Response
+
+```http
+POST /payment HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+{
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "payment_id": "string", 
+    "reference_number": "string", 
+    "status": "string"
+}
+```
+
 #### Payees
 
 ```
@@ -312,6 +518,27 @@ Get list of payees for a user
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
 | 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /payees HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+
+Content-Type: application/json
+[{
+    "alias": [
+        {
+            "type": "string"
+        }
+    ], 
+    "name": "string", 
+    "payee_id": "string"
+}]
+```
 
 
 ### Schema Definitions
