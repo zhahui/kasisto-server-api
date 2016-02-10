@@ -51,16 +51,16 @@ Validate One-Time Password and return new user token
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | token response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 451 | Invalid One-Time Password |
-| 452 | Expired One-Time Password |
-| 453 | Too Many One-Time Password Failures |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [validate_otp_response](#validate_otp_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 451 | Invalid One-Time Password | [error_response](#error_response) |
+| 452 | Expired One-Time Password | [error_response](#error_response) |
+| 453 | Too Many One-Time Password Failures | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 #### Customer
 
@@ -80,14 +80,14 @@ Get customer object
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | customer response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 450 | One-Time Password is required |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | customer response | [customer](#customer) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 #### Token
 
@@ -106,13 +106,13 @@ Get access token for a customer
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | token response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [token_response](#token_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 
 ### Accounts Methods
@@ -135,14 +135,14 @@ Get customer accounts
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | accounts response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 450 | One-Time Password is required |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | accounts response |  |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 
 ### Transactions Methods
@@ -165,13 +165,13 @@ Get merchants
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | merchants response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | merchants response |  |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 #### Transactions
 
@@ -191,14 +191,14 @@ Search customer transactions
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | transactions |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 450 | One-Time Password is required |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | transactions |  |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 #### Categories
 
@@ -218,13 +218,13 @@ Get transaction categories
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | categories response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | categories response |  |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 
 ### Transfers Methods
@@ -247,14 +247,14 @@ Transfer funds between two accounts
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | transfer response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 450 | One-Time Password is required |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | transfer response | [transfer](#transfer) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 
 ### Payments Methods
@@ -277,14 +277,14 @@ Pay funds to a payee
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | payment response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 450 | One-Time Password is required |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | payment response | [payment](#payment) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 #### Payees
 
@@ -304,13 +304,13 @@ Get list of payees for a user
 
 ##### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 200 | payees response |
-| 401 | Authentication Failed |
-| 403 | Access Denied |
-| 500 | Server Error |
-| 501 | Not Implemented |
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | payees response |  |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
 
 
 ### Definitions
