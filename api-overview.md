@@ -6,10 +6,10 @@ Version 1.0
 - [Schema](#schema)
 - [Customer Methods](#customer-methods)
   * [/validate_otp](#validate-otp)
-  * [/customer](#### customer)
-  * [/token](#### token)
-- [Accounts Methods](### accounts-methods)
-  * [/accounts](#### accounts)
+  * [/customer](#customer)
+  * [/token](#token)
+- [Accounts Methods](#accounts-methods)
+  * [/accounts](#accounts)
 - [Transactions Methods](### transactions-methods)
   * [/merchants](#### merchants)
   * [/transactions](#### transactions)
@@ -33,7 +33,7 @@ All API access must be over HTTPS.  All data is sent and received as JSON.
 
 ### Customer Methods
 
-# Validate OTP
+#### Validate OTP
 
 ```
 POST /validate_otp
