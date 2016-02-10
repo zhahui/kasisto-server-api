@@ -137,7 +137,7 @@ Get customer accounts
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | accounts response |  |
+| 200 | accounts response | Array of [account](#account) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 450 | One-Time Password is required | [error_response](#error_response) |
@@ -167,7 +167,7 @@ Get merchants
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | merchants response |  |
+| 200 | merchants response | Array of [merchant](#merchant) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
@@ -193,7 +193,7 @@ Search customer transactions
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | transactions |  |
+| 200 | transactions | Array of [transaction](#transaction) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 450 | One-Time Password is required | [error_response](#error_response) |
@@ -220,7 +220,7 @@ Get transaction categories
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | categories response |  |
+| 200 | categories response | Array of [category](#category) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
@@ -306,7 +306,7 @@ Get list of payees for a user
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | payees response |  |
+| 200 | payees response | Array of [payee](#payee) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
