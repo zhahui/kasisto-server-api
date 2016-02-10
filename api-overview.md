@@ -71,8 +71,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 {
     "token": "string", 
     "user_id": "string"
@@ -114,8 +120,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 {
     "first_name": "string", 
     "full_name": "string", 
@@ -162,8 +174,14 @@ POST /token HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 {
     "token": "string", 
     "user_id": "string"
@@ -208,8 +226,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 [{
     "account_id": "string", 
     "account_name": "string", 
@@ -268,8 +292,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 [{
     "alias": [
         {
@@ -316,8 +346,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 [{
     "account_id": "string", 
     "amount": 0, 
@@ -374,8 +410,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 [{
     "alias": [
         {
@@ -425,8 +467,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 {
     "meta": [
         {
@@ -478,8 +526,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 {
     "meta": [
         {
@@ -527,8 +581,14 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
+```
 
+```http
+HTTP/1.1 200 OK
 Content-Type: application/json
+```
+
+```json
 [{
     "alias": [
         {
