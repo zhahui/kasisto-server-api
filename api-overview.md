@@ -4,8 +4,8 @@ Version 1.0
 - [Authentication](#authentication)
 - [Authorization](#authorization)
 - [Schema](#schema)
-- [Customer Methods](### customer-methods)
-  * [/validate_otp](#### validate-otp)
+- [Customer Methods](#customer-methods)
+  * [/validate_otp](#validate-otp)
   * [/customer](#### customer)
   * [/token](#### token)
 - [Accounts Methods](### accounts-methods)
@@ -33,7 +33,7 @@ All API access must be over HTTPS.  All data is sent and received as JSON.
 
 ### Customer Methods
 
-#### Validate OTP
+# Validate OTP
 
 ```
 POST /validate_otp
@@ -318,144 +318,296 @@ Get list of payees for a user
 #### account
 
 ```json
-{"available_credit": 0, "account_type": "string", "account_id": "string", "payment_due_amount": 0, "current_balance": 0, "interest_rate": 0, "payment_due_date": "2016-01-30", "available_balance": 0, "meta": [{"$ref": "#/definitions/meta_field"}], "account_number": "string", "account_name": "string", "currency_code": "string"}
+{
+    "account_id": "string", 
+    "account_name": "string", 
+    "account_number": "string", 
+    "account_type": "string", 
+    "available_balance": 0, 
+    "available_credit": 0, 
+    "currency_code": "string", 
+    "current_balance": 0, 
+    "interest_rate": 0, 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "payment_due_amount": 0, 
+    "payment_due_date": "2016-01-30"
+}
 ```
 
 #### accounts_request
 
 ```json
-{"user_id": "string", "account_id": "string"}
+{
+    "account_id": "string", 
+    "user_id": "string"
+}
 ```
 
 #### auth_info
 
 ```json
-{"token": "string", "meta": [{"$ref": "#/definitions/meta_field"}]}
+{
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "token": "string"
+}
 ```
 
 #### categories_request
 
 ```json
-{"user_id": "string"}
+{
+    "user_id": "string"
+}
 ```
 
 #### category
 
 ```json
-{"alias": [{"type": "string"}], "category_id": "string", "name": "string"}
+{
+    "alias": [
+        {
+            "type": "string"
+        }
+    ], 
+    "category_id": "string", 
+    "name": "string"
+}
 ```
 
 #### customer
 
 ```json
-{"first_name": "string", "last_name": "string", "user_id": "string", "meta": [{"$ref": "#/definitions/meta_field"}], "full_name": "string"}
+{
+    "first_name": "string", 
+    "full_name": "string", 
+    "last_name": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "user_id": "string"
+}
 ```
 
 #### customer_request
 
 ```json
-{"user_id": "string"}
+{
+    "user_id": "string"
+}
 ```
 
 #### error_response
 
 ```json
-{"message": "string", "code": "string"}
+{
+    "code": "string", 
+    "message": "string"
+}
 ```
 
 #### merchant
 
 ```json
-{"alias": [{"type": "string"}], "merchant_id": "string", "name": "string"}
+{
+    "alias": [
+        {
+            "type": "string"
+        }
+    ], 
+    "merchant_id": "string", 
+    "name": "string"
+}
 ```
 
 #### merchants_request
 
 ```json
-{"user_id": "string"}
+{
+    "user_id": "string"
+}
 ```
 
 #### meta_field
 
 ```json
-{"name": "string", "value": "string"}
+{
+    "name": "string", 
+    "value": "string"
+}
 ```
 
 #### payee
 
 ```json
-{"alias": [{"type": "string"}], "payee_id": "string", "name": "string"}
+{
+    "alias": [
+        {
+            "type": "string"
+        }
+    ], 
+    "name": "string", 
+    "payee_id": "string"
+}
 ```
 
 #### payees_request
 
 ```json
-{"user_id": "string"}
+{
+    "user_id": "string"
+}
 ```
 
 #### payment
 
 ```json
-{"payment_id": "string", "reference_number": "string", "meta": [{"$ref": "#/definitions/meta_field"}], "status": "string"}
+{
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "payment_id": "string", 
+    "reference_number": "string", 
+    "status": "string"
+}
 ```
 
 #### payment_request
 
 ```json
-{"date": "2016-01-30", "source_account_id": "string", "amount": 0, "payee_id": "string", "currency_code": "string"}
+{
+    "amount": 0, 
+    "currency_code": "string", 
+    "date": "2016-01-30", 
+    "payee_id": "string", 
+    "source_account_id": "string"
+}
 ```
 
 #### token_credentials
 
 ```json
-{"username": "string", "password": "string"}
+{
+    "password": "string", 
+    "username": "string"
+}
 ```
 
 #### token_response
 
 ```json
-{"token": "string", "user_id": "string"}
+{
+    "token": "string", 
+    "user_id": "string"
+}
 ```
 
 #### transaction
 
 ```json
-{"category": "string", "merchant": "string", "account_id": "string", "transaction_date": "2016-01-30", "transaction_type": "string", "post_date": "2016-01-30", "amount": 0, "meta": [{"$ref": "#/definitions/meta_field"}], "status": "string", "currency_code": "string", "check_number": "string", "transaction_id": "string", "description": "string"}
+{
+    "account_id": "string", 
+    "amount": 0, 
+    "category": "string", 
+    "check_number": "string", 
+    "currency_code": "string", 
+    "description": "string", 
+    "merchant": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "post_date": "2016-01-30", 
+    "status": "string", 
+    "transaction_date": "2016-01-30", 
+    "transaction_id": "string", 
+    "transaction_type": "string"
+}
 ```
 
 #### transaction_criteria
 
 ```json
-{"user_id": "string", "limit": "string", "account_ids": [{"type": "string"}]}
+{
+    "account_ids": [
+        {
+            "type": "string"
+        }
+    ], 
+    "limit": "string", 
+    "user_id": "string"
+}
 ```
 
 #### transfer
 
 ```json
-{"transfer_id": "string", "reference_number": "string", "meta": [{"$ref": "#/definitions/meta_field"}], "status": "string"}
+{
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "reference_number": "string", 
+    "status": "string", 
+    "transfer_id": "string"
+}
 ```
 
 #### transfer_request
 
 ```json
-{"date": "2016-01-30", "amount": 0, "source_account_id": "string", "currency_code": "string", "dest_account_id": "string"}
+{
+    "amount": 0, 
+    "currency_code": "string", 
+    "date": "2016-01-30", 
+    "dest_account_id": "string", 
+    "source_account_id": "string"
+}
 ```
 
 #### transfer_response
 
 ```json
-{"transfer": "string", "auth_info": "string"}
+{
+    "auth_info": "string", 
+    "transfer": "string"
+}
 ```
 
 #### validate_otp_request
 
 ```json
-{"otp": "string", "user_id": "string"}
+{
+    "otp": "string", 
+    "user_id": "string"
+}
 ```
 
 #### validate_otp_response
 
 ```json
-{"token": "string", "user_id": "string"}
+{
+    "token": "string", 
+    "user_id": "string"
+}
 ```
 
