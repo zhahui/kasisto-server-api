@@ -759,7 +759,15 @@
             "code":{
                 "type":"string",
                 "required":false
-            }
+            },
+            "meta": {
+              "description": "Optional data if needed for application",
+              "required": false,
+              "type": "array",
+              "items":{
+                    "$ref": "#/definitions/meta_field"
+                  }
+              }
         }
       },
       "merchants_request":{
@@ -815,7 +823,15 @@
                     "required": false,
                     "type":"string",
                     "format":"date"
+                  },
+            "meta": {
+              "description": "Optional data if needed for application",
+              "required": false,
+              "type": "array",
+              "items":{
+                    "$ref": "#/definitions/meta_field"
                   }
+              }
           }
       },
         "payment_request":
@@ -849,6 +865,14 @@
                 "required": false,
                 "type":"string",
                 "format":"date"
+              },
+            "meta": {
+              "description": "Optional data if needed for application",
+              "required": false,
+              "type": "array",
+              "items":{
+                    "$ref": "#/definitions/meta_field"
+                  }
               }
             }
         },
@@ -930,6 +954,14 @@
             "limit":{
                 "type":"integer",
                 "format":"int32"
+            },
+            "start_date":{
+                "type":"string",
+                "format":"date"
+            },
+            "end_date":{
+                "type":"string",
+                "format":"date"
             }
         }
     },
@@ -1148,6 +1180,10 @@
           "description": "ID of this transaction",
           "type": "string"
         },
+        "title": {
+          "description": "Short description of transaction",
+          "type":"string"
+        },
         "description": {
           "description": "Description of transaction",
           "type":"string"
@@ -1177,10 +1213,13 @@
           "description": "Currency type of the amount",
           "type": "string"
         },
-        "category": {
+        "categories": {
           "description": "Category of transaction if provided",
           "required": false,
-          "type": "string"
+          "type": "array",
+          "items":{
+            "type":"string"   
+          }
         },
         "merchant": {
           "description": "Merchent or vendor of transaction if provided",
@@ -1241,7 +1280,15 @@
             "items":{
                 "type":"string"
                 }
-            }
+            },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
           }
         },
     "category": {
@@ -1261,7 +1308,15 @@
             "items":{
                 "type":"string"
                 }
-            }
+            },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
           }
         },
     "payee": {
@@ -1281,7 +1336,15 @@
             "items":{
                 "type":"string"
                 }
-            }
+            },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "required": false,
+          "type": "array",
+          "items":{
+                "$ref": "#/definitions/meta_field"
+              }
+          }
           }
         }
   }
