@@ -264,7 +264,7 @@ token: string (optional)
     "payment_due_amount": 0, 
     "current_balance": 0, 
     "interest_rate": 0, 
-    "payment_due_date": "2016-01-30", 
+    "payment_due_date": "2016-02-26T00:00:00.000+0000", 
     "available_balance": 0, 
     "meta": [
         {
@@ -278,6 +278,14 @@ token: string (optional)
 }]
 ```
 
+##### Notes:
+1) The field "account_type" in response should be one of the following:
+    "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
+    "sloc","savings","wire","unspecified".
+    
+2) The field "payment_due_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
+
+3) If there is no meta then pass empty array.
 
 ### Transactions Methods
 
@@ -408,9 +416,9 @@ token: string (optional)
     "title": "string", 
     "transaction_id": "string", 
     "transaction_type": "string", 
-    "post_date": "2016-01-30", 
+    "post_date": "2016-01-30T00:00:00.000+0000", 
     "amount": 0, 
-    "transaction_date": "2016-01-30", 
+    "transaction_date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string", 
@@ -427,6 +435,18 @@ token: string (optional)
     "account_id": "string"
 }]
 ```
+
+##### Notes:
+1) The field "transaction_type" in response should be one of the following:
+   "atm","cash","check","check_deposit","credit","debit”,"fee","dividend","interest","unspecified”.
+
+2) The field "status" in response should be one of the following:
+   "posted","pending","cancelled","unspecified".
+   
+3) The fields "transaction_date" and "post_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
+
+4) If there is no meta or categories then pass empty array. 
+
 
 #### Categories
 
