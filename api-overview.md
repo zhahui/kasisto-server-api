@@ -398,6 +398,21 @@ token: string
             "type": "string"
         }
     ], 
+    "categories": [
+        {
+            "type": "string"
+        }
+    ], 
+     "payees": [
+        {
+            "type": "string"
+        }
+    ], 
+     "merchants": [
+        {
+            "type": "string"
+        }
+    ], 
     "end_date": "2016-01-30", 
     "start_date": "2016-01-30"
 }
@@ -447,6 +462,7 @@ token: string (optional)
 
 4) If there is no meta or categories then pass empty array. 
 
+5) We prefer that API do not implement filtering by category, payee or merchant and instead rely on Kai adapter to do that filtering.
 
 #### Categories
 
