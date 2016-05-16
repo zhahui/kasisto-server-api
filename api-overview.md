@@ -1016,6 +1016,21 @@ token: string (optional)
             "type": "string"
         }
     ], 
+    "categories": [
+        {
+            "type": "string"
+        }
+    ], 
+     "payees": [
+        {
+            "type": "string"
+        }
+    ], 
+     "merchants": [
+        {
+            "type": "string"
+        }
+    ], 
     "end_date": "2016-01-30", 
     "start_date": "2016-01-30"
 }
