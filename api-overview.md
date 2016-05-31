@@ -242,8 +242,8 @@ secret: string
 ```
 ```json
 {
-    "username": "string", 
-    "password": "string"
+    "user_id": "string", 
+    "token": "string"
 }
 ```
 
@@ -258,7 +258,50 @@ token: string (optional)
     "user_id": "string"
 }
 ```
+#### Revoke Token
 
+```
+POST /revoke_token
+```
+
+Revoke a token or customer
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | Revoke token response | [revoke_token_response](#revoke_token_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /token HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+{
+    "response": "boolean"
+}
+```
 ### Accounts Methods
 
 #### Accounts
