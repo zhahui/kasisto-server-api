@@ -77,7 +77,8 @@ token: string
 ```json
 {
     "otp": "string", 
-    "user_id": "string"
+    "user_id": "string",
+    "otp_id": "string"
 }
 ```
 
