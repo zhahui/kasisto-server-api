@@ -236,7 +236,7 @@ Get session/refresh token for a customer
 ##### Sample Request / Response
 
 ```http
-POST /token HTTP/1.1
+POST /session_token HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
@@ -287,7 +287,7 @@ Revoke a token or customer
 ##### Sample Request / Response
 
 ```http
-POST /token HTTP/1.1
+POST /revoke_token HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
