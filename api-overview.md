@@ -1071,6 +1071,14 @@ token: string (optional)
 }
 ```
 
+#### revoke_token_response
+
+```json
+{
+    "response": "boolean" 
+}
+```
+
 #### transaction
 
 ```json
@@ -1180,7 +1188,8 @@ token: string (optional)
 ```json
 {
     "otp": "string", 
-    "user_id": "string"
+    "user_id": "string",
+    "otp_id": "string"
 }
 ```
 
@@ -1192,4 +1201,11 @@ token: string (optional)
     "user_id": "string"
 }
 ```
+#### session_token_request
 
+```json
+{
+    "user_id": "string",
+    "token": "string
+}
+```
