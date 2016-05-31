@@ -8,6 +8,8 @@ Version 1.0
   * [/validate_otp](#validate-otp)
   * [/customer](#customer)
   * [/token](#token)
+  * [/session_token](#session_token)
+  * [/revoke_token](#revoke_token)
 - [Accounts Methods](#accounts-methods)
   * [/accounts](#accounts)
 - [Transactions Methods](#transactions-methods)
@@ -204,7 +206,58 @@ token: string (optional)
     "user_id": "string"
 }
 ```
+#### Session Token
 
+```
+POST /session_token
+```
+
+Get session/refresh token for a customer
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [session_token_request](#session_token_request) | body | 
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [token_response](#token_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /token HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+```
+```json
+{
+    "username": "string", 
+    "password": "string"
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+{
+    "token": "string", 
+    "user_id": "string"
+}
+```
 
 ### Accounts Methods
 
