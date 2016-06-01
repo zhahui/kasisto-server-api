@@ -8,6 +8,8 @@ Version 1.0
   * [/validate_otp](#validate-otp)
   * [/customer](#customer)
   * [/token](#token)
+  * [/session_token](#session-token)
+  * [/revoke_token](#revoke-token)
 - [Accounts Methods](#accounts-methods)
   * [/accounts](#accounts)
 - [Transactions Methods](#transactions-methods)
@@ -75,7 +77,8 @@ token: string
 ```json
 {
     "otp": "string", 
-    "user_id": "string"
+    "user_id": "string",
+    "otp_id": "string"
 }
 ```
 
@@ -204,8 +207,102 @@ token: string (optional)
     "user_id": "string"
 }
 ```
+#### Session Token
 
+```
+POST /session_token
+```
 
+Get session/refresh token for a customer
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+| [session_token_request](#session_token_request) | body | 
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [token_response](#token_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /session_token HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+```
+```json
+{
+    "user_id": "string", 
+    "token": "string"
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+{
+    "token": "string", 
+    "user_id": "string"
+}
+```
+#### Revoke Token
+
+```
+POST /revoke_token
+```
+
+Revoke a token or customer
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| token | header | 
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | Revoke token response | [revoke_token_response](#revoke_token_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /revoke_token HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+{
+    "response": "boolean"
+}
+```
 ### Accounts Methods
 
 #### Accounts
@@ -975,6 +1072,14 @@ token: string (optional)
 }
 ```
 
+#### revoke_token_response
+
+```json
+{
+    "response": "boolean" 
+}
+```
+
 #### transaction
 
 ```json
@@ -1084,7 +1189,8 @@ token: string (optional)
 ```json
 {
     "otp": "string", 
-    "user_id": "string"
+    "user_id": "string",
+    "otp_id": "string"
 }
 ```
 
@@ -1096,4 +1202,11 @@ token: string (optional)
     "user_id": "string"
 }
 ```
+#### session_token_request
 
+```json
+{
+    "user_id": "string",
+    "token": "string
+}
+```
