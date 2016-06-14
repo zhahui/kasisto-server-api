@@ -1,9 +1,9 @@
-# Kasisto Integration API 1.0
+# Kasisto Integration API 1.0 beta
 Kasisto Integration API Specification for Banks and Financial Institutions
 
 Integrate your customer data with Kasisto.
 
-This page describes the Kasisto Integration API version 1.0.
+This page describes the Kasisto Integration API version 1.0 beta.
 
 ## Overview
 
