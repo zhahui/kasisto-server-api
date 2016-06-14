@@ -1,5 +1,5 @@
 # Kasisto Integration API Overview
-Version 1.0
+Version 1.0 beta
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
