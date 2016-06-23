@@ -278,7 +278,7 @@ Revoke a token or customer
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | Revoke token response | [revoke_token_response](#revoke_token_response) |
+| 200 | token response | [token_response](#token_response) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
@@ -300,7 +300,8 @@ token: string (optional)
 ```
 ```json
 {
-    "response": "boolean"
+    "token": "string", 
+    "user_id": "string"
 }
 ```
 ### Accounts Methods
@@ -1069,14 +1070,6 @@ token: string (optional)
 {
     "token": "string", 
     "user_id": "string"
-}
-```
-
-#### revoke_token_response
-
-```json
-{
-    "response": "boolean" 
 }
 ```
 
