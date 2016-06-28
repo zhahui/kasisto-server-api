@@ -59,8 +59,8 @@ Register a new KAI user with associated platform and institution accounts.
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
 | 200 | token response | [register_user_response](#register_user_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error-response) |
+| 500 | Server Error | [error_response](#error-response) |
 
 ##### Sample Request / Response
 
@@ -140,7 +140,7 @@ Content-Type: application/json
 }
 ```
 
-#### error_response
+#### error response
 
 ```json
 {
