@@ -1351,6 +1351,7 @@ token: string (optional)
     }]
 }
 ```
+
 #### register_user_response
 
 ```json
@@ -1375,8 +1376,6 @@ token: string (optional)
 }
 ```
 
-
-
 #### unregister_user_response
 
 ```json
@@ -1399,4 +1398,3 @@ token: string (optional)
     "message": "string"
 }
 ```
-
