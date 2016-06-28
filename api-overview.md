@@ -4,6 +4,9 @@ Version 1.0 beta
 - [Authentication](#authentication)
 - [Authorization](#authorization)
 - [Schema](#schema)
+- [User Registration Methods](#user-registration-methods)
+  * [/register_user](#register-user)
+  * [/unregister_user](#unregister-user)
 - [Customer Methods](#customer-methods)
   * [/validate_otp](#validate-otp)
   * [/customer](#customer)
@@ -33,6 +36,130 @@ Server implementations should return a 403 HTTP status code response if authoriz
 ## Schema
 All API access must be over HTTPS.  All data is sent and received as JSON.
 Schema definitions are described [here](#schema-definitions).
+
+### User Registration Methods
+
+#### Register User
+
+```
+POST /register_user
+```
+
+Register a new KAI user with associated platform and institution accounts.
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| [register_user_request](#register_user_request) | body | 
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [register_user_response](#register_user_response) |
+| 403 | Access Denied | [error_response](#error-response) |
+| 500 | Server Error | [error_response](#error-response) |
+
+##### Sample Request / Response
+
+```http
+POST /register_user HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+```
+```json
+{
+    "kai_user":{
+        "email":"joe.smith@someplace.com",
+        "first_name":"Joe",
+        "last_name":"Smith"
+    },
+    "platform_accounts":[{
+        "platform_type":"facebook",
+        "account_id":"1234567890"
+    }],
+    "institution_accounts":[{
+        "institution_name":"XYZ",
+        "institution_username":"100123456789",
+        "institution_token":"ABC98123018270170193810923" 
+    }]
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "user_registered": {
+        "kai_user": {
+            "first_name": "Joe",
+            "last_name": "Smith",
+            "email":"joe.smith@someplace.com"
+        }
+    }
+}
+```
+#### Unregister User
+
+```
+POST /unregister_user
+```
+
+Unregister an existing KAI user with associated platform and institution accounts.
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| [unregister_user_request](#unregister_user_request) | body | 
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [unregister_user_response](#unregister_user_response) |
+| 403 | Access Denied | [error_response](#error-response) |
+| 500 | Server Error | [error_response](#error-response) |
+
+##### Sample Request / Response
+
+```http
+POST /unregister_user HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+```
+```json
+{
+    "platform_accounts":[{
+        "platform_type":"facebook",
+        "account_id":"1234567890"
+    }]
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "user_unregistered": [{
+            "first_name": "Joe",
+            "last_name": "Smith",
+            "email":"joe.smith@someplace.com",
+            "platform_type":"facebook",
+            "account_id":"1234567890"
+        }]
+}
+```
+
 
 ### Customer Methods
 
@@ -1201,5 +1328,73 @@ token: string (optional)
 {
     "user_id": "string",
     "token": "string
+}
+```
+
+#### register_user_request
+
+```json
+{
+    "kai_user": {
+        "email":"string (optional if platform account can provide it)",
+        "first_name":"string (optional if platform account can provide it)",
+        "last_name":"string (optional if platform account can provide it)"
+    },
+    "platform_accounts":[{
+        "platform_type":"string (facebook, etc.)",
+        "platform_id":"string (user's facebook ID)"
+    }],
+    "institution_accounts":[{
+        "institution_id":"string (ID of the institution supported by KAI)",
+        "institution_username":"string (username or user ID of institution account)",
+        "institution_token":"string (encrypted authorization token for user)"
+    }]
+}
+```
+
+#### register_user_response
+
+```json
+{
+    "user_registered": {
+        "kai_user": {
+            "first_name": "string",
+            "last_name": "string",
+            "email": "string"
+        }
+    }
+}
+```
+#### unregister_user_request
+
+```json
+{
+    "platform_accounts":[{
+        "platform_type":"string (facebook, etc.)",
+        "platform_id":"string (user's facebook ID)"
+    }]
+}
+```
+
+#### unregister_user_response
+
+```json
+{
+    "user_unregistered": [{
+            "first_name": "Joe",
+            "last_name": "Smith",
+            "email":"joe.smith@someplace.com",
+            "platform_type":"facebook",
+            "account_id":"1234567890"
+        }]
+}
+```
+
+#### error response
+
+```json
+{
+    "error":"string",
+    "message": "string"
 }
 ```
