@@ -1,4 +1,4 @@
-# Kasisto Integration API Overview
+# Kasisto Enterprise API Overview
 Version 1.0 beta
 
 - [Authentication](#authentication)
