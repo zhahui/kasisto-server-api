@@ -218,12 +218,16 @@ GET /registered_user
 
 Get a registered user with associated platform and institution accounts.
 
+User can be retrieved with email, or with institution_name and institution_username parameters.
+
 ##### Request Parameters
 
 | Parameter | Location |
 | --------- | -------- |
 | secret | header | 
-| email | URL parameter|
+| email | URL parameter (optional)|
+| institution_name | URL parameter (optional)|
+| institution_username | URL parameter (optional)|
 
 ##### Responses
 
