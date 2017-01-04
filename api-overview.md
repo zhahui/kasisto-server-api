@@ -197,15 +197,19 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 ```
 ```json
+[
 {
-    "user_registered": {
+    {
         "kai_user": {
             "first_name": "Joe",
             "last_name": "Smith",
             "email":"joe.smith@someplace.com"
-        }
+        },
+        "platform_accounts":[],
+        "institution_accounts":[]
     }
 }
+]
 ```
 
 #### Registered User
@@ -221,7 +225,7 @@ Get a registered user with associated platform and institution accounts.
 | Parameter | Location |
 | --------- | -------- |
 | secret | header | 
-| email | |
+| email | URL parameter|
 
 ##### Responses
 
@@ -245,12 +249,14 @@ Content-Type: application/json
 ```
 ```json
 {
-    "user_registered": {
+    {
         "kai_user": {
             "first_name": "Joe",
             "last_name": "Smith",
             "email":"joe.smith@someplace.com"
-        }
+        },
+        "platform_accounts":[],
+        "institution_accounts":[]
     }
 }
 ```
@@ -1488,27 +1494,33 @@ token: string (optional)
 #### registered_users_response
 
 ```json
+[
 {
-    "user_registered": {
+    {
         "kai_user": {
-            "first_name": "string",
-            "last_name": "string",
-            "email": "string"
-        }
+            "first_name": "Joe",
+            "last_name": "Smith",
+            "email":"joe.smith@someplace.com"
+        },
+        "platform_accounts":[],
+        "institution_accounts":[]
     }
 }
+]
 ```
 
 #### registered_user_response
 
 ```json
 {
-    "user_registered": {
+    {
         "kai_user": {
-            "first_name": "string",
-            "last_name": "string",
-            "email": "string"
-        }
+            "first_name": "Joe",
+            "last_name": "Smith",
+            "email":"joe.smith@someplace.com"
+        },
+        "platform_accounts":[],
+        "institution_accounts":[]
     }
 }
 ```
