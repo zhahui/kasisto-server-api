@@ -7,6 +7,8 @@ Version 1.0 beta
 - [User Registration Methods](#user-registration-methods)
   * [/register_user](#register-user)
   * [/unregister_user](#unregister-user)
+  * [/registered_users](#registered-users)
+  * [/registered_user](#registered-user)
 - [Customer Methods](#customer-methods)
   * [/validate_otp](#validate-otp)
   * [/customer](#customer)
@@ -58,7 +60,7 @@ Register a new KAI user with associated platform and institution accounts.
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | token response | [register_user_response](#register_user_response) |
+| 200 | Register User Response | [register_user_response](#register_user_response) |
 | 403 | Access Denied | [error_response](#error-response) |
 | 500 | Server Error | [error_response](#error-response) |
 
@@ -123,7 +125,7 @@ Unregister an existing KAI user with associated platform and institution account
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | token response | [unregister_user_response](#unregister_user_response) |
+| 200 | Unregistered Users Response | [unregister_user_response](#unregister_user_response) |
 | 403 | Access Denied | [error_response](#error-response) |
 | 500 | Server Error | [error_response](#error-response) |
 
@@ -160,6 +162,98 @@ Content-Type: application/json
 }
 ```
 
+#### Registered Users
+
+```
+GET /registered_users
+```
+
+Get all registered users with associated platform and institution accounts.
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | Registered Users Response | [registered_users_response](#registered_users_response) |
+| 403 | Access Denied | [error_response](#error-response) |
+| 500 | Server Error | [error_response](#error-response) |
+
+##### Sample Request / Response
+
+```http
+GET /registered_users HTTP/1.1
+Accept: application/json
+secret: string
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "user_registered": {
+        "kai_user": {
+            "first_name": "Joe",
+            "last_name": "Smith",
+            "email":"joe.smith@someplace.com"
+        }
+    }
+}
+```
+
+#### Registered User
+
+```
+GET /registered_user
+```
+
+Get a registered user with associated platform and institution accounts.
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header | 
+| email | |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | Registered User Response | [registered_user_response](#registered_user_response) |
+| 403 | Access Denied | [error_response](#error-response) |
+| 500 | Server Error | [error_response](#error-response) |
+
+##### Sample Request / Response
+
+```http
+GET /registered_user?email=joe.smith@someplace.com HTTP/1.1
+Accept: application/json
+secret: string
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "user_registered": {
+        "kai_user": {
+            "first_name": "Joe",
+            "last_name": "Smith",
+            "email":"joe.smith@someplace.com"
+        }
+    }
+}
+```
 
 ### Customer Methods
 
@@ -1365,6 +1459,7 @@ token: string (optional)
     }
 }
 ```
+
 #### unregister_user_request
 
 ```json
@@ -1389,6 +1484,35 @@ token: string (optional)
         }]
 }
 ```
+
+#### registered_users_response
+
+```json
+{
+    "user_registered": {
+        "kai_user": {
+            "first_name": "string",
+            "last_name": "string",
+            "email": "string"
+        }
+    }
+}
+```
+
+#### registered_user_response
+
+```json
+{
+    "user_registered": {
+        "kai_user": {
+            "first_name": "string",
+            "last_name": "string",
+            "email": "string"
+        }
+    }
+}
+```
+
 
 #### error response
 
