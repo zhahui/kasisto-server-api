@@ -198,7 +198,6 @@ Content-Type: application/json
 ```
 ```json
 [
-{
     {
         "kai_user": {
             "first_name": "Joe",
@@ -208,7 +207,6 @@ Content-Type: application/json
         "platform_accounts":[],
         "institution_accounts":[]
     }
-}
 ]
 ```
 
@@ -249,15 +247,13 @@ Content-Type: application/json
 ```
 ```json
 {
-    {
-        "kai_user": {
-            "first_name": "Joe",
-            "last_name": "Smith",
-            "email":"joe.smith@someplace.com"
-        },
-        "platform_accounts":[],
-        "institution_accounts":[]
-    }
+    "kai_user": {
+        "first_name": "Joe",
+        "last_name": "Smith",
+        "email":"joe.smith@someplace.com"
+    },
+    "platform_accounts":[],
+    "institution_accounts":[]
 }
 ```
 
@@ -1495,7 +1491,6 @@ token: string (optional)
 
 ```json
 [
-{
     {
         "kai_user": {
             "first_name": "Joe",
@@ -1505,7 +1500,6 @@ token: string (optional)
         "platform_accounts":[],
         "institution_accounts":[]
     }
-}
 ]
 ```
 
@@ -1513,15 +1507,13 @@ token: string (optional)
 
 ```json
 {
-    {
-        "kai_user": {
-            "first_name": "Joe",
-            "last_name": "Smith",
-            "email":"joe.smith@someplace.com"
-        },
-        "platform_accounts":[],
-        "institution_accounts":[]
-    }
+    "kai_user": {
+        "first_name": "Joe",
+        "last_name": "Smith",
+        "email":"joe.smith@someplace.com"
+    },
+    "platform_accounts":[],
+    "institution_accounts":[]
 }
 ```
 
