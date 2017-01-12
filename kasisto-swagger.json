@@ -822,7 +822,7 @@
                      "description": "date of transfer",
                     "required": false,
                     "type":"string",
-                    "format":"date"
+                    "format":"date-time"
                   },
             "meta": {
               "description": "Optional data if needed for application",
@@ -979,6 +979,53 @@
                 "required":true
             }
           }
+     },
+     "location":{
+        "type":"object",
+        "properties":{
+            "address":{
+                "description":"Street address of merchant",
+                "type":"string",
+                "required":false
+            },
+            "city":{
+                "description":"City of merchant",
+                "type":"string",
+                "required":false
+            },
+            "state":{
+                "description":"State of merchant",
+                "type":"string",
+                "required":false
+            },
+            "zip":{
+                "description":"Postal code of merchant",
+                "type":"string",
+                "required":false
+            },
+            "coordinates":{
+               "description":"Coordinates of merchant location",
+               "required":false,
+                "$ref":"#/definitions/coordinates"
+            }
+        }
+     },
+     "coordinates":{
+        "type":"object",
+        "properties":{
+            "lat":{
+                "description":"Latitude of merchant location",
+                "type":"number",
+                "format":"float",
+                "required":true
+            },
+            "long":{
+                "description":"Longitude of merchant location",
+                "type":"number",
+                "format":"float",
+                "required":true
+            }
+        }
      },
      "auth_info":{
         "type":"object",
@@ -1222,9 +1269,16 @@
           }
         },
         "merchant": {
-          "description": "Merchent or vendor of transaction if provided",
+          "description": "Merchant or vendor of transaction if provided",
           "required": false,
           "type": "string"
+        },
+        "location":{
+            "description":"Location of merchant or vendor if provided",
+            "required":false,
+            "schema":{
+                "$ref":"#/definitions/location"
+            }
         },
         "status": {
           "description": "Status of transaction",
@@ -1245,12 +1299,12 @@
         "transaction_date": {
           "description": "Date of transaction",
           "type": "string",
-          "format":"date"
+          "format":"date-time"
         },
         "post_date": {
           "description": "Date of transaction",
           "type": "string",
-          "format":"date"
+          "format":"date-time"
         },
         "meta": {
           "description": "Optional data if needed for application",
