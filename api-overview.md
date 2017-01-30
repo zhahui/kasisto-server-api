@@ -586,10 +586,11 @@ token: string (optional)
     "available_credit": 0, 
     "account_type": "string", 
     "account_id": "string", 
-    "payment_due_amount": 0, 
+    "payment_due_amount": 0,
+    "minimum_payment_due_amount":0,
     "current_balance": 0, 
     "interest_rate": 0, 
-    "payment_due_date": "2016-02-26T00:00:00.000+0000", 
+    "payment_due_date": "2016-02-26T00:00:00.000+0000",
     "available_balance": 0, 
     "meta": [
         {
@@ -597,9 +598,11 @@ token: string (optional)
             "value": "string"
         }
     ], 
+    "account_nickname": "string", 
     "account_number": "string", 
     "account_name": "string", 
-    "currency_code": "string"
+    "currency_code": "string", 
+    "credit_limit": 0
 }]
 ```
 
@@ -1078,6 +1081,7 @@ token: string (optional)
     "payment_due_amount": 0, 
     "current_balance": 0, 
     "interest_rate": 0, 
+    "minimum_payment_due_amount": 0, 
     "payment_due_date": "2016-01-30", 
     "available_balance": 0, 
     "meta": [
@@ -1086,9 +1090,11 @@ token: string (optional)
             "value": "string"
         }
     ], 
+    "account_nickname": "string", 
     "account_number": "string", 
     "account_name": "string", 
-    "currency_code": "string"
+    "currency_code": "string", 
+    "credit_limit": 0
 }
 ```
 
@@ -1308,6 +1314,7 @@ token: string (optional)
     "status": "string", 
     "description": "string", 
     "title": "string", 
+    "currency_code": "string", 
     "transaction_id": "string", 
     "transaction_type": "string", 
     "post_date": "2016-01-30", 

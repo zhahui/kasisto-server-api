@@ -1150,7 +1150,11 @@
           "type": "string"
         },
         "account_name": {
-          "description": "account name or nickname",
+          "description": "account name",
+          "type": "string"
+        },
+        "account_nickname": {
+          "description": "account nickname",
           "type": "string"
         },
         "account_type": {
@@ -1191,12 +1195,22 @@
           "type": "number",
           "format":"float"
         },
+        "credit_limit": {
+          "description": "(for credit_card only)",
+          "type": "number",
+          "format":"float"
+        },
         "payment_due_date": {
           "description": "(for credit_card and loan)",
           "type": "string",
           "format":"date"
         },
         "payment_due_amount": {
+          "description": "(for credit_card and loan)",
+          "type": "number",
+          "format":"float"
+        },
+        "minimum_payment_due_amount": {
           "description": "(for credit_card and loan)",
           "type": "number",
           "format":"float"
