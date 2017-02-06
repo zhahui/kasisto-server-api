@@ -1,20 +1,13 @@
 # Kasisto Enterprise API Overview
-Version 1.0 beta
+Version 1.0
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
 - [Schema](#schema)
-- [User Registration Methods](#user-registration-methods)
-  * [/register_user](#register-user)
-  * [/unregister_user](#unregister-user)
-  * [/registered_users](#registered-users)
-  * [/registered_user](#registered-user)
 - [Customer Methods](#customer-methods)
   * [/validate_otp](#validate-otp)
   * [/customer](#customer)
   * [/token](#token)
-  * [/session_token](#session-token)
-  * [/revoke_token](#revoke-token)
 - [Accounts Methods](#accounts-methods)
   * [/accounts](#accounts)
 - [Transactions Methods](#transactions-methods)
@@ -27,6 +20,7 @@ Version 1.0 beta
   * [/payment](#payment)
   * [/payees](#payees)
 
+
 ## Authentication
 The Kasisto API requires all requests to include a secret key header value used for request authentication.  Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
 Server implementations should return a 401 HTTP status code response if authentication fails.
@@ -38,228 +32,6 @@ Server implementations should return a 403 HTTP status code response if authoriz
 ## Schema
 All API access must be over HTTPS.  All data is sent and received as JSON.
 Schema definitions are described [here](#schema-definitions).
-
-### User Registration Methods
-
-#### Register User
-
-```
-POST /register_user
-```
-
-Register a new KAI user with associated platform and institution accounts.
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header | 
-| [register_user_request](#register_user_request) | body | 
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | Register User Response | [register_user_response](#register_user_response) |
-| 403 | Access Denied | [error_response](#error-response) |
-| 500 | Server Error | [error_response](#error-response) |
-
-##### Sample Request / Response
-
-```http
-POST /register_user HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-```
-```json
-{
-    "kai_user":{
-        "email":"joe.smith@someplace.com",
-        "first_name":"Joe",
-        "last_name":"Smith"
-    },
-    "platform_accounts":[{
-        "platform_type":"facebook",
-        "account_id":"1234567890"
-    }],
-    "institution_accounts":[{
-        "institution_name":"XYZ",
-        "institution_username":"100123456789",
-        "institution_token":"ABC98123018270170193810923" 
-    }]
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-```
-```json
-{
-    "user_registered": {
-        "kai_user": {
-            "first_name": "Joe",
-            "last_name": "Smith",
-            "email":"joe.smith@someplace.com"
-        }
-    }
-}
-```
-#### Unregister User
-
-```
-POST /unregister_user
-```
-
-Unregister an existing KAI user with associated platform and institution accounts.
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header | 
-| [unregister_user_request](#unregister_user_request) | body | 
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | Unregistered Users Response | [unregister_user_response](#unregister_user_response) |
-| 403 | Access Denied | [error_response](#error-response) |
-| 500 | Server Error | [error_response](#error-response) |
-
-##### Sample Request / Response
-
-```http
-POST /unregister_user HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-```
-```json
-{
-    "platform_accounts":[{
-        "platform_type":"facebook",
-        "account_id":"1234567890"
-    }]
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-```
-```json
-{
-    "user_unregistered": [{
-            "first_name": "Joe",
-            "last_name": "Smith",
-            "email":"joe.smith@someplace.com",
-            "platform_type":"facebook",
-            "account_id":"1234567890"
-        }]
-}
-```
-
-#### Registered Users
-
-```
-GET /registered_users
-```
-
-Get all registered users with associated platform and institution accounts.
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header | 
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | Registered Users Response | [registered_users_response](#registered_users_response) |
-| 403 | Access Denied | [error_response](#error-response) |
-| 500 | Server Error | [error_response](#error-response) |
-
-##### Sample Request / Response
-
-```http
-GET /registered_users HTTP/1.1
-Accept: application/json
-secret: string
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-```
-```json
-[
-    {
-        "kai_user": {
-            "first_name": "Joe",
-            "last_name": "Smith",
-            "email":"joe.smith@someplace.com"
-        },
-        "platform_accounts":[],
-        "institution_accounts":[]
-    }
-]
-```
-
-#### Registered User
-
-```
-GET /registered_user
-```
-
-Get a registered user with associated platform and institution accounts.
-
-User can be retrieved with email, or with institution_name and institution_username parameters.
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header | 
-| email | URL parameter (optional)|
-| institution_name | URL parameter (optional)|
-| institution_username | URL parameter (optional)|
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | Registered User Response | [registered_user_response](#registered_user_response) |
-| 403 | Access Denied | [error_response](#error-response) |
-| 500 | Server Error | [error_response](#error-response) |
-
-##### Sample Request / Response
-
-```http
-GET /registered_user?email=joe.smith@someplace.com HTTP/1.1
-Accept: application/json
-secret: string
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-```
-```json
-{
-    "kai_user": {
-        "first_name": "Joe",
-        "last_name": "Smith",
-        "email":"joe.smith@someplace.com"
-    },
-    "platform_accounts":[],
-    "institution_accounts":[]
-}
-```
 
 ### Customer Methods
 
@@ -275,9 +47,9 @@ Validate One-Time Password and return new user token
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [validate_otp_request](#validate_otp_request) | body | 
+| secret | header |
+| token | header |
+| [validate_otp_request](#validate_otp_request) | body |
 
 ##### Responses
 
@@ -303,9 +75,8 @@ token: string
 ```
 ```json
 {
-    "otp": "string", 
-    "user_id": "string",
-    "otp_id": "string"
+    "otp": "string",
+    "user_id": "string"
 }
 ```
 
@@ -316,7 +87,7 @@ token: string (optional)
 ```
 ```json
 {
-    "token": "string", 
+    "token": "string",
     "user_id": "string"
 }
 ```
@@ -333,9 +104,9 @@ Get customer object
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [customer_request](#customer_request) | body | 
+| secret | header |
+| token | header |
+| [customer_request](#customer_request) | body |
 
 ##### Responses
 
@@ -370,15 +141,15 @@ token: string (optional)
 ```
 ```json
 {
-    "first_name": "string", 
-    "last_name": "string", 
-    "user_id": "string", 
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "full_name": "string"
 }
 ```
@@ -395,8 +166,8 @@ Get access token for a customer
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| [token_credentials](#token_credentials) | body | 
+| secret | header |
+| [token_credentials](#token_credentials) | body |
 
 ##### Responses
 
@@ -418,7 +189,7 @@ secret: string
 ```
 ```json
 {
-    "username": "string", 
+    "username": "string",
     "password": "string"
 }
 ```
@@ -430,107 +201,12 @@ token: string (optional)
 ```
 ```json
 {
-    "token": "string", 
+    "token": "string",
     "user_id": "string"
 }
 ```
-#### Session Token
 
-```
-POST /session_token
-```
 
-Get session/refresh token for a customer
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header | 
-| token | header | 
-| [session_token_request](#session_token_request) | body | 
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | token response | [token_response](#token_response) |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /session_token HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-```
-```json
-{
-    "user_id": "string", 
-    "token": "string"
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-{
-    "token": "string", 
-    "user_id": "string"
-}
-```
-#### Revoke Token
-
-```
-POST /revoke_token
-```
-
-Revoke a token or customer
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header | 
-| token | header | 
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | token response | [token_response](#token_response) |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /revoke_token HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-{
-    "token": "string", 
-    "user_id": "string"
-}
-```
 ### Accounts Methods
 
 #### Accounts
@@ -545,9 +221,9 @@ Get customer accounts
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [accounts_request](#accounts_request) | body | 
+| secret | header |
+| token | header |
+| [accounts_request](#accounts_request) | body |
 
 ##### Responses
 
@@ -571,7 +247,7 @@ token: string
 ```
 ```json
 {
-    "user_id": "string", 
+    "user_id": "string",
     "account_id": "string"
 }
 ```
@@ -583,25 +259,25 @@ token: string (optional)
 ```
 ```json
 [{
-    "available_credit": 0, 
-    "account_type": "string", 
-    "account_id": "string", 
+    "available_credit": 0,
+    "account_type": "string",
+    "account_id": "string",
     "payment_due_amount": 0,
-    "minimum_payment_due_amount":0,
-    "current_balance": 0, 
-    "interest_rate": 0, 
-    "payment_due_date": "2016-02-26T00:00:00.000+0000",
-    "available_balance": 0, 
+    "current_balance": 0,
+    "interest_rate": 0,
+    "minimum_payment_due_amount": 0,
+    "payment_due_date": "2016-01-30",
+    "available_balance": 0,
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "account_nickname": "string", 
-    "account_number": "string", 
-    "account_name": "string", 
-    "currency_code": "string", 
+    ],
+    "account_nickname": "string",
+    "account_number": "string",
+    "account_name": "string",
+    "currency_code": "string",
     "credit_limit": 0
 }]
 ```
@@ -610,7 +286,7 @@ token: string (optional)
 1) The field "account_type" in response should be one of the following:
     "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
     "sloc","savings","wire","unspecified".
-    
+
 2) The field "payment_due_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
 
 3) If there is no meta then pass empty array.
@@ -629,9 +305,9 @@ Get merchants
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [merchants_request](#merchants_request) | body | 
+| secret | header |
+| token | header |
+| [merchants_request](#merchants_request) | body |
 
 ##### Responses
 
@@ -669,14 +345,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ], 
-    "merchant_id": "string", 
+    ],
+    "merchant_id": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "name": "string"
 }]
 ```
@@ -693,9 +369,9 @@ Search customer transactions
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [transaction_criteria](#transaction_criteria) | body | 
+| secret | header |
+| token | header |
+| [transaction_criteria](#transaction_criteria) | body |
 
 ##### Responses
 
@@ -719,29 +395,14 @@ token: string
 ```
 ```json
 {
-    "user_id": "string", 
-    "limit": 0, 
+    "user_id": "string",
+    "limit": 0,
     "account_ids": [
         {
             "type": "string"
         }
-    ], 
-    "categories": [
-        {
-            "type": "string"
-        }
-    ], 
-     "payees": [
-        {
-            "type": "string"
-        }
-    ], 
-     "merchants": [
-        {
-            "type": "string"
-        }
-    ], 
-    "end_date": "2016-01-30", 
+    ],
+    "end_date": "2016-01-30",
     "start_date": "2016-01-30"
 }
 ```
@@ -753,28 +414,29 @@ token: string (optional)
 ```
 ```json
 [{
-    "merchant": "string", 
-    "status": "string", 
-    "description": "string", 
-    "title": "string", 
-    "transaction_id": "string", 
-    "transaction_type": "string", 
+    "merchant": "string",
+    "status": "string",
+    "description": "string",
+    "title": "string",
+    "currency_code": "string",
+    "transaction_id": "string",
+    "transaction_type": "string",
+    "amount": 0,
     "post_date": "2016-01-30T00:00:00.000+0000", 
-    "amount": 0, 
     "transaction_date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "currency_code": "string", 
-    "check_number": 0, 
+    ],
+    "location": "string",
+    "check_number": 0,
     "categories": [
         {
             "type": "string"
         }
-    ], 
+    ],
     "account_id": "string"
 }]
 ```
@@ -785,10 +447,10 @@ token: string (optional)
 
 2) The field "status" in response should be one of the following:
    "posted","pending","cancelled","unspecified".
-   
+
 3) The fields "transaction_date" and "post_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
 
-4) If there is no meta or categories then pass empty array. 
+4) If there is no meta or categories then pass empty array.
 
 5) We prefer that API do not implement filtering by category, payee or merchant and instead rely on Kai adapter to do that filtering.
 
@@ -804,9 +466,9 @@ Get transaction categories
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [categories_request](#categories_request) | body | 
+| secret | header |
+| token | header |
+| [categories_request](#categories_request) | body |
 
 ##### Responses
 
@@ -844,14 +506,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ], 
-    "category_id": "string", 
+    ],
+    "category_id": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "name": "string"
 }]
 ```
@@ -871,9 +533,9 @@ Transfer funds between two accounts
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [transfer_request](#transfer_request) | body | 
+| secret | header |
+| token | header |
+| [transfer_request](#transfer_request) | body |
 
 ##### Responses
 
@@ -897,15 +559,15 @@ token: string
 ```
 ```json
 {
-    "dest_account_id": "string", 
-    "source_account_id": "string", 
-    "amount": 0, 
+    "dest_account_id": "string",
+    "source_account_id": "string",
+    "amount": 0,
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "date": "2016-01-30", 
     "currency_code": "string"
 }
@@ -918,14 +580,14 @@ token: string (optional)
 ```
 ```json
 {
-    "transfer_id": "string", 
-    "reference_number": "string", 
+    "transfer_id": "string",
+    "reference_number": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "status": "string"
 }
 ```
@@ -945,9 +607,9 @@ Pay funds to a payee
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [payment_request](#payment_request) | body | 
+| secret | header |
+| token | header |
+| [payment_request](#payment_request) | body |
 
 ##### Responses
 
@@ -971,16 +633,16 @@ token: string
 ```
 ```json
 {
-    "source_account_id": "string", 
-    "payee_id": "string", 
-    "amount": 0, 
+    "source_account_id": "string",
+    "payee_id": "string",
+    "amount": 0,
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "date": "2016-01-30", 
+    ],
+    "date": "2016-01-30",
     "currency_code": "string"
 }
 ```
@@ -992,14 +654,14 @@ token: string (optional)
 ```
 ```json
 {
-    "payment_id": "string", 
-    "reference_number": "string", 
+    "payment_id": "string",
+    "reference_number": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "status": "string"
 }
 ```
@@ -1016,9 +678,9 @@ Get list of payees for a user
 
 | Parameter | Location |
 | --------- | -------- |
-| secret | header | 
-| token | header | 
-| [payees_request](#payees_request) | body | 
+| secret | header |
+| token | header |
+| [payees_request](#payees_request) | body |
 
 ##### Responses
 
@@ -1056,14 +718,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ], 
+    ],
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "payee_id": "string", 
+    ],
+    "payee_id": "string",
     "name": "string"
 }]
 ```
@@ -1075,25 +737,25 @@ token: string (optional)
 
 ```json
 {
-    "available_credit": 0, 
-    "account_type": "string", 
-    "account_id": "string", 
-    "payment_due_amount": 0, 
-    "current_balance": 0, 
-    "interest_rate": 0, 
-    "minimum_payment_due_amount": 0, 
-    "payment_due_date": "2016-01-30", 
-    "available_balance": 0, 
+    "available_credit": 0,
+    "account_type": "string",
+    "account_id": "string",
+    "payment_due_amount": 0,
+    "current_balance": 0,
+    "interest_rate": 0,
+    "minimum_payment_due_amount": 0,
+    "payment_due_date": "2016-01-30",
+    "available_balance": 0,
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "account_nickname": "string", 
-    "account_number": "string", 
-    "account_name": "string", 
-    "currency_code": "string", 
+    ],
+    "account_nickname": "string",
+    "account_number": "string",
+    "account_name": "string",
+    "currency_code": "string",
     "credit_limit": 0
 }
 ```
@@ -1102,7 +764,7 @@ token: string (optional)
 
 ```json
 {
-    "user_id": "string", 
+    "user_id": "string",
     "account_id": "string"
 }
 ```
@@ -1111,10 +773,10 @@ token: string (optional)
 
 ```json
 {
-    "token": "string", 
+    "token": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
     ]
@@ -1137,15 +799,24 @@ token: string (optional)
         {
             "type": "string"
         }
-    ], 
-    "category_id": "string", 
+    ],
+    "category_id": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "name": "string"
+}
+```
+
+#### coordinates
+
+```json
+{
+    "lat": 0,
+    "long": 0
 }
 ```
 
@@ -1153,15 +824,15 @@ token: string (optional)
 
 ```json
 {
-    "first_name": "string", 
-    "last_name": "string", 
-    "user_id": "string", 
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "full_name": "string"
 }
 ```
@@ -1178,14 +849,26 @@ token: string (optional)
 
 ```json
 {
-    "message": "string", 
-    "code": "string", 
+    "message": "string",
+    "code": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
     ]
+}
+```
+
+#### location
+
+```json
+{
+    "city": "string",
+    "state": "string",
+    "zip": "string",
+    "coordinates": "string",
+    "address": "string"
 }
 ```
 
@@ -1197,14 +880,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ], 
-    "merchant_id": "string", 
+    ],
+    "merchant_id": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "name": "string"
 }
 ```
@@ -1221,7 +904,7 @@ token: string (optional)
 
 ```json
 {
-    "name": "string", 
+    "name": "string",
     "value": "string"
 }
 ```
@@ -1234,14 +917,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ], 
+    ],
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "payee_id": "string", 
+    ],
+    "payee_id": "string",
     "name": "string"
 }
 ```
@@ -1258,14 +941,14 @@ token: string (optional)
 
 ```json
 {
-    "payment_id": "string", 
-    "reference_number": "string", 
+    "payment_id": "string",
+    "reference_number": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "status": "string"
 }
 ```
@@ -1274,16 +957,16 @@ token: string (optional)
 
 ```json
 {
-    "source_account_id": "string", 
-    "payee_id": "string", 
-    "amount": 0, 
+    "source_account_id": "string",
+    "payee_id": "string",
+    "amount": 0,
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "date": "2016-01-30", 
+    ],
+    "date": "2016-01-30",
     "currency_code": "string"
 }
 ```
@@ -1292,7 +975,7 @@ token: string (optional)
 
 ```json
 {
-    "username": "string", 
+    "username": "string",
     "password": "string"
 }
 ```
@@ -1301,7 +984,7 @@ token: string (optional)
 
 ```json
 {
-    "token": "string", 
+    "token": "string",
     "user_id": "string"
 }
 ```
@@ -1310,29 +993,29 @@ token: string (optional)
 
 ```json
 {
-    "merchant": "string", 
-    "status": "string", 
-    "description": "string", 
-    "title": "string", 
-    "currency_code": "string", 
-    "transaction_id": "string", 
-    "transaction_type": "string", 
+    "merchant": "string",
+    "status": "string",
+    "description": "string",
+    "title": "string",
+    "currency_code": "string",
+    "transaction_id": "string",
+    "transaction_type": "string",
     "post_date": "2016-01-30", 
-    "amount": 0, 
+    "amount": 0,
     "transaction_date": "2016-01-30", 
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "currency_code": "string", 
-    "check_number": 0, 
+    ],
+    "location": "string",
+    "check_number": 0,
     "categories": [
         {
             "type": "string"
         }
-    ], 
+    ],
     "account_id": "string"
 }
 ```
@@ -1341,29 +1024,14 @@ token: string (optional)
 
 ```json
 {
-    "user_id": "string", 
-    "limit": 0, 
+    "user_id": "string",
+    "limit": 0,
     "account_ids": [
         {
             "type": "string"
         }
-    ], 
-    "categories": [
-        {
-            "type": "string"
-        }
-    ], 
-     "payees": [
-        {
-            "type": "string"
-        }
-    ], 
-     "merchants": [
-        {
-            "type": "string"
-        }
-    ], 
-    "end_date": "2016-01-30", 
+    ],
+    "end_date": "2016-01-30",
     "start_date": "2016-01-30"
 }
 ```
@@ -1372,14 +1040,14 @@ token: string (optional)
 
 ```json
 {
-    "transfer_id": "string", 
-    "reference_number": "string", 
+    "transfer_id": "string",
+    "reference_number": "string",
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
+    ],
     "status": "string"
 }
 ```
@@ -1388,16 +1056,16 @@ token: string (optional)
 
 ```json
 {
-    "dest_account_id": "string", 
-    "source_account_id": "string", 
-    "amount": 0, 
+    "dest_account_id": "string",
+    "source_account_id": "string",
+    "amount": 0,
     "meta": [
         {
-            "name": "string", 
+            "name": "string",
             "value": "string"
         }
-    ], 
-    "date": "2016-01-30", 
+    ],
+    "date": "string",
     "currency_code": "string"
 }
 ```
@@ -1406,7 +1074,7 @@ token: string (optional)
 
 ```json
 {
-    "transfer": "string", 
+    "transfer": "string",
     "auth_info": "string"
 }
 ```
@@ -1415,9 +1083,8 @@ token: string (optional)
 
 ```json
 {
-    "otp": "string", 
-    "user_id": "string",
-    "otp_id": "string"
+    "otp": "string",
+    "user_id": "string"
 }
 ```
 
@@ -1425,115 +1092,8 @@ token: string (optional)
 
 ```json
 {
-    "token": "string", 
+    "token": "string",
     "user_id": "string"
 }
 ```
-#### session_token_request
 
-```json
-{
-    "user_id": "string",
-    "token": "string
-}
-```
-
-#### register_user_request
-
-```json
-{
-    "kai_user": {
-        "email":"string (optional if platform account can provide it)",
-        "first_name":"string (optional if platform account can provide it)",
-        "last_name":"string (optional if platform account can provide it)"
-    },
-    "platform_accounts":[{
-        "platform_type":"string (facebook, etc.)",
-        "platform_id":"string (user's facebook ID)"
-    }],
-    "institution_accounts":[{
-        "institution_id":"string (ID of the institution supported by KAI)",
-        "institution_username":"string (username or user ID of institution account)",
-        "institution_token":"string (encrypted authorization token for user)"
-    }]
-}
-```
-
-#### register_user_response
-
-```json
-{
-    "user_registered": {
-        "kai_user": {
-            "first_name": "string",
-            "last_name": "string",
-            "email": "string"
-        }
-    }
-}
-```
-
-#### unregister_user_request
-
-```json
-{
-    "platform_accounts":[{
-        "platform_type":"string (facebook, etc.)",
-        "platform_id":"string (user's facebook ID)"
-    }]
-}
-```
-
-#### unregister_user_response
-
-```json
-{
-    "user_unregistered": [{
-            "first_name": "Joe",
-            "last_name": "Smith",
-            "email":"joe.smith@someplace.com",
-            "platform_type":"facebook",
-            "account_id":"1234567890"
-        }]
-}
-```
-
-#### registered_users_response
-
-```json
-[
-    {
-        "kai_user": {
-            "first_name": "Joe",
-            "last_name": "Smith",
-            "email":"joe.smith@someplace.com"
-        },
-        "platform_accounts":[],
-        "institution_accounts":[]
-    }
-]
-```
-
-#### registered_user_response
-
-```json
-{
-    "kai_user": {
-        "first_name": "Joe",
-        "last_name": "Smith",
-        "email":"joe.smith@someplace.com"
-    },
-    "platform_accounts":[],
-    "institution_accounts":[]
-}
-```
-
-
-#### error response
-
-```json
-{
-    "error":"string",
-    "message": "string"
-}
-```
