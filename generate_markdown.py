@@ -143,13 +143,16 @@ def generate_schema(def_obj):
                 if prop.get('format')=='date':
                     obj[name]='2016-01-30'
                 else:
-                    if prop.get('type')=='object':
-                        obj[name]=generate_schema(prop)
+                    if prop.get('format')=='date-time':
+                        obj[name]='2016-01-30T00:00:00.000+0000'
                     else:
-                        if prop.get('type')=='array':
-                            obj[name]=[prop.get('items')]
+                        if prop.get('type')=='object':
+                            obj[name]=generate_schema(prop)
                         else:
-                            obj[name]='string'
+                            if prop.get('type')=='array':
+                                obj[name]=[prop.get('items')]
+                            else:
+                                obj[name]='string'
     return obj
 
 if __name__=='__main__':
