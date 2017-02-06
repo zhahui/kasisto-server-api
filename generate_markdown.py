@@ -54,9 +54,9 @@ def generate_markdown(input_filename):
                     print '| --------- | -------- |'
                     for param in method_obj['parameters']:
                         if param['in']=='body':
-                            print '| ['+param['name']+'](#'+param['name']+') | '+param['in'] +' | '# +str(param.get('required',False))+' | ' + param.get('description','')+' |'
+                            print '| ['+param['name']+'](#'+param['name']+') | '+param['in'] +' |'# +str(param.get('required',False))+' | ' + param.get('description','')+' |'
                         else:
-                            print '| '+param['name']+' | '+param['in']+' | ' #+str(param.get('required',False))+' | ' + param.get('description','')+' |'
+                            print '| '+param['name']+' | '+param['in']+' |' #+str(param.get('required',False))+' | ' + param.get('description','')+' |'
                     print ''
                     print '##### Responses'
                     print ''
