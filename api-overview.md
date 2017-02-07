@@ -5,20 +5,22 @@ Version 1.0
 - [Authorization](#authorization)
 - [Schema](#schema)
 - [Customer Methods](#customer-methods)
-  * [/customer](#customer)
   * [/validate_otp](#validate-otp)
+  * [/customer](#customer)
   * [/token](#token)
 - [Accounts Methods](#accounts-methods)
   * [/accounts](#accounts)
 - [Transactions Methods](#transactions-methods)
   * [/merchants](#merchants)
-  * [/transactions](#transactions)
   * [/categories](#categories)
+  * [/transactions](#transactions)
 - [Transfers Methods](#transfers-methods)
   * [/transfer](#transfer)
 - [Payments Methods](#payments-methods)
   * [/payment](#payment)
   * [/payees](#payees)
+- [Points of Interest (POIs) Methods](#points-of-interest-(pois)-methods)
+  * [/pois](#points-of-interest-(pois))
 
 
 ## Authentication
@@ -34,6 +36,63 @@ All API access must be over HTTPS.  All data is sent and received as JSON.
 Schema definitions are described [here](#schema-definitions).
 
 ### Customer Methods
+
+#### Validate OTP
+
+```
+POST /validate_otp
+```
+
+Validate One-Time Password and return new user token
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| token | header |
+| [validate_otp_request](#validate_otp_request) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [validate_otp_response](#validate_otp_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 451 | Invalid One-Time Password | [error_response](#error_response) |
+| 452 | Expired One-Time Password | [error_response](#error_response) |
+| 453 | Too Many One-Time Password Failures | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /validate_otp HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+```
+```json
+{
+    "otp": "string",
+    "user_id": "string"
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+{
+    "token": "string",
+    "user_id": "string"
+}
+```
 
 #### Customer
 
@@ -94,63 +153,6 @@ token: string (optional)
         }
     ],
     "full_name": "string"
-}
-```
-
-#### Validate OTP
-
-```
-POST /validate_otp
-```
-
-Validate One-Time Password and return new user token
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header |
-| token | header |
-| [validate_otp_request](#validate_otp_request) | body |
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | token response | [validate_otp_response](#validate_otp_response) |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 451 | Invalid One-Time Password | [error_response](#error_response) |
-| 452 | Expired One-Time Password | [error_response](#error_response) |
-| 453 | Too Many One-Time Password Failures | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /validate_otp HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-token: string
-```
-```json
-{
-    "otp": "string",
-    "user_id": "string"
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-{
-    "token": "string",
-    "user_id": "string"
 }
 ```
 
@@ -282,6 +284,15 @@ token: string (optional)
 }]
 ```
 
+##### Notes:
+1) The field "account_type" in response should be one of the following:
+    "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
+    "sloc","savings","wire","unspecified".
+
+2) The field "payment_due_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
+
+3) If there is no meta then pass empty array.
+
 
 ### Transactions Methods
 
@@ -349,90 +360,6 @@ token: string (optional)
 }]
 ```
 
-#### Transactions
-
-```
-POST /transactions
-```
-
-Search customer transactions
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header |
-| token | header |
-| [transaction_criteria](#transaction_criteria) | body |
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | transactions | Array of [transaction](#transaction) |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 450 | One-Time Password is required | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /transactions HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-token: string
-```
-```json
-{
-    "limit": 0,
-    "user_id": "string",
-    "account_ids": [
-        {
-            "type": "string"
-        }
-    ],
-    "end_date": "2016-01-30",
-    "start_date": "2016-01-30"
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-[{
-    "merchant": "string",
-    "status": "string",
-    "description": "string",
-    "title": "string",
-    "currency_code": "string",
-    "categories": [
-        {
-            "type": "string"
-        }
-    ],
-    "transaction_type": "string",
-    "post_date": "2016-01-30T00:00:00.000+0000",
-    "amount": 0,
-    "transaction_date": "2016-01-30T00:00:00.000+0000",
-    "meta": [
-        {
-            "name": "string",
-            "value": "string"
-        }
-    ],
-    "location": "string",
-    "check_number": 0,
-    "transaction_id": "string",
-    "account_id": "string"
-}]
-```
-
 #### Categories
 
 ```
@@ -497,6 +424,102 @@ token: string (optional)
 }]
 ```
 
+#### Transactions
+
+```
+POST /transactions
+```
+
+Search customer transactions
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| token | header |
+| [transaction_criteria](#transaction_criteria) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | transactions | Array of [transaction](#transaction) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /transactions HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+```
+```json
+{
+    "user_id": "string",
+    "limit": 0,
+    "account_ids": [
+        {
+            "type": "string"
+        }
+    ],
+    "end_date": "2016-01-30",
+    "start_date": "2016-01-30"
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+[{
+    "merchant": "string",
+    "status": "string",
+    "description": "string",
+    "title": "string",
+    "currency_code": "string",
+    "transaction_id": "string",
+    "transaction_type": "string",
+    "post_date": "2016-01-30T00:00:00.000+0000",
+    "amount": 0,
+    "transaction_date": "2016-01-30T00:00:00.000+0000",
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ],
+    "location": "string",
+    "check_number": 0,
+    "categories": [
+        {
+            "type": "string"
+        }
+    ],
+    "account_id": "string"
+}]
+```
+
+##### Notes:
+1) The field "transaction_type" in response should be one of the following:
+   "atm","cash","check","check_deposit","credit","debit”,"fee","dividend","interest","unspecified”.
+
+2) The field "status" in response should be one of the following:
+   "posted","pending","cancelled","unspecified".
+
+3) The fields "transaction_date" and "post_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
+
+4) If there is no meta or categories then pass empty array.
+
+5) We prefer that API do not implement filtering by category, payee or merchant and instead rely on Kai adapter to do that filtering.
 
 ### Transfers Methods
 
@@ -559,7 +582,7 @@ token: string (optional)
 ```
 ```json
 {
-    "status": "string",
+    "transfer_id": "string",
     "reference_number": "string",
     "meta": [
         {
@@ -567,7 +590,7 @@ token: string (optional)
             "value": "string"
         }
     ],
-    "transfer_id": "string"
+    "status": "string"
 }
 ```
 
@@ -612,8 +635,8 @@ token: string
 ```
 ```json
 {
-    "payee_id": "string",
     "source_account_id": "string",
+    "payee_id": "string",
     "amount": 0,
     "meta": [
         {
@@ -710,6 +733,111 @@ token: string (optional)
 ```
 
 
+### Points of Interest (POIs) Methods
+
+#### Points of Interest (POIs)
+
+```
+POST /pois
+```
+
+Search for points of interests by location
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| token | header |
+| [poi_criteria](#poi_criteria) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | pois | Array of [poi](#poi) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /pois HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+```
+```json
+{
+    "city_state": "string",
+    "coordinates": "string",
+    "zipcode": "string"
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+[{
+    "atm_deposit_cutoff": [
+        {
+            "$ref": "#/definitions/day_time"
+        }
+    ],
+    "location_name": "string",
+    "holiday_hours": [
+        {
+            "$ref": "#/definitions/day_hours"
+        }
+    ],
+    "lobby_hours": [
+        {
+            "$ref": "#/definitions/day_hours"
+        }
+    ],
+    "bank_services": [
+        {
+            "type": "string"
+        }
+    ],
+    "atm_services": [
+        {
+            "type": "string"
+        }
+    ],
+    "bank_deposit_cutoff": [
+        {
+            "$ref": "#/definitions/day_time"
+        }
+    ],
+    "location": "string",
+    "number_of_atms": 0,
+    "geo_location": "string",
+    "atm_hours": "string",
+    "teller_languages": [
+        {
+            "type": "string"
+        }
+    ],
+    "location_url": "string",
+    "location_id": "string",
+    "location_type": "string",
+    "atm_languages": [
+        {
+            "type": "string"
+        }
+    ]
+}]
+```
+
+
 ### Schema Definitions
 
 #### account
@@ -748,20 +876,6 @@ token: string (optional)
 }
 ```
 
-#### auth_info
-
-```json
-{
-    "token": "string",
-    "meta": [
-        {
-            "name": "string",
-            "value": "string"
-        }
-    ]
-}
-```
-
 #### categories_request
 
 ```json
@@ -787,6 +901,15 @@ token: string (optional)
         }
     ],
     "name": "string"
+}
+```
+
+#### city_state
+
+```json
+{
+    "city": "string",
+    "state": "string"
 }
 ```
 
@@ -824,6 +947,24 @@ token: string (optional)
 }
 ```
 
+#### day_hours
+
+```json
+{
+    "hours": "string",
+    "day": "string"
+}
+```
+
+#### day_time
+
+```json
+{
+    "day": "string",
+    "time": 0
+}
+```
+
 #### error_response
 
 ```json
@@ -845,8 +986,8 @@ token: string (optional)
 {
     "city": "string",
     "state": "string",
-    "coordinates": "string",
     "zip": "string",
+    "coordinates": "string",
     "address": "string"
 }
 ```
@@ -936,8 +1077,8 @@ token: string (optional)
 
 ```json
 {
-    "payee_id": "string",
     "source_account_id": "string",
+    "payee_id": "string",
     "amount": 0,
     "meta": [
         {
@@ -947,6 +1088,80 @@ token: string (optional)
     ],
     "date": "2016-01-30",
     "currency_code": "string"
+}
+```
+
+#### poi
+
+```json
+{
+    "atm_deposit_cutoff": [
+        {
+            "$ref": "#/definitions/day_time"
+        }
+    ],
+    "location_name": "string",
+    "holiday_hours": [
+        {
+            "$ref": "#/definitions/day_hours"
+        }
+    ],
+    "lobby_hours": [
+        {
+            "$ref": "#/definitions/day_hours"
+        }
+    ],
+    "bank_services": [
+        {
+            "type": "string"
+        }
+    ],
+    "atm_services": [
+        {
+            "type": "string"
+        }
+    ],
+    "bank_deposit_cutoff": [
+        {
+            "$ref": "#/definitions/day_time"
+        }
+    ],
+    "location": "string",
+    "number_of_atms": 0,
+    "geo_location": "string",
+    "atm_hours": "string",
+    "teller_languages": [
+        {
+            "type": "string"
+        }
+    ],
+    "location_url": "string",
+    "location_id": "string",
+    "location_type": "string",
+    "atm_languages": [
+        {
+            "type": "string"
+        }
+    ]
+}
+```
+
+#### poi_criteria
+
+```json
+{
+    "city_state": "string",
+    "coordinates": "string",
+    "zipcode": "string"
+}
+```
+
+#### time_range
+
+```json
+{
+    "start": 0,
+    "end": 0
 }
 ```
 
@@ -977,11 +1192,7 @@ token: string (optional)
     "description": "string",
     "title": "string",
     "currency_code": "string",
-    "categories": [
-        {
-            "type": "string"
-        }
-    ],
+    "transaction_id": "string",
     "transaction_type": "string",
     "post_date": "2016-01-30T00:00:00.000+0000",
     "amount": 0,
@@ -994,7 +1205,11 @@ token: string (optional)
     ],
     "location": "string",
     "check_number": 0,
-    "transaction_id": "string",
+    "categories": [
+        {
+            "type": "string"
+        }
+    ],
     "account_id": "string"
 }
 ```
@@ -1003,8 +1218,8 @@ token: string (optional)
 
 ```json
 {
-    "limit": 0,
     "user_id": "string",
+    "limit": 0,
     "account_ids": [
         {
             "type": "string"
@@ -1019,7 +1234,7 @@ token: string (optional)
 
 ```json
 {
-    "status": "string",
+    "transfer_id": "string",
     "reference_number": "string",
     "meta": [
         {
@@ -1027,7 +1242,7 @@ token: string (optional)
             "value": "string"
         }
     ],
-    "transfer_id": "string"
+    "status": "string"
 }
 ```
 
@@ -1046,15 +1261,6 @@ token: string (optional)
     ],
     "date": "2016-01-30T00:00:00.000+0000",
     "currency_code": "string"
-}
-```
-
-#### transfer_response
-
-```json
-{
-    "transfer": "string",
-    "auth_info": "string"
 }
 ```
 
