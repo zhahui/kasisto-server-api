@@ -251,14 +251,18 @@
             "name":"token",
             "in":"header",
             "required":true,
-            "type":"string"
+            "type":"string",
+            "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
           },
           {
             "name": "accounts_request",
             "in":"body",
             "required": true,
             "schema":{
-              "$ref":"#/definitions/accounts_request"
+              "$ref":"#/definitions/accounts_request",
+              "example": {
+                "account_id": "98927d5be608d4a1652d493e85e74637cac066be29d77e9f39026b419faafeb3"
+              }
             }
           }
         ],
@@ -327,14 +331,20 @@
             "name":"token",
             "in":"header",
             "required":true,
-            "type":"string"
+            "type":"string",
+            "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
           },
           {
             "name":"transaction_criteria",
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/transaction_criteria"
+              "$ref":"#/definitions/transaction_criteria",
+              "example": {
+                "account_ids": "98927d5be608d4a1652d493e85e74637cac066be29d77e9f39026b419faafeb3",
+                "start_date": "2015-05-01",
+                "end_date": "2016-11-03"
+              }
             }
           }
         ],
@@ -410,7 +420,10 @@
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/poi_criteria"
+              "$ref":"#/definitions/poi_criteria",
+              "example": {
+                "zipcode": "94114"
+              }
             }
           }
         ],
