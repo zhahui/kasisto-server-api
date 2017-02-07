@@ -1379,6 +1379,10 @@
     "poi": {
       "type": "object",
       "properties": {
+        "location_id": {
+          "description": "The id of this",
+          "type": "string"
+        },
         "location_type": {
           "description": "The type of point of interest it is",
           "type": "string",
@@ -1396,12 +1400,11 @@
           "description": "The url of this",
           "type": "string"
         },
-        "title": {
-          "description": "Address for the location",
-          "type":"string"
+        "location": {
+          "$ref": "#/definitions/location"
         },
         "geo_location": {
-          "$ref":"#/definitions/coordinates"
+          "$ref": "#/definitions/coordinates"
         },
         "number_of_atms": {
           "description": "Number of ATMs at location",
@@ -1416,14 +1419,14 @@
           "description": "When deposits are picked up from the ATM each day",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_event"
+              "$ref":"#/definitions/day_time"
           }
         },
         "bank_deposit_cutoff": {
           "description": "When deposits are picked up from the Bank each day",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_event"
+              "$ref":"#/definitions/day_time"
           }
         },
         "atm_languages": {
@@ -1470,23 +1473,11 @@
         }
       }
     },
-    "day_event": {
+    "day_time": {
       "type": "object",
       "properties": {
         "day": {
           "description": "The day associated with the event (could be a holiday name or a day of the week)",
-          "type": "string"
-        },
-        "event": {
-          "$ref": "#/definitions/event"
-        }
-      }
-    },
-    "event": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of event this is",
           "type": "string"
         },
         "time": {
