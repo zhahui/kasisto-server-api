@@ -27,7 +27,7 @@
     {"name":"Transactions"},
     {"name":"Transfers"},
     {"name":"Payments"},
-    {"name":"Points of Interest (POIs)"}
+    {"name":"Bank Locations"}
   ],
   "paths": {
     "/token": {
@@ -397,11 +397,11 @@
         }
       }
     },
-    "/pois": {
+    "/bank_locations": {
       "post": {
-        "x-name":"Points of Interest (POIs)",
-        "tags":["Points of Interest (POIs)"],
-        "description": "Search for points of interests by location",
+        "x-name":"Bank Locations",
+        "tags":["Bank Locations"],
+        "description": "Search for bank locations",
         "parameters": [
           {
             "name":"secret",
@@ -416,11 +416,11 @@
             "type":"string"
           },
           {
-            "name":"poi_criteria",
+            "name":"bank_locations_criteria",
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/poi_criteria",
+              "$ref":"#/definitions/bank_locations_criteria",
               "example": {
                 "zipcode": "94114"
               }
@@ -429,11 +429,11 @@
         ],
         "responses": {
           "200": {
-            "description": "pois",
+            "description": "bank_locations",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/poi"
+                "$ref": "#/definitions/bank_location"
               }
             },
             "headers":{
@@ -1031,7 +1031,7 @@
         }
       }
     },
-    "poi_criteria":{
+    "bank_locations_criteria":{
       "type":"object",
       "properties":{
         "coordinates":{
@@ -1376,7 +1376,7 @@
         }
       }
     },
-    "poi": {
+    "bank_location": {
       "type": "object",
       "properties": {
         "location_id": {
@@ -1403,9 +1403,6 @@
         "location": {
           "$ref": "#/definitions/location"
         },
-        "geo_location": {
-          "$ref": "#/definitions/coordinates"
-        },
         "number_of_atms": {
           "description": "Number of ATMs at location",
           "type": "integer",
@@ -1419,14 +1416,14 @@
           "description": "When deposits are picked up from the ATM each day",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_time"
+              "$ref":"#/definitions/day_status"
           }
         },
         "bank_deposit_cutoff": {
           "description": "When deposits are picked up from the Bank each day",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_time"
+              "$ref":"#/definitions/day_status"
           }
         },
         "atm_languages": {
@@ -1461,56 +1458,28 @@
           "description": "Array of holidays with closing times",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_hours"
+              "$ref":"#/definitions/day_status"
           }
         },
         "lobby_hours": {
           "description": "Hours of operation for each day of the week",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_hours"
+              "$ref":"#/definitions/day_status"
           }
         }
       }
     },
-    "day_time": {
+    "day_status": {
       "type": "object",
       "properties": {
         "day": {
           "description": "The day associated with the event (could be a holiday name or a day of the week)",
           "type": "string"
         },
-        "time": {
+        "status": {
           "description": "The time this event happens (0000 - 2359)",
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "day_hours": {
-      "type": "object",
-      "properties": {
-        "day": {
-          "description": "The day associated with the hours (could be a holiday name or a day of the week)",
           "type": "string"
-        },
-        "hours": {
-          "$ref": "#/definitions/time_range"
-        }
-      }
-    },
-    "time_range": {
-      "type": "object",
-      "properties": {
-        "start": {
-          "description": "The time this starts (0000 - 2359)",
-          "type": "integer",
-          "format": "int32"
-        },
-        "end": {
-          "description": "The time this ends (0000 - 2359)",
-          "type": "integer",
-          "format": "int32"
         }
       }
     },

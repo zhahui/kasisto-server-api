@@ -12,15 +12,15 @@ Version 1.0
   * [/accounts](#accounts)
 - [Transactions Methods](#transactions-methods)
   * [/merchants](#merchants)
-  * [/categories](#categories)
   * [/transactions](#transactions)
+  * [/categories](#categories)
 - [Transfers Methods](#transfers-methods)
   * [/transfer](#transfer)
 - [Payments Methods](#payments-methods)
   * [/payment](#payment)
   * [/payees](#payees)
-- [Points of Interest (POIs) Methods](#points-of-interest-(pois)-methods)
-  * [/pois](#points-of-interest-(pois))
+- [Bank Locations Methods](#bank-locations-methods)
+  * [/bank_locations](#bank-locations)
 
 
 ## Authentication
@@ -360,70 +360,6 @@ token: string (optional)
 }]
 ```
 
-#### Categories
-
-```
-POST /categories
-```
-
-Get transaction categories
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header |
-| token | header |
-| [categories_request](#categories_request) | body |
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | categories response | Array of [category](#category) |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /categories HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-token: string
-```
-```json
-{
-    "user_id": "string"
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-[{
-    "alias": [
-        {
-            "type": "string"
-        }
-    ],
-    "category_id": "string",
-    "meta": [
-        {
-            "name": "string",
-            "value": "string"
-        }
-    ],
-    "name": "string"
-}]
-```
-
 #### Transactions
 
 ```
@@ -505,6 +441,70 @@ token: string (optional)
         }
     ],
     "account_id": "string"
+}]
+```
+
+#### Categories
+
+```
+POST /categories
+```
+
+Get transaction categories
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| token | header |
+| [categories_request](#categories_request) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | categories response | Array of [category](#category) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /categories HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+```
+```json
+{
+    "user_id": "string"
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+[{
+    "alias": [
+        {
+            "type": "string"
+        }
+    ],
+    "category_id": "string",
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ],
+    "name": "string"
 }]
 ```
 
@@ -733,15 +733,15 @@ token: string (optional)
 ```
 
 
-### Points of Interest (POIs) Methods
+### Bank Locations Methods
 
-#### Points of Interest (POIs)
+#### Bank Locations
 
 ```
-POST /pois
+POST /bank_locations
 ```
 
-Search for points of interests by location
+Search for bank locations
 
 ##### Request Parameters
 
@@ -749,13 +749,13 @@ Search for points of interests by location
 | --------- | -------- |
 | secret | header |
 | token | header |
-| [poi_criteria](#poi_criteria) | body |
+| [bank_locations_criteria](#bank_locations_criteria) | body |
 
 ##### Responses
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | pois | Array of [poi](#poi) |
+| 200 | bank_locations | Array of [bank_location](#bank_location) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 450 | One-Time Password is required | [error_response](#error_response) |
@@ -765,7 +765,7 @@ Search for points of interests by location
 ##### Sample Request / Response
 
 ```http
-POST /pois HTTP/1.1
+POST /bank_locations HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
@@ -788,18 +788,18 @@ token: string (optional)
 [{
     "atm_deposit_cutoff": [
         {
-            "$ref": "#/definitions/day_time"
+            "$ref": "#/definitions/day_status"
         }
     ],
     "location_name": "string",
     "holiday_hours": [
         {
-            "$ref": "#/definitions/day_hours"
+            "$ref": "#/definitions/day_status"
         }
     ],
     "lobby_hours": [
         {
-            "$ref": "#/definitions/day_hours"
+            "$ref": "#/definitions/day_status"
         }
     ],
     "bank_services": [
@@ -814,12 +814,11 @@ token: string (optional)
     ],
     "bank_deposit_cutoff": [
         {
-            "$ref": "#/definitions/day_time"
+            "$ref": "#/definitions/day_status"
         }
     ],
     "location": "string",
     "number_of_atms": 0,
-    "geo_location": "string",
     "atm_hours": "string",
     "teller_languages": [
         {
@@ -873,6 +872,70 @@ token: string (optional)
 {
     "user_id": "string",
     "account_id": "string"
+}
+```
+
+#### bank_location
+
+```json
+{
+    "atm_deposit_cutoff": [
+        {
+            "$ref": "#/definitions/day_status"
+        }
+    ],
+    "location_name": "string",
+    "holiday_hours": [
+        {
+            "$ref": "#/definitions/day_status"
+        }
+    ],
+    "lobby_hours": [
+        {
+            "$ref": "#/definitions/day_status"
+        }
+    ],
+    "bank_services": [
+        {
+            "type": "string"
+        }
+    ],
+    "atm_services": [
+        {
+            "type": "string"
+        }
+    ],
+    "bank_deposit_cutoff": [
+        {
+            "$ref": "#/definitions/day_status"
+        }
+    ],
+    "location": "string",
+    "number_of_atms": 0,
+    "atm_hours": "string",
+    "teller_languages": [
+        {
+            "type": "string"
+        }
+    ],
+    "location_url": "string",
+    "location_id": "string",
+    "location_type": "string",
+    "atm_languages": [
+        {
+            "type": "string"
+        }
+    ]
+}
+```
+
+#### bank_locations_criteria
+
+```json
+{
+    "city_state": "string",
+    "coordinates": "string",
+    "zipcode": "string"
 }
 ```
 
@@ -947,21 +1010,12 @@ token: string (optional)
 }
 ```
 
-#### day_hours
+#### day_status
 
 ```json
 {
-    "hours": "string",
+    "status": "string",
     "day": "string"
-}
-```
-
-#### day_time
-
-```json
-{
-    "day": "string",
-    "time": 0
 }
 ```
 
@@ -1088,80 +1142,6 @@ token: string (optional)
     ],
     "date": "2016-01-30",
     "currency_code": "string"
-}
-```
-
-#### poi
-
-```json
-{
-    "atm_deposit_cutoff": [
-        {
-            "$ref": "#/definitions/day_time"
-        }
-    ],
-    "location_name": "string",
-    "holiday_hours": [
-        {
-            "$ref": "#/definitions/day_hours"
-        }
-    ],
-    "lobby_hours": [
-        {
-            "$ref": "#/definitions/day_hours"
-        }
-    ],
-    "bank_services": [
-        {
-            "type": "string"
-        }
-    ],
-    "atm_services": [
-        {
-            "type": "string"
-        }
-    ],
-    "bank_deposit_cutoff": [
-        {
-            "$ref": "#/definitions/day_time"
-        }
-    ],
-    "location": "string",
-    "number_of_atms": 0,
-    "geo_location": "string",
-    "atm_hours": "string",
-    "teller_languages": [
-        {
-            "type": "string"
-        }
-    ],
-    "location_url": "string",
-    "location_id": "string",
-    "location_type": "string",
-    "atm_languages": [
-        {
-            "type": "string"
-        }
-    ]
-}
-```
-
-#### poi_criteria
-
-```json
-{
-    "city_state": "string",
-    "coordinates": "string",
-    "zipcode": "string"
-}
-```
-
-#### time_range
-
-```json
-{
-    "start": 0,
-    "end": 0
 }
 ```
 
