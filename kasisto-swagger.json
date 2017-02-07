@@ -26,7 +26,8 @@
     {"name":"Accounts"},
     {"name":"Transactions"},
     {"name":"Transfers"},
-    {"name":"Payments"}
+    {"name":"Payments"},
+    {"name":"Points of Interest (POIs)"}
   ],
   "paths": {
     "/token": {
@@ -344,6 +345,82 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/transaction"
+              }
+            },
+            "headers":{
+              "token":{
+                "description":"Valid auth token for subsequent requests if using SSO tokens",
+                "type":"string"
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Failed",
+            "schema":{
+              "$ref":"#/definitions/error_response"
+            }
+          },
+          "403": {
+            "description": "Access Denied",
+            "schema":{
+              "$ref":"#/definitions/error_response"
+            }
+          },
+          "450":{
+            "description":"One-Time Password is required",
+            "schema":{
+              "$ref":"#/definitions/error_response"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema":{
+              "$ref":"#/definitions/error_response"
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "schema":{
+              "$ref":"#/definitions/error_response"
+            }
+          }
+        }
+      }
+    },
+    "/pois": {
+      "post": {
+        "x-name":"Points of Interest (POIs)",
+        "tags":["Points of Interest (POIs)"],
+        "description": "Search for points of interests by location",
+        "parameters": [
+          {
+            "name":"secret",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"poi_criteria",
+            "in":"body",
+            "required":true,
+            "schema":{
+              "$ref":"#/definitions/poi_criteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pois",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/poi"
               }
             },
             "headers":{
@@ -941,6 +1018,34 @@
         }
       }
     },
+    "poi_criteria":{
+      "type":"object",
+      "properties":{
+        "coordinates":{
+          "$ref":"#/definitions/coordinates"
+        },
+        "city_state":{
+          "$ref":"#/definitions/city_state"
+        },
+        "zipcode":{
+          "type":"string"
+        }
+      }
+    },
+    "city_state":{
+      "type":"object",
+      "required": [ "city", "state" ],
+      "properties":{
+        "city":{
+          "description":"City of the location",
+          "type":"string"
+        },
+        "state":{
+          "description":"State of the location",
+          "type":"string"
+        }
+      }
+    },
     "meta_field":{
       "type":"object",
       "required": [ "name", "value" ],
@@ -975,7 +1080,6 @@
           "type":"string"
         },
         "coordinates":{
-          "description":"Coordinates of merchant location",
           "$ref":"#/definitions/coordinates"
         }
       }
@@ -993,33 +1097,6 @@
           "description":"Longitude of merchant location",
           "type":"number",
           "format":"float"
-        }
-      }
-    },
-    "auth_info":{
-      "type":"object",
-      "properties":{
-        "token":{
-          "type":"string",
-          "description":"New valid token if using SSO tokens"
-        },
-        "meta": {
-          "description": "Optional data if needed for application",
-          "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
-          }
-        }
-      }
-    },
-    "transfer_response":{
-      "type":"object",
-      "properties":{
-        "auth_info":{
-          "$ref":"#/definitions/auth_info"
-        },
-        "transfer":{
-          "$ref":"#/definitions/transfer"
         }
       }
     },
@@ -1250,7 +1327,6 @@
           "type": "string"
         },
         "location":{
-          "description":"Location of merchant or vendor if provided",
           "$ref":"#/definitions/location"
         },
         "status": {
@@ -1284,6 +1360,153 @@
           "items":{
             "$ref": "#/definitions/meta_field"
           }
+        }
+      }
+    },
+    "poi": {
+      "type": "object",
+      "properties": {
+        "location_type": {
+          "description": "The type of point of interest it is",
+          "type": "string",
+          "enum": [
+            "atm",
+            "bank",
+            "bank+atm"
+          ]
+        },
+        "location_name": {
+          "description": "The name of this",
+          "type": "string"
+        },
+        "location_url": {
+          "description": "The url of this",
+          "type": "string"
+        },
+        "title": {
+          "description": "Address for the location",
+          "type":"string"
+        },
+        "geo_location": {
+          "$ref":"#/definitions/coordinates"
+        },
+        "number_of_atms": {
+          "description": "Number of ATMs at location",
+          "type": "integer",
+          "format": "int32"
+        },
+        "atm_hours": {
+          "description": "Expected hours for the ATM",
+          "type": "string"
+        },
+        "atm_deposit_cutoff": {
+          "description": "When deposits are picked up from the ATM each day",
+          "type": "array",
+          "items": {
+              "$ref":"#/definitions/day_event"
+          }
+        },
+        "bank_deposit_cutoff": {
+          "description": "When deposits are picked up from the Bank each day",
+          "type": "array",
+          "items": {
+              "$ref":"#/definitions/day_event"
+          }
+        },
+        "atm_languages": {
+          "description": "Array of languages used at the ATM",
+          "type": "array",
+          "items": {
+              "type": "string"
+          }
+        },
+        "teller_languages": {
+          "description": "Array of languages used by the Tellers",
+          "type": "array",
+          "items": {
+              "type": "string"
+          }
+        },
+        "atm_services": {
+          "description": "Array of services supported at the ATM",
+          "type": "array",
+          "items": {
+              "type": "string"
+          }
+        },
+        "bank_services": {
+          "description": "Array of services supported at the Bank",
+          "type": "array",
+          "items": {
+              "type": "string"
+          }
+        },
+        "holiday_hours": {
+          "description": "Array of holidays with closing times",
+          "type": "array",
+          "items": {
+              "$ref":"#/definitions/day_hours"
+          }
+        },
+        "lobby_hours": {
+          "description": "Hours of operation for each day of the week",
+          "type": "array",
+          "items": {
+              "$ref":"#/definitions/day_hours"
+          }
+        }
+      }
+    },
+    "day_event": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "description": "The day associated with the event (could be a holiday name or a day of the week)",
+          "type": "string"
+        },
+        "event": {
+          "$ref": "#/definitions/event"
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of event this is",
+          "type": "string"
+        },
+        "time": {
+          "description": "The time this event happens (0000 - 2359)",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "day_hours": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "description": "The day associated with the hours (could be a holiday name or a day of the week)",
+          "type": "string"
+        },
+        "hours": {
+          "$ref": "#/definitions/time_range"
+        }
+      }
+    },
+    "time_range": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "The time this starts (0000 - 2359)",
+          "type": "integer",
+          "format": "int32"
+        },
+        "end": {
+          "description": "The time this ends (0000 - 2359)",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
