@@ -420,10 +420,7 @@
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/bank_locations_criteria",
-              "example": {
-                "zipcode": "94114"
-              }
+              "$ref":"#/definitions/bank_locations_criteria"
             }
           }
         ],
@@ -1034,28 +1031,8 @@
     "bank_locations_criteria":{
       "type":"object",
       "properties":{
-        "coordinates":{
-          "$ref":"#/definitions/coordinates"
-        },
-        "city_state":{
-          "$ref":"#/definitions/city_state"
-        },
-        "zipcode":{
-          "type":"string"
-        }
-      }
-    },
-    "city_state":{
-      "type":"object",
-      "required": [ "city", "state" ],
-      "properties":{
-        "city":{
-          "description":"City of the location",
-          "type":"string"
-        },
-        "state":{
-          "description":"State of the location",
-          "type":"string"
+        "location":{
+            "$ref":"#/definitions/location"
         }
       }
     },
