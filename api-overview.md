@@ -773,9 +773,7 @@ token: string
 ```
 ```json
 {
-    "city_state": "string",
-    "coordinates": "string",
-    "zipcode": "string"
+    "location": "string"
 }
 ```
 
@@ -933,9 +931,7 @@ token: string (optional)
 
 ```json
 {
-    "city_state": "string",
-    "coordinates": "string",
-    "zipcode": "string"
+    "location": "string"
 }
 ```
 
@@ -964,15 +960,6 @@ token: string (optional)
         }
     ],
     "name": "string"
-}
-```
-
-#### city_state
-
-```json
-{
-    "city": "string",
-    "state": "string"
 }
 ```
 
