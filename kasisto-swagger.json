@@ -1380,6 +1380,10 @@
         "location": {
           "$ref": "#/definitions/location"
         },
+        "distance": {
+          "description": "Distance to this location",
+          "type": "string"
+        },
         "number_of_atms": {
           "description": "Number of ATMs at location",
           "type": "integer",

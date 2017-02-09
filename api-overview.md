@@ -784,6 +784,7 @@ token: string (optional)
 ```
 ```json
 [{
+    "distance": "string",
     "atm_deposit_cutoff": [
         {
             "$ref": "#/definitions/day_status"
@@ -877,6 +878,7 @@ token: string (optional)
 
 ```json
 {
+    "distance": "string",
     "atm_deposit_cutoff": [
         {
             "$ref": "#/definitions/day_status"
