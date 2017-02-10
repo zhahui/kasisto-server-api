@@ -1380,6 +1380,10 @@
         "location": {
           "$ref": "#/definitions/location"
         },
+        "phone_number": {
+          "description": "The phone number of this location",
+          "type": "string"
+        },
         "distance": {
           "description": "Distance to this location",
           "type": "string"

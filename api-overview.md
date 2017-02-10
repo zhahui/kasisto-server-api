@@ -784,6 +784,7 @@ token: string (optional)
 ```
 ```json
 [{
+    "phone_number": "string",
     "distance": "string",
     "atm_deposit_cutoff": [
         {
@@ -878,6 +879,7 @@ token: string (optional)
 
 ```json
 {
+    "phone_number": "string",
     "distance": "string",
     "atm_deposit_cutoff": [
         {
