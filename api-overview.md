@@ -788,18 +788,18 @@ token: string (optional)
     "distance": "string",
     "atm_deposit_cutoff": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "location_name": "string",
     "holiday_hours": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "lobby_hours": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "bank_services": [
@@ -814,7 +814,7 @@ token: string (optional)
     ],
     "bank_deposit_cutoff": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "location": "string",
@@ -883,18 +883,18 @@ token: string (optional)
     "distance": "string",
     "atm_deposit_cutoff": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "location_name": "string",
     "holiday_hours": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "lobby_hours": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "bank_services": [
@@ -909,7 +909,7 @@ token: string (optional)
     ],
     "bank_deposit_cutoff": [
         {
-            "$ref": "#/definitions/day_status"
+            "$ref": "#/definitions/day_hours"
         }
     ],
     "location": "string",
@@ -1001,11 +1001,11 @@ token: string (optional)
 }
 ```
 
-#### day_status
+#### day_hours
 
 ```json
 {
-    "status": "string",
+    "hours": "string",
     "day": "string"
 }
 ```
@@ -1022,6 +1022,15 @@ token: string (optional)
             "value": "string"
         }
     ]
+}
+```
+
+#### hours
+
+```json
+{
+    "start": 0,
+    "end": 0
 }
 ```
 
