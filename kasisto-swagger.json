@@ -1380,6 +1380,14 @@
         "location": {
           "$ref": "#/definitions/location"
         },
+        "phone_number": {
+          "description": "The phone number of this location",
+          "type": "string"
+        },
+        "distance": {
+          "description": "Distance to this location",
+          "type": "string"
+        },
         "number_of_atms": {
           "description": "Number of ATMs at location",
           "type": "integer",
@@ -1393,14 +1401,14 @@
           "description": "When deposits are picked up from the ATM each day",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_status"
+              "$ref":"#/definitions/day_hours"
           }
         },
         "bank_deposit_cutoff": {
           "description": "When deposits are picked up from the Bank each day",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_status"
+              "$ref":"#/definitions/day_hours"
           }
         },
         "atm_languages": {
@@ -1435,28 +1443,43 @@
           "description": "Array of holidays with closing times",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_status"
+              "$ref":"#/definitions/day_hours"
           }
         },
         "lobby_hours": {
           "description": "Hours of operation for each day of the week",
           "type": "array",
           "items": {
-              "$ref":"#/definitions/day_status"
+              "$ref":"#/definitions/day_hours"
           }
         }
       }
     },
-    "day_status": {
+    "day_hours": {
       "type": "object",
+      "required": [ "day" ],
       "properties": {
         "day": {
           "description": "The day associated with the event (could be a holiday name or a day of the week)",
           "type": "string"
         },
-        "status": {
-          "description": "The time this event happens (0000 - 2359)",
-          "type": "string"
+        "hours": {
+          "$ref":"#/definitions/hours"
+        }
+      }
+    },
+    "hours": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "Start time for a range of hours in 24 hour format as an integer.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "end": {
+          "description": "End time for a range of hours in 24 hour format as an integer.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
