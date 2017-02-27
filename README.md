@@ -28,14 +28,7 @@ The following security requirements must be met:
 | Authentication | The secret key request header must be validated |
 | Authorization | The user token request header must be validated |
 
-## Server Side Sample Code
-Kasisto provides server code samples which implement a server stub to get you started.  Code is available for multiple languages.
-
-### The code for these languages are up-to-date with support for all major functionality
-- [Java](servers/java)
-- [C#](servers/dotnet)
-
-### Additional server code can be generated using the Swagger code generator
-The kasisto-swagger.json file can be used to generate server stubs in additional languages.
+### Server code can be generated using the Swagger code generator
+The kasisto-swagger.json file can be used to generate server stubs in many languages.
 You can turn our API spec into server-side code with <a href="https://github.com/swagger-api/swagger-codegen" target="_blank">Swagger Codegen</a>.
 
