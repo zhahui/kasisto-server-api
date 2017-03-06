@@ -1190,7 +1190,7 @@
           "type": "string"
         },
         "account_type": {
-          "description": "checking,savings,loan,credit_card",
+          "description": "checking,savings,loan,credit_card, etc.",
           "type": "string",
           "enum": [
             "cd",
@@ -1207,6 +1207,7 @@
             "sloc",
             "savings",
             "wire",
+            "p2p_payment",
             "unspecified"
           ]
         },
@@ -1251,6 +1252,14 @@
           "description": "Interest rate if applicable",
           "type": "number",
           "format":"float"
+        },
+        "can_transfer_to": {
+          "description": "True if account is a valid transfer destination",
+          "type": "boolean"
+        },
+        "can_transfer_from": {
+          "description": "True if account is a valid transfer source",
+          "type": "boolean"
         },
         "meta": {
           "description": "Optional data if needed for application",
