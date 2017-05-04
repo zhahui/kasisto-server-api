@@ -38,7 +38,7 @@ A chat session with a user starts with Kasisto fetching the user's info by
 targetting the `/customer` endpoint. The request and response for the
 `/customer` endpoint looks like:
 
-    [`/customer`](./api-overview.md#customer)
+ > [`/customer`](./api-overview.md#customer)
 
 For most endpoint calls, there are several commonalities. The `secret` header is
 given to you by Kasisto so you can verify that it is from us. The `token` header
@@ -55,7 +55,7 @@ In order for Kasisto to present intents based on a User's account information
 (like getting a balance), the Enterprise API must implement the `/accounts`
 endpoint. Which can be found here:
 
-    [`/accounts`](./api-overview.md#accounts)
+ > [`/accounts`](./api-overview.md#accounts)
 
 The key details to keep in mind here is that the `account_id` in the request
 from Kasisto should be expected as either:
@@ -75,7 +75,7 @@ search for transactions with a variety of filters using natural language. These
 transactions are fetched from the Enterprise API with the `/transactions`
 endpoint. The documentation for transactions can be found here:
 
-    [`/transactions`](./api-overview.md#transactions)
+ > [`/transactions`](./api-overview.md#transactions)
 
 The filters are mostly applied on the Kasisto side of things, but the key detail
 to keep in mind is that we send a `limit` as well as a `start_date`, and
@@ -94,7 +94,7 @@ from one account to another account. The request and response for this is fairly
 straight forward, and probably the only thing to keep in mind is the enumeration
 around the transfer status:
 
-    [`/transfer`](./api-overview.md#transfer)
+ > [`/transfer`](./api-overview.md#transfer)
 
 
 ### Person to Person Payments
@@ -105,8 +105,8 @@ that a user is able to send a payment to. After those payees are presented and
 one is selected (with an amount to pay) a call to `/payment` will be made. Again
 pay close attention to enumerations (like `status`):
 
-    [`/payees`](./api-overview.md#payees)
-    [`/payment`](./api-overview.md#payment)
+ > [`/payees`](./api-overview.md#payees)
+ > [`/payment`](./api-overview.md#payment)
 
 
 ## Handling Common Complications
