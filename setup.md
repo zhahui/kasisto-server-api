@@ -192,7 +192,7 @@ both.
 
 Obviously not every bank will have every piece of data that we are looking for.
 Do your best to create a transformation function that will convert what the bank
-ahs to what Kasisto needs. This may be difficult and require data manipulation
+has to what Kasisto needs. This may be difficult and require data manipulation
 like string parsing, enumeration mapping, or deriving based on other data that
 exists. It may even require additional calls to endpoints to collect all of the
 data. This may be one of the more difficult task as this requires a bit of
