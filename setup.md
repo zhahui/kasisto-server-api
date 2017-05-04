@@ -77,14 +77,19 @@ endpoint. The documentation for transactions can be found here:
 
  > [`/transactions`](./api-overview.md#transactions)
 
-The filters are mostly applied on the Kasisto side of things, but the key detail
-to keep in mind is that we send a `limit` as well as a `start_date`, and
-`end_date`. Something mentioned later in the document is that it may be more
-optimal for the Enterprise API to do that filtering of dates and limits on their
-side, rather than relying on bank services to do it. This way a single request
-can be made for the max number of transactions and that request can be cached,
-then re-used with different filters. You may also have to merge in the
-`account_id` for the transactions as well.
+The filters are mostly applied on the Kasisto side of things, but the key
+detail to keep in mind is that we send a `limit` as well as a `start_date`, and
+`end_date`. It should be noted that `limit` does not relate directly to the
+user's request, but instead relates to our internally set limit that we use to
+determine how much to grab from the Enterprise API for that implementation. The
+reason for this is that we need to grab more than expected so we have at least
+`X` transactions AFTER applying the user's desired filters. Something mentioned
+later in the document is that it may be more optimal for the Enterprise API to
+do that filtering of dates and limits on their side, rather than relying on
+bank services to do it. This way a single request can be made for the max
+number of transactions and that request can be cached, then re-used with
+different filters. You may also have to merge in the `account_id` for the
+transactions as well.
 
 
 ### Account Transfers
