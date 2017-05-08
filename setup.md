@@ -67,6 +67,14 @@ from Kasisto should be expected as either:
 Keep an eye out for mapping the account types given by banks to match the
 enumerations needed by Kasisto.
 
+#### Gotchas
+
+> - Ensure you have the ability to handle `null` for accounts which should fetch
+>   ALL account details
+> - Check the account type enumerations and ensure you have them all setup
+>   properly
+> - Check the enumeration for Currency Codes
+
 
 ### Transaction Search
 
@@ -76,6 +84,9 @@ transactions are fetched from the Enterprise API with the `/transactions`
 endpoint. The documentation for transactions can be found here:
 
  > [`/transactions`](./api-overview.md#transactions)
+ > [`/merchants`](./api-overview.md#merchants) *(Optional Enhancement)*
+ > [`/categories`](./api-overview.md#categories) *(Optional Enhancement)*
+ > [`/payees`](./api-overview.md#payees) *(Optional Enhancement)*
 
 The filters are mostly applied on the Kasisto side of things, but the key
 detail to keep in mind is that we send a `limit` as well as a `start_date`, and
@@ -91,6 +102,25 @@ number of transactions and that request can be cached, then re-used with
 different filters. You may also have to merge in the `account_id` for the
 transactions as well.
 
+The additional endpoints for `/merchants`, `/categories`, and `/payees` enables
+our system to optimize transaction searches, but giving us details on the
+possibilities for the respective endpoint. Finding merchants, categories, and
+payees becomes much more accuracte if these endpoints are implemented.
+
+#### Gotchas
+
+> - Handle a `null` limit properly (this should not limit the transactions
+>   coming out)
+> - Some data like `currency_code` or `account_id` doesn't come from the
+>   transaction and comes from the account details, so merge that in when need
+>   be
+> - While `location` is optional, it enables a valuable search by location
+>   feature
+> - Sometimes the `merchant` is referred to as a `payee` or something of the
+>   like
+> - Keep an eye on the enumeration for `status`, `currency_code`, and
+>   `transaction_type`
+
 
 ### Account Transfers
 
@@ -100,6 +130,10 @@ straight forward, and probably the only thing to keep in mind is the enumeration
 around the transfer status:
 
  > [`/transfer`](./api-overview.md#transfer)
+
+#### Gotchas
+
+> - Keep an eye on the enumeration for `status`
 
 
 ### Person to Person Payments
@@ -112,6 +146,10 @@ pay close attention to enumerations (like `status`):
 
  > [`/payees`](./api-overview.md#payees)
  > [`/payment`](./api-overview.md#payment)
+
+#### Gotchas
+
+> - Keep an eye on the enumeration for `currency_code` and `status`
 
 
 ## Handling Common Complications
