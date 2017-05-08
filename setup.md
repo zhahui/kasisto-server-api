@@ -73,11 +73,13 @@ enumerations needed by Kasisto.
 
 #### Gotchas
 
-> - Ensure you have the ability to handle `null` for accounts which should fetch
->   ALL account details
-> - Check the account type enumerations and ensure you have them all setup
->   properly
-> - Check the enumeration for Currency Codes
+> - Ensure you have the ability to handle `null` for accounts which should
+>   fetch ALL account details
+> - Keep an eye on the enumerations for `account_type` and `currency_code`
+>     - `account_type` **enumeration:** All lowercase with underscore word
+>       separation. e.g. "cd", "checking", "credit_card", etc.
+>     - `currency_code` **enumeration:** All uppercase, 3 letter codes from ISO
+>       4217. e.g. "USD", "CAD", "INR", etc.
 
 
 ---
@@ -125,10 +127,16 @@ payees becomes much more accuracte if these endpoints are implemented.
 >   be
 > - While `location` is optional, it enables a valuable search by location
 >   feature
-> - Sometimes the `merchant` is referred to as a `payee` or something of the
->   like
+> - Sometimes the `merchant` comes from banks as a field known as `payee` or
+>   similar nomenclature
 > - Keep an eye on the enumeration for `status`, `currency_code`, and
 >   `transaction_type`
+>     - `status` **enumeration:** All lowercase. e.g. "posted", "pending",
+>       "cancelled", etc.
+>     - `currency_code` **enumeration:** All uppercase, 3 letter codes from ISO
+>       4217. e.g. "USD", "CAD", "INR", etc.
+>     - `transaction_type` **enumeration:** All lowercase with underscore word
+>       separation. e.g. "atm", "check_deposit", "credit", etc.
 
 
 ---
@@ -145,6 +153,8 @@ around the transfer status:
 #### Gotchas
 
 > - Keep an eye on the enumeration for `status`
+>     - `status` **enumeration:** All lowercase. e.g. "posted", "pending",
+>       "cancelled", etc.
 
 
 ---
@@ -163,6 +173,10 @@ pay close attention to enumerations (like `status`):
 #### Gotchas
 
 > - Keep an eye on the enumeration for `currency_code` and `status`
+>     - `currency_code` **enumeration:** All uppercase, 3 letter codes from ISO
+>       4217. e.g. "USD", "CAD", "INR", etc.
+>     - `status` **enumeration:** All lowercase. e.g. "posted", "pending",
+>       "cancelled", etc.
 
 
 ## Handling Common Complications
