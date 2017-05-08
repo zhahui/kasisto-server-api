@@ -32,6 +32,8 @@ will take to ensure that we have the data we need to provide the features you
 want.
 
 
+---
+
 ### All Sessions
 
 A chat session with a user starts with Kasisto fetching the user's info by
@@ -48,6 +50,8 @@ to access the endpoints for a given user. This could be an Oauth Access Token
 that the bank assigns to the user. The `user_id` field is provided in case it is
 needed by the bank for any requests.
 
+
+---
 
 ### Account Information
 
@@ -75,6 +79,8 @@ enumerations needed by Kasisto.
 >   properly
 > - Check the enumeration for Currency Codes
 
+
+---
 
 ### Transaction Search
 
@@ -125,6 +131,8 @@ payees becomes much more accuracte if these endpoints are implemented.
 >   `transaction_type`
 
 
+---
+
 ### Account Transfers
 
 A simple, but very useful feature of Kasisto is the ability to transfer money
@@ -138,6 +146,8 @@ around the transfer status:
 
 > - Keep an eye on the enumeration for `status`
 
+
+---
 
 ### Person to Person Payments
 
