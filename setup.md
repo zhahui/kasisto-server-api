@@ -23,6 +23,11 @@ interested in having. You can have the first iteration of a server working by
 creating simple stubs of the endpoints, which can take anywhere from a few hours
 to a few days, depending on your language of choice and your experience level.
 
+ > **NOTE:** *The Level of Effort is a rough estimation if implementation goes
+ > smoothly with a bank, this can drastically change based on the difficulty of
+ > implementation with the bank's services. The estimations are made with the
+ > Scrum Process in mind using fibonnaci numbers (1, 2, 3, 5, 8) as work days.*
+
 
 ## Intents and their Services
 
@@ -35,6 +40,8 @@ want.
 ---
 
 ### All Sessions
+
+ * **Level of Effort:** *2 days*
 
 A chat session with a user starts with Kasisto fetching the user's info by
 targetting the `/customer` endpoint. The request and response for the
@@ -54,6 +61,8 @@ needed by the bank for any requests.
 ---
 
 ### Account Information
+
+ * **Level of Effort:** *3 days*
 
 In order for Kasisto to present intents based on a User's account information
 (like getting a balance), the Enterprise API must implement the `/accounts`
@@ -85,6 +94,8 @@ enumerations needed by Kasisto.
 ---
 
 ### Transaction Search
+
+ * **Level of Effort:** *8 days*
 
 One of the most powerful features Kasisto has is giving the user the ability to
 search for transactions with a variety of filters using natural language. These
@@ -143,6 +154,8 @@ payees becomes much more accuracte if these endpoints are implemented.
 
 ### Account Transfers
 
+ * **Level of Effort:** *3 days*
+
 A simple, but very useful feature of Kasisto is the ability to transfer money
 from one account to another account. The request and response for this is fairly
 straight forward, and probably the only thing to keep in mind is the enumeration
@@ -160,6 +173,8 @@ around the transfer status:
 ---
 
 ### Person to Person Payments
+
+ * **Level of Effort:** *8 days*
 
 The ability to pay another person is very valuable and typically requires two
 endpoint calls. The first being to `/payees` in order to get a list of people
@@ -190,6 +205,8 @@ taken into account that will add time to your implementation.
 
 ### Making Multiple Calls for Aggregation
 
+ * **Additional Level of Effort:** *+8 days*
+
 One of the most common patterns that will be run into is having to take a single
 batch of information (like a list of account IDs) and convert them into a batch
 of things for each piece of information from a different location (details for
@@ -205,6 +222,8 @@ strategy to handle requests to banks in parallel.
 
 ### Server Load
 
+ * **Additional Level of Effort:** *+5 days*
+
 It is common for banking infrastructure to be fragile and it may not be able to
 handle the load of many requests one after the other. The best way to approach
 this is to integrate caching on your Enterprise API implementation. There are a
@@ -218,6 +237,8 @@ request so fresh data can be pulled.
 
 
 ### Response Time
+
+ * **Additional Level of Effort:** *+5 days*
 
 Sometimes frequency of calls isn't a problem, but instead the problem is the
 length of calls. This problem can be partially alleviated by using caching as
@@ -234,6 +255,8 @@ performance and put less strain on the bank's infrastructure.
 
 ### Error Handling
 
+ * **Additional Level of Effort:** *+3 days*
+
 Expect failures when working with any infrastructure and have a strategy to
 tackle them. A common one may be that an API key or authorization may fail and
 may have to be refreshed. The Enterprise API needs to be able to respond to
@@ -241,6 +264,8 @@ these scenarios gracefully without hiccup.
 
 
 ### Parameter Management
+
+ * **Additional Level of Effort:** *+2 days*
 
 Always protect your instance against the parallels of request parameters. As
 common to all programming is ensuring that your system is able to handle
@@ -254,6 +279,8 @@ both.
 
 
 ### Data Mapping
+
+ * **Additional Level of Effort:** *+1 days*
 
 Obviously not every bank will have every piece of data that we are looking for.
 Do your best to create a transformation function that will convert what the bank
