@@ -84,9 +84,12 @@ transactions are fetched from the Enterprise API with the `/transactions`
 endpoint. The documentation for transactions can be found here:
 
  > [`/transactions`](./api-overview.md#transactions)
- > [`/merchants`](./api-overview.md#merchants) *(Optional Enhancement)*
- > [`/categories`](./api-overview.md#categories) *(Optional Enhancement)*
- > [`/payees`](./api-overview.md#payees) *(Optional Enhancement)*
+
+##### Optional Enhancements
+
+ > [`/merchants`](./api-overview.md#merchants)
+ > [`/categories`](./api-overview.md#categories)
+ > [`/payees`](./api-overview.md#payees)
 
 The filters are mostly applied on the Kasisto side of things, but the key
 detail to keep in mind is that we send a `limit` as well as a `start_date`, and
