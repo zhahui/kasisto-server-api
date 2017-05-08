@@ -140,6 +140,8 @@ payees becomes much more accuracte if these endpoints are implemented.
 >   feature
 > - Sometimes the `merchant` comes from banks as a field known as `payee` or
 >   similar nomenclature
+> - For the Spending Overview features to work properly the `transaction_type`
+>   field must be of type `credit` or `debit`
 > - Keep an eye on the enumeration for `status`, `currency_code`, and
 >   `transaction_type`
 >     - `status` **enumeration:** All lowercase. e.g. "posted", "pending",
@@ -165,6 +167,10 @@ around the transfer status:
 
 #### Gotchas
 
+> - Transfers implement an "Intent Level Security" system that enables the
+>   Enterprise to require additional authorization.
+>     - Throw a `[450] One-Time Password is required` http response to require
+>       a OTP from the user
 > - Keep an eye on the enumeration for `status`
 >     - `status` **enumeration:** All lowercase. e.g. "posted", "pending",
 >       "cancelled", etc.
@@ -176,17 +182,21 @@ around the transfer status:
 
  * **Level of Effort:** *8 days*
 
-The ability to pay another person is very valuable and typically requires two
-endpoint calls. The first being to `/payees` in order to get a list of people
-that a user is able to send a payment to. After those payees are presented and
-one is selected (with an amount to pay) a call to `/payment` will be made. Again
-pay close attention to enumerations (like `status`):
+The ability to pay another person is very valuable (aka P2P) and typically
+requires two endpoint calls. The first being to `/payees` in order to get a
+list of people that a user is able to send a payment to. After those payees are
+presented and one is selected (with an amount to pay) a call to `/payment` will
+be made. Again pay close attention to enumerations (like `status`):
 
  > [`/payees`](./api-overview.md#payees)
  > [`/payment`](./api-overview.md#payment)
 
 #### Gotchas
 
+> - P2P implement an "Intent Level Security" system that enables the
+>   Enterprise to require additional authorization.
+>     - Throw a `[450] One-Time Password is required` http response to require
+>       a OTP from the user
 > - Keep an eye on the enumeration for `currency_code` and `status`
 >     - `currency_code` **enumeration:** All uppercase, 3 letter codes from ISO
 >       4217. e.g. "USD", "CAD", "INR", etc.
