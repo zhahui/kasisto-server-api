@@ -836,6 +836,9 @@
         "code":{
           "type":"string"
         },
+        "display_message_id":{
+          "type":"string"
+        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",

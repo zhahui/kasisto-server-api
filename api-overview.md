@@ -1020,6 +1020,7 @@ token: string (optional)
 {
     "message": "string",
     "code": "string",
+    "display_message_id": "string", 
     "meta": [
         {
             "name": "string",
