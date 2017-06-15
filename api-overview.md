@@ -563,6 +563,7 @@ token: string
 ```
 ```json
 {
+    "user_id": "string", 
     "dest_account_id": "string",
     "source_account_id": "string",
     "amount": 0,
@@ -637,8 +638,9 @@ token: string
 ```
 ```json
 {
+    "user_id": "string", 
+    "payee_id": "string", 
     "source_account_id": "string",
-    "payee_id": "string",
     "amount": 0,
     "meta": [
         {
@@ -1136,8 +1138,9 @@ token: string (optional)
 
 ```json
 {
+    "user_id": "string", 
+    "payee_id": "string", 
     "source_account_id": "string",
-    "payee_id": "string",
     "amount": 0,
     "meta": [
         {
@@ -1235,6 +1238,7 @@ token: string (optional)
 
 ```json
 {
+    "user_id": "string", 
     "dest_account_id": "string",
     "source_account_id": "string",
     "amount": 0,
