@@ -1108,6 +1108,19 @@
         "last_name": {
           "type": "string"
         },
+        "email" : {
+          "type" : "string",
+          "format" : "email"
+        },
+        "home_phone" : {
+          "type" : "string"
+        },
+        "office_phone" : {
+          "type" : "string"
+        },
+        "mobile_phone" : {
+          "type" : "string"
+        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
