@@ -152,7 +152,9 @@ token: string (optional)
             "value": "string"
         }
     ],
-    "full_name": "string"
+    "full_name": "string",
+    "email": "string",
+    "mobile_number" : "string"
 }
 ```
 
