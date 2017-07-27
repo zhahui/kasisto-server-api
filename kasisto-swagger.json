@@ -1112,13 +1112,7 @@
           "type" : "string",
           "format" : "email"
         },
-        "home_phone" : {
-          "type" : "string"
-        },
-        "office_phone" : {
-          "type" : "string"
-        },
-        "mobile_phone" : {
+        "mobile_number" : {
           "type" : "string"
         },
         "meta": {
