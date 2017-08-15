@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Kasisto API",
     "description": "Kasisto Enterprise API",
     "contact": {
@@ -1107,6 +1107,13 @@
         },
         "last_name": {
           "type": "string"
+        },
+        "email" : {
+          "type" : "string",
+          "format" : "email"
+        },
+        "mobile_number" : {
+          "type" : "string"
         },
         "meta": {
           "description": "Optional data if needed for application",
