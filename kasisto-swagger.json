@@ -1115,6 +1115,9 @@
         "mobile_number" : {
           "type" : "string"
         },
+        "time_zone":{
+          "type":"string"
+        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",

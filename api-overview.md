@@ -77,7 +77,7 @@ token: string
 ```
 ```json
 {
-    "otp": "string",
+    "otp": "string", 
     "user_id": "string"
 }
 ```
@@ -89,7 +89,7 @@ token: string (optional)
 ```
 ```json
 {
-    "token": "string",
+    "token": "string", 
     "user_id": "string"
 }
 ```
@@ -143,18 +143,19 @@ token: string (optional)
 ```
 ```json
 {
-    "first_name": "string",
-    "last_name": "string",
-    "user_id": "string",
+    "first_name": "string", 
+    "last_name": "string", 
+    "user_id": "string", 
+    "time_zone": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "full_name": "string",
-    "email": "string",
-    "mobile_number" : "string"
+    ], 
+    "full_name": "string", 
+    "mobile_number": "string", 
+    "email": "string"
 }
 ```
 
@@ -193,7 +194,7 @@ secret: string
 ```
 ```json
 {
-    "username": "string",
+    "username": "string", 
     "password": "string"
 }
 ```
@@ -205,7 +206,7 @@ token: string (optional)
 ```
 ```json
 {
-    "token": "string",
+    "token": "string", 
     "user_id": "string"
 }
 ```
@@ -251,7 +252,7 @@ token: string
 ```
 ```json
 {
-    "user_id": "string",
+    "user_id": "string", 
     "account_id": "string"
 }
 ```
@@ -263,39 +264,30 @@ token: string (optional)
 ```
 ```json
 [{
-    "available_credit": 0,
-    "account_type": "string",
-    "account_id": "string",
-    "payment_due_amount": 0,
-    "can_transfer_to": false, 
-    "can_transfer_from": false, 
-    "current_balance": 0,
-    "interest_rate": 0,
-    "minimum_payment_due_amount": 0,
-    "payment_due_date": "2016-01-30",
-    "available_balance": 0,
+    "available_credit": 0, 
+    "account_type": "string", 
+    "account_id": "string", 
+    "payment_due_amount": 0, 
+    "can_transfer_to": "string", 
+    "current_balance": 0, 
+    "interest_rate": 0, 
+    "minimum_payment_due_amount": 0, 
+    "payment_due_date": "2016-01-30", 
+    "available_balance": 0, 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "account_nickname": "string",
-    "account_number": "string",
-    "account_name": "string",
-    "currency_code": "string",
+    ], 
+    "account_nickname": "string", 
+    "account_number": "string", 
+    "can_transfer_from": "string", 
+    "account_name": "string", 
+    "currency_code": "string", 
     "credit_limit": 0
 }]
 ```
-
-##### Notes:
-1) The field "account_type" in response should be one of the following:
-    "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
-    "sloc","savings","wire","unspecified".
-
-2) The field "payment_due_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
-
-3) If there is no meta then pass empty array.
 
 
 ### Transactions Methods
@@ -352,14 +344,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ],
-    "merchant_id": "string",
+    ], 
+    "merchant_id": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "name": "string"
 }]
 ```
@@ -402,14 +394,14 @@ token: string
 ```
 ```json
 {
-    "user_id": "string",
-    "limit": 0,
+    "user_id": "string", 
+    "limit": 0, 
     "account_ids": [
         {
             "type": "string"
         }
-    ],
-    "end_date": "2016-01-30",
+    ], 
+    "end_date": "2016-01-30", 
     "start_date": "2016-01-30"
 }
 ```
@@ -421,29 +413,29 @@ token: string (optional)
 ```
 ```json
 [{
-    "merchant": "string",
-    "status": "string",
-    "description": "string",
-    "title": "string",
-    "currency_code": "string",
-    "transaction_id": "string",
-    "transaction_type": "string",
-    "post_date": "2016-01-30T00:00:00.000+0000",
-    "amount": 0,
-    "transaction_date": "2016-01-30T00:00:00.000+0000",
+    "merchant": "string", 
+    "status": "string", 
+    "description": "string", 
+    "title": "string", 
+    "currency_code": "string", 
+    "transaction_id": "string", 
+    "transaction_type": "string", 
+    "post_date": "2016-01-30T00:00:00.000+0000", 
+    "amount": 0, 
+    "transaction_date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "location": "string",
-    "check_number": 0,
+    ], 
+    "location": "string", 
+    "check_number": 0, 
     "categories": [
         {
             "type": "string"
         }
-    ],
+    ], 
     "account_id": "string"
 }]
 ```
@@ -500,30 +492,18 @@ token: string (optional)
         {
             "type": "string"
         }
-    ],
-    "category_id": "string",
+    ], 
+    "category_id": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "name": "string"
 }]
 ```
 
-##### Notes:
-1) The field "transaction_type" in response should be one of the following:
-   "atm","cash","check","check_deposit","credit","debit”,"fee","dividend","interest","unspecified”.
-
-2) The field "status" in response should be one of the following:
-   "posted","pending","cancelled","unspecified".
-
-3) The fields "transaction_date" and "post_date" in response should be in "yyyy-MM-dd’T’HH:mm:ss.SSSZ” Date format.
-
-4) If there is no meta or categories then pass empty array.
-
-5) We prefer that API do not implement filtering by category, payee or merchant and instead rely on Kai adapter to do that filtering.
 
 ### Transfers Methods
 
@@ -565,16 +545,16 @@ token: string
 ```
 ```json
 {
-    "dest_account_id": "string",
-    "source_account_id": "string",
-    "amount": 0,
+    "dest_account_id": "string", 
+    "source_account_id": "string", 
+    "amount": 0, 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "date": "2016-01-30T00:00:00.000+0000",
+    ], 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "currency_code": "string"
 }
 ```
@@ -586,14 +566,14 @@ token: string (optional)
 ```
 ```json
 {
-    "transfer_id": "string",
-    "reference_number": "string",
+    "transfer_id": "string", 
+    "reference_number": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "status": "string"
 }
 ```
@@ -639,16 +619,16 @@ token: string
 ```
 ```json
 {
-    "source_account_id": "string",
-    "payee_id": "string",
-    "amount": 0,
+    "source_account_id": "string", 
+    "payee_id": "string", 
+    "amount": 0, 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "date": "2016-01-30",
+    ], 
+    "date": "2016-01-30", 
     "currency_code": "string"
 }
 ```
@@ -660,14 +640,14 @@ token: string (optional)
 ```
 ```json
 {
-    "payment_id": "string",
-    "reference_number": "string",
+    "payment_id": "string", 
+    "reference_number": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "status": "string"
 }
 ```
@@ -724,14 +704,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ],
+    ], 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "payee_id": "string",
+    ], 
+    "payee_id": "string", 
     "name": "string"
 }]
 ```
@@ -788,50 +768,50 @@ token: string (optional)
 ```
 ```json
 [{
-    "phone_number": "string",
-    "distance": "string",
+    "phone_number": "string", 
+    "distance": "string", 
     "atm_deposit_cutoff": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
-    "location_name": "string",
+    ], 
+    "location_name": "string", 
     "holiday_hours": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
+    ], 
     "lobby_hours": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
+    ], 
     "bank_services": [
         {
             "type": "string"
         }
-    ],
+    ], 
     "atm_services": [
         {
             "type": "string"
         }
-    ],
+    ], 
     "bank_deposit_cutoff": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
-    "location": "string",
-    "number_of_atms": 0,
-    "atm_hours": "string",
+    ], 
+    "location": "string", 
+    "number_of_atms": 0, 
+    "atm_hours": "string", 
     "teller_languages": [
         {
             "type": "string"
         }
-    ],
-    "location_url": "string",
-    "location_id": "string",
-    "location_type": "string",
+    ], 
+    "location_url": "string", 
+    "location_id": "string", 
+    "location_type": "string", 
     "atm_languages": [
         {
             "type": "string"
@@ -847,27 +827,27 @@ token: string (optional)
 
 ```json
 {
-    "available_credit": 0,
-    "account_type": "string",
-    "account_id": "string",
-    "payment_due_amount": 0,
+    "available_credit": 0, 
+    "account_type": "string", 
+    "account_id": "string", 
+    "payment_due_amount": 0, 
     "can_transfer_to": false, 
     "can_transfer_from": false, 
-    "current_balance": 0,
-    "interest_rate": 0,
-    "minimum_payment_due_amount": 0,
-    "payment_due_date": "2016-01-30",
-    "available_balance": 0,
+    "current_balance": 0, 
+    "interest_rate": 0, 
+    "minimum_payment_due_amount": 0, 
+    "payment_due_date": "2016-01-30", 
+    "available_balance": 0, 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "account_nickname": "string",
-    "account_number": "string",
-    "account_name": "string",
-    "currency_code": "string",
+    ], 
+    "account_nickname": "string", 
+    "account_number": "string", 
+    "account_name": "string", 
+    "currency_code": "string", 
     "credit_limit": 0
 }
 ```
@@ -876,7 +856,7 @@ token: string (optional)
 
 ```json
 {
-    "user_id": "string",
+    "user_id": "string", 
     "account_id": "string"
 }
 ```
@@ -885,50 +865,50 @@ token: string (optional)
 
 ```json
 {
-    "phone_number": "string",
-    "distance": "string",
+    "phone_number": "string", 
+    "distance": "string", 
     "atm_deposit_cutoff": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
-    "location_name": "string",
+    ], 
+    "location_name": "string", 
     "holiday_hours": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
+    ], 
     "lobby_hours": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
+    ], 
     "bank_services": [
         {
             "type": "string"
         }
-    ],
+    ], 
     "atm_services": [
         {
             "type": "string"
         }
-    ],
+    ], 
     "bank_deposit_cutoff": [
         {
             "$ref": "#/definitions/day_hours"
         }
-    ],
-    "location": "string",
-    "number_of_atms": 0,
-    "atm_hours": "string",
+    ], 
+    "location": "string", 
+    "number_of_atms": 0, 
+    "atm_hours": "string", 
     "teller_languages": [
         {
             "type": "string"
         }
-    ],
-    "location_url": "string",
-    "location_id": "string",
-    "location_type": "string",
+    ], 
+    "location_url": "string", 
+    "location_id": "string", 
+    "location_type": "string", 
     "atm_languages": [
         {
             "type": "string"
@@ -961,14 +941,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ],
-    "category_id": "string",
+    ], 
+    "category_id": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "name": "string"
 }
 ```
@@ -977,7 +957,7 @@ token: string (optional)
 
 ```json
 {
-    "lat": 0,
+    "lat": 0, 
     "long": 0
 }
 ```
@@ -986,16 +966,19 @@ token: string (optional)
 
 ```json
 {
-    "first_name": "string",
-    "last_name": "string",
-    "user_id": "string",
+    "first_name": "string", 
+    "last_name": "string", 
+    "user_id": "string", 
+    "time_zone": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "full_name": "string"
+    ], 
+    "full_name": "string", 
+    "mobile_number": "string", 
+    "email": "string"
 }
 ```
 
@@ -1011,7 +994,7 @@ token: string (optional)
 
 ```json
 {
-    "hours": "string",
+    "hours": "string", 
     "day": "string"
 }
 ```
@@ -1020,12 +1003,12 @@ token: string (optional)
 
 ```json
 {
-    "message": "string",
-    "code": "string",
+    "message": "string", 
+    "code": "string", 
     "display_message_id": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
     ]
@@ -1036,7 +1019,7 @@ token: string (optional)
 
 ```json
 {
-    "start": 0,
+    "start": 0, 
     "end": 0
 }
 ```
@@ -1045,10 +1028,10 @@ token: string (optional)
 
 ```json
 {
-    "city": "string",
-    "state": "string",
-    "zip": "string",
-    "coordinates": "string",
+    "city": "string", 
+    "state": "string", 
+    "zip": "string", 
+    "coordinates": "string", 
     "address": "string"
 }
 ```
@@ -1061,14 +1044,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ],
-    "merchant_id": "string",
+    ], 
+    "merchant_id": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "name": "string"
 }
 ```
@@ -1085,7 +1068,7 @@ token: string (optional)
 
 ```json
 {
-    "name": "string",
+    "name": "string", 
     "value": "string"
 }
 ```
@@ -1098,14 +1081,14 @@ token: string (optional)
         {
             "type": "string"
         }
-    ],
+    ], 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "payee_id": "string",
+    ], 
+    "payee_id": "string", 
     "name": "string"
 }
 ```
@@ -1122,14 +1105,14 @@ token: string (optional)
 
 ```json
 {
-    "payment_id": "string",
-    "reference_number": "string",
+    "payment_id": "string", 
+    "reference_number": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "status": "string"
 }
 ```
@@ -1138,16 +1121,16 @@ token: string (optional)
 
 ```json
 {
-    "source_account_id": "string",
-    "payee_id": "string",
-    "amount": 0,
+    "source_account_id": "string", 
+    "payee_id": "string", 
+    "amount": 0, 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "date": "2016-01-30",
+    ], 
+    "date": "2016-01-30", 
     "currency_code": "string"
 }
 ```
@@ -1156,7 +1139,7 @@ token: string (optional)
 
 ```json
 {
-    "username": "string",
+    "username": "string", 
     "password": "string"
 }
 ```
@@ -1165,7 +1148,7 @@ token: string (optional)
 
 ```json
 {
-    "token": "string",
+    "token": "string", 
     "user_id": "string"
 }
 ```
@@ -1174,29 +1157,29 @@ token: string (optional)
 
 ```json
 {
-    "merchant": "string",
-    "status": "string",
-    "description": "string",
-    "title": "string",
-    "currency_code": "string",
-    "transaction_id": "string",
-    "transaction_type": "string",
-    "post_date": "2016-01-30T00:00:00.000+0000",
-    "amount": 0,
-    "transaction_date": "2016-01-30T00:00:00.000+0000",
+    "merchant": "string", 
+    "status": "string", 
+    "description": "string", 
+    "title": "string", 
+    "currency_code": "string", 
+    "transaction_id": "string", 
+    "transaction_type": "string", 
+    "post_date": "2016-01-30T00:00:00.000+0000", 
+    "amount": 0, 
+    "transaction_date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "location": "string",
-    "check_number": 0,
+    ], 
+    "location": "string", 
+    "check_number": 0, 
     "categories": [
         {
             "type": "string"
         }
-    ],
+    ], 
     "account_id": "string"
 }
 ```
@@ -1205,14 +1188,14 @@ token: string (optional)
 
 ```json
 {
-    "user_id": "string",
-    "limit": 0,
+    "user_id": "string", 
+    "limit": 0, 
     "account_ids": [
         {
             "type": "string"
         }
-    ],
-    "end_date": "2016-01-30",
+    ], 
+    "end_date": "2016-01-30", 
     "start_date": "2016-01-30"
 }
 ```
@@ -1221,14 +1204,14 @@ token: string (optional)
 
 ```json
 {
-    "transfer_id": "string",
-    "reference_number": "string",
+    "transfer_id": "string", 
+    "reference_number": "string", 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
+    ], 
     "status": "string"
 }
 ```
@@ -1237,16 +1220,16 @@ token: string (optional)
 
 ```json
 {
-    "dest_account_id": "string",
-    "source_account_id": "string",
-    "amount": 0,
+    "dest_account_id": "string", 
+    "source_account_id": "string", 
+    "amount": 0, 
     "meta": [
         {
-            "name": "string",
+            "name": "string", 
             "value": "string"
         }
-    ],
-    "date": "2016-01-30T00:00:00.000+0000",
+    ], 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "currency_code": "string"
 }
 ```
@@ -1255,7 +1238,7 @@ token: string (optional)
 
 ```json
 {
-    "otp": "string",
+    "otp": "string", 
     "user_id": "string"
 }
 ```
@@ -1264,7 +1247,7 @@ token: string (optional)
 
 ```json
 {
-    "token": "string",
+    "token": "string", 
     "user_id": "string"
 }
 ```
