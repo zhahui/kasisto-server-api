@@ -26,7 +26,7 @@ to a few days, depending on your language of choice and your experience level.
  > **NOTE:** *The Level of Effort is a rough estimation if implementation goes
  > smoothly with a bank, this can drastically change based on the difficulty of
  > implementation with the bank's services. The estimations are made with the
- > Scrum Process in mind using fibonnaci numbers (XSmall, Small, Medium, Large, XLarge) as work days.*
+ > Scrum Process in mind using fibonnaci numbers (Small, Medium, Large, XLarge) as work days.*
 
 
 ## Intents and their Services
@@ -290,7 +290,7 @@ both.
 
 ### Data Mapping
 
- * **Additional Level of Effort:** *+XSmall*
+ * **Additional Level of Effort:** *+Small*
 
 Obviously not every bank will have every piece of data that we are looking for.
 Do your best to create a transformation function that will convert what the bank
