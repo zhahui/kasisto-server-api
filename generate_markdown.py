@@ -3,7 +3,7 @@ import json
 def generate_markdown(input_filename):
     spec=json.loads(open(input_filename,'r').read())
     print '# Kasisto Enterprise API Overview'
-    print 'Version 1.0'
+    print 'Version 1.2'
     print ''
     print '- [Authentication](#authentication)'
     print '- [Authorization](#authorization)'
