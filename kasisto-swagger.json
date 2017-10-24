@@ -876,6 +876,9 @@
       "type":"object",
       "required": [ "source_account_id", "dest_account_id", "amount" ],
       "properties":{
+        "user_id":{
+          "type":"string"
+        },
         "source_account_id":{
           "description": "source account of transfer",
           "type": "string"
@@ -911,6 +914,9 @@
       "type":"object",
       "required": [ "source_account_id", "payee_id", "amount" ],
       "properties": {
+        "user_id":{
+          "type":"string"
+        },
         "source_account_id": {
           "description": "source account of payment",
           "type": "string"
