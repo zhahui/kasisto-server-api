@@ -1,5 +1,5 @@
 # Kasisto Enterprise API Overview
-Version 1.1
+Version 1.2
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
@@ -193,8 +193,12 @@ secret: string
 ```
 ```json
 {
-    "username": "string",
-    "password": "string"
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ]
 }
 ```
 
