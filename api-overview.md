@@ -889,7 +889,7 @@ token: string (optional)
             "name": "string",
             "value": "string"
         }
-    ],
+    ]
 
 
 }
