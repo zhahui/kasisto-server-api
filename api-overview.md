@@ -884,6 +884,14 @@ token: string (optional)
 {
     "user_id": "string",
     "account_id": "string"
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ],
+
+
 }
 ```
 
