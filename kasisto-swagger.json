@@ -956,6 +956,13 @@
         },
         "account_id":{
           "type":"string"
+        },
+         "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items":{
+            "$ref": "#/definitions/meta_field"
+          }
         }
       }
     },
