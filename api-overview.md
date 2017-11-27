@@ -883,7 +883,15 @@ token: string (optional)
 ```json
 {
     "user_id": "string",
-    "account_id": "string"
+    "account_id": "string",
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ]
+
+
 }
 ```
 
