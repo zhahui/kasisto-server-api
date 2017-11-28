@@ -269,8 +269,7 @@
             "name":"token",
             "in":"header",
             "required":true,
-            "type":"string",
-            "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
+            "type":"string"
           },
           {
             "name":"UUID",
@@ -283,10 +282,7 @@
             "in":"body",
             "required": true,
             "schema":{
-              "$ref":"#/definitions/accounts_request",
-              "example": {
-                "account_id": "98927d5be608d4a1652d493e85e74637cac066be29d77e9f39026b419faafeb3"
-              }
+              "$ref":"#/definitions/accounts_request"
             }
           }
         ],
@@ -355,8 +351,7 @@
             "name":"token",
             "in":"header",
             "required":true,
-            "type":"string",
-            "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
+            "type":"string"
           },
           {
             "name":"UUID",
@@ -369,12 +364,7 @@
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/transaction_criteria",
-              "example": {
-                "account_ids": "98927d5be608d4a1652d493e85e74637cac066be29d77e9f39026b419faafeb3",
-                "start_date": "2015-05-01",
-                "end_date": "2016-11-03"
-              }
+              "$ref":"#/definitions/transaction_criteria"
             }
           }
         ],
@@ -1003,7 +993,7 @@
         "date": {
           "description": "date of payment",
           "type": "string",
-          "format": "date"
+          "format": "date-time"
         },
         "meta": {
           "description": "Optional data if needed for application",
@@ -1103,11 +1093,11 @@
         },
         "start_date":{
           "type":"string",
-          "format":"date"
+          "format":"date-time"
         },
         "end_date":{
           "type":"string",
-          "format":"date"
+          "format":"date-time"
         }
       }
     },
@@ -1297,8 +1287,7 @@
             "sloc",
             "savings",
             "wire",
-            "p2p_payment",
-            "unspecified"
+            "p2p_payment"
           ]
         },
         "currency_code": {
@@ -1383,16 +1372,8 @@
           "description": "Type of transaction",
           "type": "string",
           "enum": [
-            "atm",
-            "cash",
-            "check",
-            "check_deposit",
             "credit",
-            "debit",
-            "fee",
-            "dividend",
-            "interest",
-            "unspecified"
+            "debit"
           ]
         },
         "amount": {
@@ -1424,8 +1405,7 @@
           "enum": [
             "posted",
             "pending",
-            "cancelled",
-            "unspecified"
+            "cancelled"
           ]
         },
         "check_number": {

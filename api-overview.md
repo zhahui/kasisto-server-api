@@ -306,7 +306,7 @@ token: string (optional)
 ##### Notes:
 1) The field "account_type" in response should be one of the following:
     "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
-    "sloc","savings","wire","unspecified".
+    "sloc","savings","wire".
 
 2) The field "payment_due_date" in response should be in "yyyy-MM-dd” Date format.
 
@@ -527,10 +527,10 @@ token: string (optional)
 
 ##### Notes:
 1) The field "transaction_type" in response should be one of the following:
-   "atm","cash","check","check_deposit","credit","debit”,"fee","dividend","interest","unspecified”.
+   "credit","debit”.
 
 2) The field "status" in response should be one of the following:
-   "posted","pending","cancelled","unspecified".
+   "posted","pending","cancelled".
 
 3) The fields "transaction_date" and "post_date" in response should be in ISO-8601 format "yyyy-MM-dd’T’HH:mm:ssZ” Date format.
 
