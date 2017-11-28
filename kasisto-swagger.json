@@ -41,6 +41,12 @@
             "in":"header",
             "required":true,
             "type":"string"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
+            "type":"string"
           },
           {
             "name": "token_credentials",
@@ -98,6 +104,12 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"UUID",
             "in":"header",
             "required":true,
             "type":"string"
@@ -181,6 +193,12 @@
             "type":"string"
           },
           {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name": "customer_request",
             "in":"body",
             "required": true,
@@ -253,6 +271,12 @@
             "required":true,
             "type":"string",
             "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
+          },
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
+            "type":"string"
           },
           {
             "name": "accounts_request",
@@ -333,6 +357,12 @@
             "required":true,
             "type":"string",
             "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
+          },
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
+            "type":"string"
           },
           {
             "name":"transaction_criteria",
@@ -416,6 +446,12 @@
             "type":"string"
           },
           {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name":"bank_locations_criteria",
             "in":"body",
             "required":true,
@@ -487,6 +523,12 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"UUID",
             "in":"header",
             "required":true,
             "type":"string"
@@ -565,6 +607,12 @@
             "type":"string"
           },
           {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name":"transfer_request",
             "in":"body",
             "schema":{
@@ -632,6 +680,12 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"UUID",
             "in":"header",
             "required":true,
             "type":"string"
@@ -706,6 +760,12 @@
             "type":"string"
           },
           {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name":"categories_request",
             "in":"body",
             "schema":{
@@ -770,6 +830,12 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"UUID",
             "in":"header",
             "required":true,
             "type":"string"
