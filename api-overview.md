@@ -424,8 +424,8 @@ UUID: string
     "account_ids": [
         "string"
     ],
-    "end_date": "2017-08-01T03:59:59+00:00",
-    "start_date": "2017-07-01T04:00+00:00"
+    "end_date": "2017-08-01T03:59:59Z",
+    "start_date": "2017-07-01T04:00Z"
 }
 ```
 
@@ -443,9 +443,9 @@ token: string (optional)
     "currency_code": "string",
     "transaction_id": "string",
     "transaction_type": "string",
-    "post_date": "2016-01-30T00:00:00+00:00",
+    "post_date": "2016-01-30T00:00:00Z",
     "amount": 0,
-    "transaction_date": "2016-01-30T00:00:00+00:00",
+    "transaction_date": "2016-01-30T00:00:00Z",
     "meta": [
         {
             "name": "string",
@@ -590,7 +590,7 @@ UUID: string
             "value": "string"
         }
     ],
-    "date": "2016-01-30",
+    "date": "2016-01-30T00:00:00Z",
     "currency_code": "string"
 }
 ```
@@ -667,7 +667,7 @@ UUID: string
             "value": "string"
         }
     ],
-    "date": "2016-01-30",
+    "date": "2016-01-30T00:00:00Z",
     "currency_code": "string"
 }
 ```
@@ -1203,7 +1203,7 @@ token: string (optional)
             "value": "string"
         }
     ],
-    "date": "2016-01-30",
+    "date": "2016-01-30T00:00:00Z",
     "currency_code": "string"
 }
 ```
@@ -1237,9 +1237,9 @@ token: string (optional)
     "currency_code": "string",
     "transaction_id": "string",
     "transaction_type": "string",
-    "post_date": "2016-01-30T00:00:00+00:00",
+    "post_date": "2016-01-30T00:00:00Z",
     "amount": 0,
-    "transaction_date": "2016-01-30T00:00:00+00:00",
+    "transaction_date": "2016-01-30T00:00:00Z",
     "meta": [
         {
             "name": "string",
@@ -1264,8 +1264,8 @@ token: string (optional)
     "account_ids": [
         "string"
     ],
-    "end_date": "2016-01-30T00:00:00+00:00",
-    "start_date": "2016-01-29T00:00:00+00:00"
+    "end_date": "2016-01-30T00:00:00Z",
+    "start_date": "2016-01-29T00:00:00Z"
 }
 ```
 
@@ -1299,7 +1299,7 @@ token: string (optional)
             "value": "string"
         }
     ],
-    "date": "2016-01-30",
+    "date": "2016-01-30T00:00:00Z",
     "currency_code": "string"
 }
 ```
