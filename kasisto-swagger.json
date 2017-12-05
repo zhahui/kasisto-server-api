@@ -49,6 +49,12 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
             "name": "token_credentials",
             "in":"body",
             "schema":{
@@ -112,6 +118,12 @@
             "name":"UUID",
             "in":"header",
             "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
             "type":"string"
           },
           {
@@ -199,6 +211,12 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
             "name": "customer_request",
             "in":"body",
             "required": true,
@@ -275,6 +293,12 @@
             "name":"UUID",
             "in":"header",
             "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
             "type":"string"
           },
           {
@@ -360,6 +384,12 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
             "name":"transaction_criteria",
             "in":"body",
             "required":true,
@@ -439,6 +469,12 @@
             "name":"UUID",
             "in":"header",
             "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
             "type":"string"
           },
           {
@@ -524,6 +560,12 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
             "name":"payment_request",
             "in":"body",
             "schema":{
@@ -600,6 +642,12 @@
             "name":"UUID",
             "in":"header",
             "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
             "type":"string"
           },
           {
@@ -681,6 +729,12 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
             "name":"payees_request",
             "in":"body",
             "schema":{
@@ -756,6 +810,12 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
             "name":"categories_request",
             "in":"body",
             "schema":{
@@ -828,6 +888,12 @@
             "name":"UUID",
             "in":"header",
             "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
             "type":"string"
           },
           {

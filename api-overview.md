@@ -55,6 +55,7 @@ Validate One-Time Password and return new user token
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [validate_otp_request](#validate_otp_request) | body |
 
 ##### Responses
@@ -79,6 +80,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -114,6 +116,7 @@ Get customer object
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [customer_request](#customer_request) | body |
 
 ##### Responses
@@ -136,6 +139,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -179,6 +183,7 @@ Get access token for a customer
 | --------- | -------- |
 | secret | header |
 | UUID | header |
+| locale | header |
 | [token_credentials](#token_credentials) | body |
 
 ##### Responses
@@ -199,6 +204,7 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -241,6 +247,7 @@ Get customer accounts
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [accounts_request](#accounts_request) | body |
 
 ##### Responses
@@ -263,6 +270,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -330,6 +338,7 @@ Get merchants
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [merchants_request](#merchants_request) | body |
 
 ##### Responses
@@ -351,6 +360,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -394,6 +404,7 @@ Search customer transactions
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [transaction_criteria](#transaction_criteria) | body |
 
 ##### Responses
@@ -416,6 +427,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -476,6 +488,7 @@ Get transaction categories
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [categories_request](#categories_request) | body |
 
 ##### Responses
@@ -497,6 +510,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -555,6 +569,7 @@ Transfer funds between two accounts
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [transfer_request](#transfer_request) | body |
 
 ##### Responses
@@ -577,6 +592,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -632,6 +648,7 @@ Pay funds to a payee
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [payment_request](#payment_request) | body |
 
 ##### Responses
@@ -654,6 +671,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -706,6 +724,7 @@ Get list of payees for a user
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [payees_request](#payees_request) | body |
 
 ##### Responses
@@ -727,6 +746,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
@@ -773,6 +793,7 @@ Search for bank locations
 | secret | header |
 | token | header |
 | UUID | header |
+| locale | header |
 | [bank_locations_criteria](#bank_locations_criteria) | body |
 
 ##### Responses
@@ -795,6 +816,7 @@ Accept: application/json
 secret: string
 token: string
 UUID: string
+locale: string
 ```
 ```json
 {
