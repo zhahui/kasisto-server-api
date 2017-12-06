@@ -81,7 +81,7 @@ Accept: application/json
 secret: string
 token: string
 locale: string
-Date: Tue, 01 Jan 2017 09:90:00 GMT
+Date: Tue, 01 Jan 2017 00:00:00 GMT
 UUID: string
 ```
 ```json
