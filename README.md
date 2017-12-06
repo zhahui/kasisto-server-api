@@ -1,9 +1,9 @@
-# Kasisto Enterprise API 1.2 beta
+# Kasisto Enterprise API 1.2.1
 Kasisto Enterprise API Specification for Banks and Financial Institutions
 
 Integrate your customer data with Kasisto.
 
-This page describes the Kasisto Enterprise API version 1.2 beta.
+This page describes the Kasisto Enterprise API version 1.2.1.
 
 ## Overview
 
