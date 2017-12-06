@@ -43,15 +43,22 @@
             "type":"string"
           },          
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -115,15 +122,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -205,15 +219,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -290,15 +311,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -378,15 +406,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -466,15 +501,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -554,15 +596,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -639,15 +688,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -723,15 +779,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -804,15 +867,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {
@@ -885,15 +955,22 @@
             "type":"string"
           },
           {
-            "name":"UUID",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },
-          {
             "name":"locale",
             "in":"header",
             "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"UUID",
+            "in":"header",
+            "required":true,
             "type":"string"
           },
           {

@@ -54,8 +54,9 @@ Validate One-Time Password and return new user token
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [validate_otp_request](#validate_otp_request) | body |
 
 ##### Responses
@@ -79,8 +80,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 09:90:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -115,8 +117,9 @@ Get customer object
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [customer_request](#customer_request) | body |
 
 ##### Responses
@@ -138,8 +141,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -182,8 +186,9 @@ Get access token for a customer
 | Parameter | Location |
 | --------- | -------- |
 | secret | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [token_credentials](#token_credentials) | body |
 
 ##### Responses
@@ -203,8 +208,9 @@ POST /token HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -246,8 +252,9 @@ Get customer accounts
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [accounts_request](#accounts_request) | body |
 
 ##### Responses
@@ -269,8 +276,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -337,8 +345,9 @@ Get merchants
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [merchants_request](#merchants_request) | body |
 
 ##### Responses
@@ -359,8 +368,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -403,8 +413,9 @@ Search customer transactions
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [transaction_criteria](#transaction_criteria) | body |
 
 ##### Responses
@@ -426,8 +437,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -487,8 +499,9 @@ Get transaction categories
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [categories_request](#categories_request) | body |
 
 ##### Responses
@@ -509,8 +522,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -568,8 +582,9 @@ Transfer funds between two accounts
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [transfer_request](#transfer_request) | body |
 
 ##### Responses
@@ -591,8 +606,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -647,8 +663,9 @@ Pay funds to a payee
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [payment_request](#payment_request) | body |
 
 ##### Responses
@@ -670,8 +687,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -723,8 +741,9 @@ Get list of payees for a user
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [payees_request](#payees_request) | body |
 
 ##### Responses
@@ -745,8 +764,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
@@ -792,8 +812,9 @@ Search for bank locations
 | --------- | -------- |
 | secret | header |
 | token | header |
-| UUID | header |
 | locale | header |
+| Date | header |
+| UUID | header |
 | [bank_locations_criteria](#bank_locations_criteria) | body |
 
 ##### Responses
@@ -815,8 +836,9 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 token: string
-UUID: string
 locale: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+UUID: string
 ```
 ```json
 {
