@@ -32,7 +32,7 @@ The Kasisto API allows requests to include a user authorization token header val
 Server implementations should return a 403 HTTP status code response if authorization fails.
 
 ## Tracking
-The Kasisto API requests include a unique request identifier. This identifier is provided as a UUID field in the HTTP Request header. This UUID can be used to track the requests when investigating execution logs.
+The Kasisto API requests include a unique request identifier. This identifier is provided as a request_id field in the HTTP Request header. This request_id can be used to track the requests when investigating execution logs.
 
 ## Schema
 All API access must be over HTTPS.  All data is sent and received as JSON.
@@ -55,8 +55,8 @@ Validate One-Time Password and return new user token
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [validate_otp_request](#validate_otp_request) | body |
 
 ##### Responses
@@ -81,8 +81,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -118,8 +118,8 @@ Get customer object
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [customer_request](#customer_request) | body |
 
 ##### Responses
@@ -142,8 +142,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -187,8 +187,8 @@ Get access token for a customer
 | --------- | -------- |
 | secret | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [token_credentials](#token_credentials) | body |
 
 ##### Responses
@@ -209,8 +209,8 @@ Content-Type: application/json
 Accept: application/json
 secret: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -253,8 +253,8 @@ Get customer accounts
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [accounts_request](#accounts_request) | body |
 
 ##### Responses
@@ -277,8 +277,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -346,8 +346,8 @@ Get merchants
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [merchants_request](#merchants_request) | body |
 
 ##### Responses
@@ -369,8 +369,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -414,8 +414,8 @@ Search customer transactions
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [transaction_criteria](#transaction_criteria) | body |
 
 ##### Responses
@@ -438,8 +438,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -500,8 +500,8 @@ Get transaction categories
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [categories_request](#categories_request) | body |
 
 ##### Responses
@@ -523,8 +523,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -583,8 +583,8 @@ Transfer funds between two accounts
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [transfer_request](#transfer_request) | body |
 
 ##### Responses
@@ -607,8 +607,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -664,8 +664,8 @@ Pay funds to a payee
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [payment_request](#payment_request) | body |
 
 ##### Responses
@@ -688,8 +688,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -742,8 +742,8 @@ Get list of payees for a user
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [payees_request](#payees_request) | body |
 
 ##### Responses
@@ -765,8 +765,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {
@@ -813,8 +813,8 @@ Search for bank locations
 | secret | header |
 | token | header |
 | locale | header |
+| request_id | header |
 | Date | header |
-| UUID | header |
 | [bank_locations_criteria](#bank_locations_criteria) | body |
 
 ##### Responses
@@ -837,8 +837,8 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
-UUID: string
 ```
 ```json
 {

@@ -56,7 +56,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -135,7 +135,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -232,7 +232,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -324,7 +324,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -419,7 +419,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -514,7 +514,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -609,7 +609,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -701,7 +701,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -792,7 +792,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -880,7 +880,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -968,7 +968,7 @@
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },          
           {
-            "name":"UUID",
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
