@@ -41,6 +41,25 @@
             "in":"header",
             "required":true,
             "type":"string"
+          },          
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
+            "in":"header",
+            "required":true,
+            "type":"string"
           },
           {
             "name": "token_credentials",
@@ -98,6 +117,25 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -181,6 +219,25 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name": "customer_request",
             "in":"body",
             "required": true,
@@ -251,18 +308,33 @@
             "name":"token",
             "in":"header",
             "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
             "type":"string",
-            "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
+            "in":"header",
+            "required":true,
+            "type":"string"
           },
           {
             "name": "accounts_request",
             "in":"body",
             "required": true,
             "schema":{
-              "$ref":"#/definitions/accounts_request",
-              "example": {
-                "account_id": "98927d5be608d4a1652d493e85e74637cac066be29d77e9f39026b419faafeb3"
-              }
+              "$ref":"#/definitions/accounts_request"
             }
           }
         ],
@@ -331,20 +403,33 @@
             "name":"token",
             "in":"header",
             "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
             "type":"string",
-            "x-example": "91ff6deb-3aac-4f38-890c-390afb52a656"
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
+            "in":"header",
+            "required":true,
+            "type":"string"
           },
           {
             "name":"transaction_criteria",
             "in":"body",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/transaction_criteria",
-              "example": {
-                "account_ids": "98927d5be608d4a1652d493e85e74637cac066be29d77e9f39026b419faafeb3",
-                "start_date": "2015-05-01",
-                "end_date": "2016-11-03"
-              }
+              "$ref":"#/definitions/transaction_criteria"
             }
           }
         ],
@@ -411,6 +496,25 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -492,6 +596,25 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name":"payment_request",
             "in":"body",
             "schema":{
@@ -560,6 +683,25 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -637,6 +779,25 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name":"payees_request",
             "in":"body",
             "schema":{
@@ -706,6 +867,25 @@
             "type":"string"
           },
           {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
             "name":"categories_request",
             "in":"body",
             "schema":{
@@ -770,6 +950,25 @@
           },
           {
             "name":"token",
+            "in":"header",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "name":"locale",
+            "in":"header",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"Date",
+            "in":"header",
+            "required":true,
+            "type":"string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },          
+          {
+            "name":"request_id",
             "in":"header",
             "required":true,
             "type":"string"
@@ -937,7 +1136,7 @@
         "date": {
           "description": "date of payment",
           "type": "string",
-          "format": "date"
+          "format": "date-time"
         },
         "meta": {
           "description": "Optional data if needed for application",
@@ -1037,11 +1236,11 @@
         },
         "start_date":{
           "type":"string",
-          "format":"date"
+          "format":"date-time"
         },
         "end_date":{
           "type":"string",
-          "format":"date"
+          "format":"date-time"
         }
       }
     },
@@ -1231,8 +1430,7 @@
             "sloc",
             "savings",
             "wire",
-            "p2p_payment",
-            "unspecified"
+            "p2p_payment"
           ]
         },
         "currency_code": {
@@ -1317,16 +1515,8 @@
           "description": "Type of transaction",
           "type": "string",
           "enum": [
-            "atm",
-            "cash",
-            "check",
-            "check_deposit",
             "credit",
-            "debit",
-            "fee",
-            "dividend",
-            "interest",
-            "unspecified"
+            "debit"
           ]
         },
         "amount": {
@@ -1358,8 +1548,7 @@
           "enum": [
             "posted",
             "pending",
-            "cancelled",
-            "unspecified"
+            "cancelled"
           ]
         },
         "check_number": {
