@@ -22,7 +22,7 @@ Version 1.3 beta
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
 - [Customer Service Request Methods](#customer-service-request-methods)
-  * [/customer_service_request](#customer-service-request)
+  * [/customer_service_request](#submit-customer-service-request)
 
 
 ## Authentication
