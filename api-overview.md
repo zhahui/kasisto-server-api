@@ -1,5 +1,5 @@
 # Kasisto Enterprise API Overview
-Version 1.2.1
+Version 1.3 beta
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
@@ -21,6 +21,8 @@ Version 1.2.1
   * [/payees](#payees)
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
+- [Customer Service Request Methods](#customer-service-request-methods)
+  * [/customer_service_request](#customer-service-request)
 
 
 ## Authentication
@@ -294,28 +296,45 @@ token: string (optional)
 ```
 ```json
 [{
-    "available_credit": 0,
-    "account_type": "string",
     "account_id": "string",
+    "account_type": "string",
+    "account_number": "string",
+    "account_name": "string",
+    "account_nickname": "string",
+    "account_status": "string", // New field to manage states (active / inactive /blocked). Some status values may be applicable only for certain account types. (Blocked could be only used for card for instance)
+   
+   // "currency_code": "string", I think we should remove this field as we request the bank to provide local currency only in current_balance and available_balance.
+    "current_balance": 0,
+    "available_balance": 0,
+
+    // I propose to spec these foreing currency codes in regular fields that we can document here
+    "currency_code_wallet": "string",
+    "current_balance_wallet": 0,
+    "available_balance_wallet": 0,
+
+    "credit_limit": 0,
+    "interest_rate": 0,
+    "available_credit": 0,
+    "statement_date": "2016-01-01", // new date of statement creation for Credit card
     "payment_due_amount": 0,
+    "payment_due_date": "2016-01-30",
+    "minimum_payment_due_amount": 0,
+    
+    // New reward points and other fields
+    "reward_points": 0,
+    "reward_miles": 0,
+    "reward_cashback": 0,
+    
     "can_transfer_to": false, 
     "can_transfer_from": false, 
-    "current_balance": 0,
-    "interest_rate": 0,
-    "minimum_payment_due_amount": 0,
-    "payment_due_date": "2016-01-30",
-    "available_balance": 0,
+    "can_pay_payee": false, // New field for P2P to match what we have for transfer
+    "can_waive_fee": false, // New field for fee waiver to match what we have for transfer
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "account_nickname": "string",
-    "account_number": "string",
-    "account_name": "string",
-    "currency_code": "string",
-    "credit_limit": 0
+    ]
 }]
 ```
 
@@ -324,10 +343,43 @@ token: string (optional)
     "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
     "sloc","savings","wire".
 
-2) The field "payment_due_date" in response should be in "yyyy-MM-dd” Date format.
+2) The field "account_status" in response should be one of the following:
+    "active","inactive".
 
-3) If there is no meta then pass empty array.
+3) The field "payment_due_date" in response should be in "yyyy-MM-dd” Date format.
 
+4) If there is no meta then pass empty array.
+
+5) As a guidance, we show the supported features per account type in the table below.
+The mapping can change from Bank to Bank: 
+
+| Feature | Certificate of deposit | Checking | Credit Card | Loan | Mortgage | Savings |
+| --------- | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+| account_id | x | x | x | x | x | x |
+| account_type | cd |checking | credit_card | loan | mortgage |savings |
+| account_number | x | x | x | x | x | x |
+| account_name | x | x | x | x | x | x |
+| account_nickname | x | x | x | x | x | x |
+| account_status | x | x | x | x | x | x |   
+| current_balance  | x | x | x | x | x | x |
+| available_balance  | x | x | x | x | x | x |
+| currency_code_wallet  |  | x |  |  |  | x |
+| current_balance_wallet |  | x |  |  |  | x |
+| available_balance_wallet |  | x |  |  |  | x |
+| credit_limit |  | x | x |  |  | x |
+| interest_rate | x | x | x | x | x | x |
+| available_credit |  |  | x |  |  |  |
+| statement_date | x | x | x | x | x | x |
+| payment_due_amount |  |  | x | x | x |  |
+| payment_due_date |  |  | x | x | x |  |
+| minimum_payment_due_amount |  |  | x | x | x |  |
+| reward_points |  | x | x |  |  | x |
+| reward_miles |  | x | x |  |  | x |
+| reward_cashback |  | x | x |  |  | x |
+| can_transfer_to | x | x | x | x | x | x |
+| can_transfer_from |  | x | x |  |  | x |
+| can_pay_payee |  | x | x |  |  | x |
+| can_waive_fee | x | x | x | x | x | x |
 
 ### Transactions Methods
 
@@ -476,7 +528,17 @@ token: string (optional)
             "value": "string"
         }
     ],
-    "location": "string",
+    "location": {
+        "address": "string",
+        "city": "string",
+        "state": "string", 
+        "zip": "string",
+        ""
+        "coordinates": {
+          "lat": 0.0,
+          "long": 0.0
+        }
+    },
     "check_number": 0,
     "categories": [
         "string"
@@ -847,7 +909,8 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
         "city": "string",
         "state": "string", 
         "zip": "string",
-        "coordinates":{
+        "country": "String",
+        "coordinates": {
           "lat": 0.0,
           "long": 0.0
         }
@@ -865,57 +928,126 @@ token: string (optional)
     "location_id": "string",
     "location_type": "string",
     "location_name": "string",
-    "location_url": "string",
     "location": {
         "address": "string",
         "city": "string",
         "state": "string",
         "zip": "string",
+        "country": "string",
         "coordinates": {
             "lat": 0.0,
             "long": 0.0
         },
-    "phone_number": "string",
-    "distance": "string",
-    "atm_hours": "string",
-    "atm_deposit_cutoff": [
+    "phone_numbers": [ 
         {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
+            "type": "string",
+            "number": "string"
         }
     ],
-    "atm_services": [
+    "services": [
         "string"
     ],
-    "holiday_hours": [
-        {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
-        }
-    ],
-    "lobby_hours": [
-        {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
-        }
-    ],
-    "bank_services": [
-        "string"
-    ],
-    "bank_deposit_cutoff": [
-        {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
-        }
-    ],
-    "teller_languages": [
-        "string"
-    ],
-    "atm_languages": [
-        "string"
-    ]
+    "opening_hours": { // I propose to use the below structure as it makes it easier for us to manage localized schedule. And we don't support queries like "Sow me the branches open today"
+        "mon - fri": "9:00am - 6:00pm",
+        "sat": "9:00am - 6:00pm",
+        "public holidays": "closed"
+    }
 }]
 ```
+
+### Customer Service Request Methods
+
+#### Submit Customer Service Request
+
+```
+POST /customer_service_request
+```
+
+Submit a customer request
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| token | header |
+| locale | header |
+| request_id | header |
+| Date | header |
+| [customer_request](#customer_request) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | customer_request_status | [customer_request_status](#customer_request_status) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /customer_service_request HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+locale: string
+request_id: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+```
+```json
+{
+    "request_type": "credit_card_activate",
+    "parameters:": [
+        { 
+            "name": "account_id", 
+            "value": "string"
+        },
+        { 
+            "name": "immediate", 
+            "value": "false"
+        },
+        { 
+            "name": "activation_date",
+            "value": "2017-06-01"
+        }
+    ]
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+{
+    "request_id": "string",
+    "request_number": "string",
+    "status": "string",
+    "display_message_id": "string",
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ]
+}
+```
+
+| Intent | request_type | parameter name | parameter description |
+| --------- | -------- | -------- | -------- |
+| Credit Card Fee Waiver | credit_card_waive_fee | account_id | Id of the credit card to waive fees |
+| Credit Card Activation | credit_card_activate | account_id | Id of the credit card to activate |
+| Pay Payee | pay_payee | from_account_id | Id of the account to pay from |
+| | | to_payee | Id of the payee to pay to |
+| | | amount | Amount of the payment |
+| | | currency | Currency of the payment |
+| | | reference | Reference of the payment |
 
 
 ### Schema Definitions
@@ -973,54 +1105,29 @@ token: string (optional)
     "location_id": "string",
     "location_type": "string",
     "location_name": "string",
-    "location_url": "string",
     "location": {
         "address": "string",
         "city": "string",
         "state": "string",
         "zip": "string",
+        "country": "string",
         "coordinates": {
             "lat": 0.0,
             "long": 0.0
         },
-    "phone_number": "string",
-    "distance": "string",
-    "atm_hours": "string",
-    "atm_deposit_cutoff": [
+    "phone_numbers": [ 
         {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
+            "type": "string",
+            "number": "string"
         }
     ],
-    "atm_services": [
+    "services": [
         "string"
     ],
-    "holiday_hours": [
-        {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
-        }
-    ],
-    "lobby_hours": [
-        {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
-        }
-    ],
-    "bank_services": [
-        "string"
-    ],
-    "bank_deposit_cutoff": [
-        {
-            "day": "string",
-            "hours": { "start": 0, "end" : 0}
-        }
-    ],
-    "teller_languages": [
-        "string"
-    ],
-    "atm_languages": [
-        "string"
+    "opening_hours": [
+        "mon-fri": "9:00am-6:00pm",
+        "sat": "9:00am-6:00pm",
+        "public holidays": "closed"
     ]
 }
 ```
@@ -1034,6 +1141,7 @@ token: string (optional)
         "city": "string",
         "state": "string", 
         "zip": "string",
+        "country": "string",
         "coordinates": {
           "lat": 0.0,
           "long": 0.0
@@ -1104,24 +1212,13 @@ token: string (optional)
 }
 ```
 
-#### day_hours
-
-```json
-{
-    "day": "string"
-    "hours": {
-        "start": 0, 
-        "end" : 0
-    }
-}
-```
-
 #### error_response
 
 ```json
 {
     "message": "string",
     "code": "string",
+    "otp_details": null,
     "display_message_id": "string", 
     "meta": [
         {
@@ -1129,15 +1226,6 @@ token: string (optional)
             "value": "string"
         }
     ]
-}
-```
-
-#### hours
-
-```json
-{
-    "start": 0,
-    "end": 0
 }
 ```
 
@@ -1149,6 +1237,7 @@ token: string (optional)
     "city": "string",
     "state": "string",
     "zip": "string",
+    "country": "string",
     "coordinates": {
             "lat": 0.0,
             "long": 0.0
@@ -1252,15 +1341,6 @@ token: string (optional)
 }
 ```
 
-#### token_credentials
-
-```json
-{
-    "username": "string",
-    "password": "string"
-}
-```
-
 #### token_response
 
 ```json
@@ -1290,7 +1370,17 @@ token: string (optional)
             "value": "string"
         }
     ],
-    "location": "string",
+    "location": {
+        "address": "string",
+        "city": "string",
+        "state": "string", 
+        "zip": "string",
+        "country": "string",
+        "coordinates": {
+          "lat": 0.0,
+          "long": 0.0
+        }
+    },
     "check_number": 0,
     "categories": [
         "string"
