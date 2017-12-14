@@ -21,8 +21,8 @@ Version 1.3 beta
   * [/payees](#payees)
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
-- [Customer Service Request Methods](#customer-service-request-methods)
-  * [/customer_service_request](#submit-customer-service-request)
+- [Customer Action Methods](#customer-action-methods)
+  * [/customer_action](#customer_action)
 
 
 ## Authentication
@@ -65,7 +65,7 @@ Validate One-Time Password and return new user token
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | token response | [validate_otp_response](#validate_otp_response) |
+| 200 | token response | [token_response](#token_response) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 451 | Invalid One-Time Password | [error_response](#error_response) |
@@ -284,8 +284,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
-    "user_id": "string",
-    "account_id": []
+    "user_id": "string"
 }
 ```
 
@@ -533,7 +532,7 @@ token: string (optional)
         "city": "string",
         "state": "string", 
         "zip": "string",
-        ""
+        "country": "string",
         "coordinates": {
           "lat": 0.0,
           "long": 0.0
@@ -904,6 +903,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
+    "user_id": "string",
     "location": {
         "address": "string",
         "city": "string",
@@ -928,6 +928,7 @@ token: string (optional)
     "location_id": "string",
     "location_type": "string",
     "location_name": "string",
+    "location_url": "string",
     "location": {
         "address": "string",
         "city": "string",
@@ -938,32 +939,58 @@ token: string (optional)
             "lat": 0.0,
             "long": 0.0
         },
-    "phone_numbers": [ 
-        {
-            "type": "string",
-            "number": "string"
-        }
-    ],
+    },
+    "phone_number": "string",
     "services": [
         "string"
     ],
-    "opening_hours": { // I propose to use the below structure as it makes it easier for us to manage localized schedule. And we don't support queries like "Sow me the branches open today"
-        "mon - fri": "9:00am - 6:00pm",
-        "sat": "9:00am - 6:00pm",
-        "public holidays": "closed"
-    }
+    "opening_hours": [
+        "string"
+    ],
+    "opening_days": [
+        "string"
+    ],
+    "languages": [
+        "string"
+    ]
 }]
 ```
 
-### Customer Service Request Methods
+##### Notes:
+1) The field "location" in the request can be ommitted in request when KAI searches for all locations.
 
-#### Submit Customer Service Request
+2) The field "opening_hours" contains a text description of the opening hours. The description should be returned in the language matching the request "locale" parameter.
+
+    a) If locale is set to en_XX (en_US, en_HK, en_SG, etc..), the opening hours should be returned in English.
+
+    b) If locale is set to zh_HK, the opening hours shouldbe returned in Cantonese.
+
+```json
+"opening_hours": [ 
+    "Mon – Fri: 9am to 5pm",
+    "Sat 9am to 1pm",
+    "public holidays: closed"
+]
+```
+
+```json
+"opening_hours": [ 
+    "星期一至星期五: 上午九時至下午五時",
+    "星期六上午九時至下午一時"
+]
+```
+
+3) The field "opening_days" in the response should be one of the following: "monday", "tuesday", "wednesday", "thursday, "friday", "saturday", "sunday". The values should always be in English.
+
+### Customer Action Methods
+
+#### Customer Action
 
 ```
-POST /customer_service_request
+POST /customer_action
 ```
 
-Submit a customer request
+Submits a customer action
 
 ##### Request Parameters
 
@@ -974,13 +1001,13 @@ Submit a customer request
 | locale | header |
 | request_id | header |
 | Date | header |
-| [customer_request](#customer_request) | body |
+| [customer_action_request](#customer_action_request) | body |
 
 ##### Responses
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | customer_request_status | [customer_request_status](#customer_request_status) |
+| 200 | Customer action response | [customer_action_response](#customer_action_response) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 450 | One-Time Password is required | [error_response](#error_response) |
@@ -990,7 +1017,7 @@ Submit a customer request
 ##### Sample Request / Response
 
 ```http
-POST /customer_service_request HTTP/1.1
+POST /customer_action HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
@@ -1001,19 +1028,12 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
-    "request_type": "credit_card_activate",
+    "user_id": "string",
+    "action": "string",
     "parameters:": [
         { 
-            "name": "account_id", 
+            "name": "string", 
             "value": "string"
-        },
-        { 
-            "name": "immediate", 
-            "value": "false"
-        },
-        { 
-            "name": "activation_date",
-            "value": "2017-06-01"
         }
     ]
 }
@@ -1026,8 +1046,8 @@ token: string (optional)
 ```
 ```json
 {
-    "request_id": "string",
-    "request_number": "string",
+    "reference_id": "string",
+    "reference_number": "string",
     "status": "string",
     "display_message_id": "string",
     "meta": [
@@ -1039,16 +1059,16 @@ token: string (optional)
 }
 ```
 
-| Intent | request_type | parameter name | parameter description |
+| Intent | Action name | Parameter name | Parameter description | 
 | --------- | -------- | -------- | -------- |
 | Credit Card Fee Waiver | credit_card_waive_fee | account_id | Id of the credit card to waive fees |
 | Credit Card Activation | credit_card_activate | account_id | Id of the credit card to activate |
 | Pay Payee | pay_payee | from_account_id | Id of the account to pay from |
-| | | to_payee | Id of the payee to pay to |
+| | | to_payee_id | Id of the payee to pay to |
 | | | amount | Amount of the payment |
 | | | currency | Currency of the payment |
 | | | reference | Reference of the payment |
-
+| | | date | Payment date |
 
 ### Schema Definitions
 
@@ -1056,28 +1076,37 @@ token: string (optional)
 
 ```json
 {
-    "available_credit": 0,
-    "account_type": "string",
     "account_id": "string",
-    "payment_due_amount": 0,
-    "can_transfer_to": false, 
-    "can_transfer_from": false, 
+    "account_type": "string",
+    "account_number": "string",
+    "account_name": "string",
+    "account_nickname": "string",
+    "account_status": "string",
     "current_balance": 0,
-    "interest_rate": 0,
-    "minimum_payment_due_amount": 0,
-    "payment_due_date": "2016-01-30",
     "available_balance": 0,
+    "currency_code_wallet": "string",
+    "current_balance_wallet": 0,
+    "available_balance_wallet": 0,
+    "credit_limit": 0,
+    "interest_rate": 0,
+    "available_credit": 0,
+    "statement_date": "2016-01-01",
+    "payment_due_amount": 0,
+    "payment_due_date": "2016-01-30",
+    "minimum_payment_due_amount": 0,
+    "reward_points": 0,
+    "reward_miles": 0,
+    "reward_cashback": 0,
+    "can_transfer_to": false,
+    "can_transfer_from": false,
+    "can_pay_payee": false,
+    "can_waive_fee": false,
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "account_nickname": "string",
-    "account_number": "string",
-    "account_name": "string",
-    "currency_code": "string",
-    "credit_limit": 0
+    ]
 }
 ```
 
@@ -1086,7 +1115,6 @@ token: string (optional)
 ```json
 {
     "user_id": "string",
-    "account_id": "string",
     "meta": [
         {
             "name": "string",
@@ -1105,6 +1133,7 @@ token: string (optional)
     "location_id": "string",
     "location_type": "string",
     "location_name": "string",
+    "location_url": "string",
     "location": {
         "address": "string",
         "city": "string",
@@ -1114,20 +1143,20 @@ token: string (optional)
         "coordinates": {
             "lat": 0.0,
             "long": 0.0
-        },
-    "phone_numbers": [ 
-        {
-            "type": "string",
-            "number": "string"
         }
-    ],
+    },
+    "phone_number": "string",
     "services": [
         "string"
     ],
     "opening_hours": [
-        "mon-fri": "9:00am-6:00pm",
-        "sat": "9:00am-6:00pm",
-        "public holidays": "closed"
+        "string"
+    ],
+    "opening_days": [
+        "string"
+    ],
+    "languages": [
+        "string"
     ]
 }
 ```
@@ -1136,6 +1165,7 @@ token: string (optional)
 
 ```json
 {
+    "user_id": "string",
     "location": {
         "address": "string",
         "city": "string",
@@ -1176,15 +1206,6 @@ token: string (optional)
 }
 ```
 
-#### coordinates
-
-```json
-{
-    "lat": 0,
-    "long": 0
-}
-```
-
 #### customer
 
 ```json
@@ -1212,6 +1233,38 @@ token: string (optional)
 }
 ```
 
+#### customer_action_request
+
+```json
+{
+    "user_id": "string",
+    "action": "string",
+    "parameters:": [
+        { 
+            "name": "string", 
+            "value": "string"
+        }
+    ]
+}
+```
+
+#### customer_action_response
+
+```json
+{
+    "reference_id": "string",
+    "reference_number": "string",
+    "status": "string",
+    "display_message_id": "string",
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ]
+}
+```
+
 #### error_response
 
 ```json
@@ -1226,22 +1279,6 @@ token: string (optional)
             "value": "string"
         }
     ]
-}
-```
-
-#### location
-
-```json
-{
-    "address": "string",
-    "city": "string",
-    "state": "string",
-    "zip": "string",
-    "country": "string",
-    "coordinates": {
-            "lat": 0.0,
-            "long": 0.0
-        }
 }
 ```
 
@@ -1268,15 +1305,6 @@ token: string (optional)
 ```json
 {
     "user_id": "string"
-}
-```
-
-#### meta_field
-
-```json
-{
-    "name": "string",
-    "value": "string"
 }
 ```
 
@@ -1443,15 +1471,6 @@ token: string (optional)
 ```json
 {
     "otp": "string",
-    "user_id": "string"
-}
-```
-
-#### validate_otp_response
-
-```json
-{
-    "token": "string",
     "user_id": "string"
 }
 ```
