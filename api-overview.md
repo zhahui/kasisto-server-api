@@ -22,7 +22,7 @@ Version 1.3 beta
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
 - [Customer Action Methods](#customer-action-methods)
-  * [/customer_action](#customer_action)
+  * [/customer_action](#customer-action)
 
 
 ## Authentication
@@ -58,7 +58,7 @@ All the service in the Kasisto API should follow the same exception handling mec
 | 451 | Invalid One-Time Password<br>(Only for [/validate_otp](#validate-otp)) | The OTP provided by the customer is invalid.<br>KAI should ask him to enter the OTP again then retry. |
 | 452 | Expired One-Time Password<br>Only for [/validate_otp](#validate-otp)) | The OTP provided by the customer expired.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled. |
 | 453 | Too Many One-Time Password Failures<br>(Only for [/validate_otp](#validate-otp)) | The customer failed to send the correct OTP multiple times in a row.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled.  |
-| 500 | Server Error | A server error occurred when processing the request. <br>For functional errors, the server can return a "display_message_id" in the [error_response](#error_response).<br>KAI will use this "display_message_id" to lookup the message to display to the customer<br>If no "display_message_id" is returned KAI will use a default error message. |
+| 500 | Server Error | A server error occurred when processing the request. <br>For functional errors, the server can return a "display_message_id" in the [error_response](#error_response).<br>KAI will use this "display_message_id" to lookup the message to display to the customer in its message library.<br>If no "display_message_id" is returned KAI will use a default error message. |
 | 501 | Not Implemented | This operation is not implemented. |
 
 4) When a One-Time Password is required, additional details on the OTP can be provided in the field "otp_details" of the [error_response](#error_response).
@@ -72,12 +72,6 @@ POST /validate_otp
 ```
 
 This service validates a One-Time Password and return new user token.
-
-If the provided OTP is invalid, the server can return the following errors:
-1) HTTP Status 451 - The OTP provided by the customer is invalid.<br>KAI should ask him to enter the OTP again then retry.
-2) HTTP Status 452 - The OTP provided by the customer expired.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled.
-3) HTTP Status 453 - The customer failed to send the correct OTP multiple times in a row.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled.
-
 
 ##### Request Parameters
 
@@ -134,6 +128,13 @@ token: string (optional)
 }
 ```
 
+##### Notes:
+
+If the OTP provided by the customer is invalid, the server can return the following errors:
+1) HTTP Status 451 - The OTP provided by the customer is invalid.<br>KAI should ask him to enter the OTP again then retry.
+2) HTTP Status 452 - The OTP provided by the customer expired.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled.
+3) HTTP Status 453 - The customer failed to send the correct OTP multiple times in a row.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled.
+
 #### Customer
 
 ```
@@ -141,10 +142,6 @@ POST /customer
 ```
 
 Gets the customer details. 
-
-1) This service is called to retrieve the user_id of the customer and other useful customer information.
-
-2) The user_id is mandatory in the service response. This field is used by KAI to identify unique customers.
 
 ##### Request Parameters
 
@@ -206,6 +203,12 @@ token: string (optional)
     ]
 }
 ```
+
+##### Notes:
+
+1) This service is called to retrieve the user_id of the customer and other useful customer information.
+
+2) The user_id is mandatory in the service response as this field is used by KAI to identify unique customers.
 
 #### Token
 
@@ -703,13 +706,6 @@ Transfers funds between two accounts of a customer.
 
 This service can be used to transfer money from one account to another or to execute a payment to a credit card.
 
-1) Only the customer's Accounts returned by [/accounts](#accounts) can be eligible.
-
-    a) Accounts with the flag "can_transfer_from" set to true can be selected as a source.
-
-    b) Accounts with the flag "can_transfer_to" set to true can be selected as a destination.
-
-
 ##### Request Parameters
 
 | Parameter | Location |
@@ -780,6 +776,21 @@ token: string (optional)
 }
 ```
 
+##### Notes:
+
+1) Only the customer's Accounts returned by [/accounts](#accounts) can be eligible.
+
+    a) Accounts with the flag "can_transfer_from" set to true can be selected as a source.
+
+    b) Accounts with the flag "can_transfer_to" set to true can be selected as a destination.
+
+2) The field "transfer_id" in the response is the internal Bank id of the request for internal tracking purpose.
+
+3) The field "reference_number" in the response is the reference number to communicate to the customer for tracking purpose.
+
+4) The field "status" in the response can be used to inform KAI on the status of the action. The possible values are:
+    "processed", "pending", "cancelled", "failed".
+
 
 ### Payments Methods
 
@@ -790,11 +801,6 @@ POST /payment
 ```
 
 Pays funds to a payee.
-
-1) Only the Accounts with the flag "can_pay_payee" set to true can be selected as a source.
-
-2) Only payees returned by [/payees](#payees) are eligible. 
-
 
 ##### Request Parameters
 
@@ -865,6 +871,19 @@ token: string (optional)
     "status": "string"
 }
 ```
+
+##### Notes:
+
+1) Only the Accounts with the flag "can_pay_payee" set to true can be selected as a source.
+
+2) Only payees returned by [/payees](#payees) are eligible. 
+
+3) The field "payment_id" in the response is the internal Bank id of the request for internal tracking purpose.
+
+4) The field "reference_number" in the response is the reference number to communicate to the customer for tracking purpose.
+
+5) The field "status" in the response can be used to inform KAI on the status of the action. The possible values are:
+    "processed", "pending", "cancelled", "failed".
 
 #### Payees
 
@@ -1069,7 +1088,7 @@ token: string (optional)
 POST /customer_action
 ```
 
-Submits a customer action on his account or products.
+This service is a generic service that allows the customer to submit different type of requests.
 
 ##### Request Parameters
 
@@ -1147,8 +1166,17 @@ token: string (optional)
 | Credit Card Activation | credit_card_activate | account_id | Id of the credit card to activate |
 | Credit Card Fee Waiver | credit_card_waive_fee | account_id | Id of the credit card to waive fees |
 
-2) The fields "display_message_id" in the response can be used to inform KAI to display a specific message to the customer when the action is accepted.
-It can be used for variations "Your request was successfully processed" or "Your request should be processed within the next 48h" or other.
+2) Depending on the actions, the customer request can be synchronously or asynchronously processed.
+The field "status" in the response can be used to inform KAI on the status of the action. The possible values are:
+    "processed", "pending", "cancelled", "failed".
+
+3) The field "reference_id" in the response is the internal Bank id of the request for internal tracking purpose.
+
+4) The field "reference_number" in the response is the reference number to communicate to the customer for tracking purpose.
+
+5) The field "display_message_id" in the response can be used to inform KAI to display a specific message to the customer.
+KAI will use this "display_message_id" to lookup the message to display to the customer in its message library.
+If no "display_message_id" is returned KAI will use a default message.
 The list of possible messages should be defined prior to implementation.
 
 

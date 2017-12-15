@@ -1368,7 +1368,13 @@
           "type": "string"
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "processed",
+            "pending",
+            "cancelled",
+            "failed"
+          ]
         },
         "display_message_id": {
           "type": "string"
@@ -1577,8 +1583,7 @@
             "processed",
             "pending",
             "cancelled",
-            "failed",
-            "unspecified"
+            "failed"
           ]
         },
         "meta": {
@@ -1605,8 +1610,7 @@
             "processed",
             "pending",
             "cancelled",
-            "failed",
-            "unspecified"
+            "failed"
           ]
         },
         "meta": {
