@@ -48,13 +48,13 @@ All the service in the Kasisto API should follow the same exception handling mec
 
 2) When a service executes successfully, it should return a HTTP status 200.
 
-3) When an error occurs, the server should return a different HTTP status code depending on the type of the error and the response should be follow the [error_response](#error_response) format.
+3) When an error occurs, the server should return a different HTTP status code depending on the type of the error and the response should follow the [error_response](#error_response) format.
 
 | Status | Description | Trigger | 
 | ------ | ----------- | ----------- | 
-| 401 | Authentication Failed | The backend service failed to authenticate the user.<br>This error can occur <br>- when the token provided by KAI is invalid or missing.<br>- (Only for [/token](#token)) when the parameter sent by KAI to create the session are wrong. | 
+| 401 | Authentication Failed | The backend service failed to authenticate the user.<br>This error can occur:<br>- when the token provided by KAI is invalid or missing.<br>- (Only for [/token](#token)) when the parameter sent by KAI to create the session are wrong. | 
 | 403 | Access Denied |  The token provided by KAI is invalid or it expired.<br>KAI should obtain another token before retrying the call. |
-| 450 | One-Time Password is required | The user session security needs to be elevated to proceed with the request.<br>KAI should ask for an OTP from the user and verify it before retying the call.  |
+| 450 | One-Time Password is required | The user session security needs to be elevated to proceed with the request.<br>KAI should ask for an OTP from the user and validate it before retying the call.  |
 | 451 | Invalid One-Time Password<br>(Only for [/validate_otp](#validate-otp)) | The OTP provided by the customer is invalid.<br>KAI should ask him to enter the OTP again then retry. |
 | 452 | Expired One-Time Password<br>Only for [/validate_otp](#validate-otp)) | The OTP provided by the customer expired.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled. |
 | 453 | Too Many One-Time Password Failures<br>(Only for [/validate_otp](#validate-otp)) | The customer failed to send the correct OTP multiple times in a row.<br>KAI will terminate the intent flow and inform the customer that the request has been cancelled.  |
