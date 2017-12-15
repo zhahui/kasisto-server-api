@@ -1327,9 +1327,6 @@
     "customer_request": {
       "type": "object",
       "properties": {
-        "user_id": {
-          "type": "string"
-        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
@@ -1669,6 +1666,10 @@
             "inactive"
           ]
         },
+        "account_image": {
+          "description": "account image",
+          "type": "string"
+        },
         "current_balance": {
           "type": "number",
           "format": "float"
@@ -1677,15 +1678,15 @@
           "type": "number",
           "format": "float"
         },
-        "currency_code_wallet": {
+        "fcy_currency_code": {
           "description": "account name",
           "type": "string"
         },
-        "current_balance_wallet": {
+        "fcy_current_balance": {
           "type": "number",
           "format": "float"
         },
-        "available_balance_wallet": {
+        "fcy_available_balance": {
           "type": "number",
           "format": "float"
         },
