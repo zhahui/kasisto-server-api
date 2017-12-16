@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.2.0",
+    "version": "1.3.0",
     "title": "Kasisto API",
     "description": "Kasisto Enterprise API",
     "contact": {
@@ -22,50 +22,67 @@
     "application/json"
   ],
   "tags": [
-    {"name":"Customer"},
-    {"name":"Accounts"},
-    {"name":"Transactions"},
-    {"name":"Transfers"},
-    {"name":"Payments"},
-    {"name":"Bank Locations"}
+    {
+      "name": "Customer"
+    },
+    {
+      "name": "Accounts"
+    },
+    {
+      "name": "Transactions"
+    },
+    {
+      "name": "Transfers"
+    },
+    {
+      "name": "Payments"
+    },
+    {
+      "name": "Bank Locations"
+    },
+    {
+      "name": "Customer Action Methods"
+    }
   ],
   "paths": {
     "/token": {
       "post": {
-        "x-name":"Token",
-        "tags":["Customer"],
+        "x-name": "Token",
+        "tags": [
+          "Customer"
+        ],
         "description": "Get access token for a customer",
         "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
-          },          
-          {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
-            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
           {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },
+          {
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "token_credentials",
-            "in":"body",
-            "schema":{
-              "$ref":"#/definitions/token_credentials"
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/token_credentials"
             }
           }
         ],
@@ -73,78 +90,80 @@
           "200": {
             "description": "token response",
             "schema": {
-              "$ref":"#/definitions/token_response"
+              "$ref": "#/definitions/token_response"
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
       }
     },
-    "/validate_otp":{
-      "post":{
-        "x-name":"Validate OTP",
-        "tags":["Customer"],
-        "description":"Validate One-Time Password and return new user token",
-        "parameters":[
+    "/validate_otp": {
+      "post": {
+        "x-name": "Validate OTP",
+        "tags": [
+          "Customer"
+        ],
+        "description": "Validate One-Time Password and return new user token",
+        "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"validate_otp_request",
-            "in":"body",
-            "schema":{
-              "$ref":"#/definitions/validate_otp_request"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "validate_otp_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/validate_otp_request"
             }
           }
         ],
@@ -152,49 +171,49 @@
           "200": {
             "description": "token response",
             "schema": {
-              "$ref":"#/definitions/validate_otp_response"
+              "$ref": "#/definitions/token_response"
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "451":{
-            "description":"Invalid One-Time Password",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "451": {
+            "description": "Invalid One-Time Password",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "452":{
-            "description":"Expired One-Time Password",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "452": {
+            "description": "Expired One-Time Password",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "453":{
-            "description":"Too Many One-Time Password Failures",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "453": {
+            "description": "Too Many One-Time Password Failures",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -202,47 +221,49 @@
     },
     "/customer": {
       "post": {
-        "x-name":"Customer",
-        "tags":["Customer"],
+        "x-name": "Customer",
+        "tags": [
+          "Customer"
+        ],
         "description": "Get customer object",
         "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
+          },
           {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "customer_request",
-            "in":"body",
+            "in": "body",
             "required": true,
-            "schema":{
-              "$ref":"#/definitions/customer_request"
+            "schema": {
+              "$ref": "#/definitions/customer_request"
             }
           }
         ],
@@ -252,41 +273,41 @@
             "schema": {
               "$ref": "#/definitions/customer"
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "450":{
-            "description":"One-Time Password is required",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "450": {
+            "description": "One-Time Password is required",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -294,47 +315,49 @@
     },
     "/accounts": {
       "post": {
-        "x-name":"Accounts",
-        "tags":["Accounts"],
+        "x-name": "Accounts",
+        "tags": [
+          "Accounts"
+        ],
         "description": "Get customer accounts",
         "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
+          },
           {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "accounts_request",
-            "in":"body",
+            "in": "body",
             "required": true,
-            "schema":{
-              "$ref":"#/definitions/accounts_request"
+            "schema": {
+              "$ref": "#/definitions/accounts_request"
             }
           }
         ],
@@ -347,41 +370,41 @@
                 "$ref": "#/definitions/account"
               }
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "450":{
-            "description":"One-Time Password is required",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "450": {
+            "description": "One-Time Password is required",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -389,47 +412,49 @@
     },
     "/transactions": {
       "post": {
-        "x-name":"Transactions",
-        "tags":["Transactions"],
+        "x-name": "Transactions",
+        "tags": [
+          "Transactions"
+        ],
         "description": "Search customer transactions",
         "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"transaction_criteria",
-            "in":"body",
-            "required":true,
-            "schema":{
-              "$ref":"#/definitions/transaction_criteria"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transaction_criteria",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/transaction_criteria"
             }
           }
         ],
@@ -442,41 +467,41 @@
                 "$ref": "#/definitions/transaction"
               }
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "450":{
-            "description":"One-Time Password is required",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "450": {
+            "description": "One-Time Password is required",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -484,47 +509,49 @@
     },
     "/bank_locations": {
       "post": {
-        "x-name":"Bank Locations",
-        "tags":["Bank Locations"],
+        "x-name": "Bank Locations",
+        "tags": [
+          "Bank Locations"
+        ],
         "description": "Search for bank locations",
         "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"bank_locations_criteria",
-            "in":"body",
-            "required":true,
-            "schema":{
-              "$ref":"#/definitions/bank_locations_criteria"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bank_locations_criteria",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bank_locations_criteria"
             }
           }
         ],
@@ -537,91 +564,92 @@
                 "$ref": "#/definitions/bank_location"
               }
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "450":{
-            "description":"One-Time Password is required",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "450": {
+            "description": "One-Time Password is required",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
       }
     },
-    "/payment":{
-      "post":{
-        "x-name":"Payment",
-        "tags":["Payments"],
-        "description":"Pay funds to a payee",
-        "parameters":[
+    "/payment": {
+      "post": {
+        "x-name": "Payment",
+        "tags": [
+          "Payments"
+        ],
+        "description": "Pay funds to a payee",
+        "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"payment_request",
-            "in":"body",
-            "schema":{
-              "$ref":"#/definitions/payment_request"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payment_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/payment_request"
             }
           }
-
         ],
         "responses": {
           "200": {
@@ -629,88 +657,90 @@
             "schema": {
               "$ref": "#/definitions/payment"
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "450":{
-            "description":"One-Time Password is required",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "450": {
+            "description": "One-Time Password is required",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
       }
     },
-    "/transfer":{
-      "post":{
-        "x-name":"Transfer",
-        "tags":["Transfers"],
-        "description":"Transfer funds between two accounts",
-        "parameters":[
+    "/transfer": {
+      "post": {
+        "x-name": "Transfer",
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Transfer funds between two accounts",
+        "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"transfer_request",
-            "in":"body",
-            "schema":{
-              "$ref":"#/definitions/transfer_request"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transfer_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/transfer_request"
             }
           }
         ],
@@ -720,41 +750,135 @@
             "schema": {
               "$ref": "#/definitions/transfer"
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
-          "450":{
-            "description":"One-Time Password is required",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+          "450": {
+            "description": "One-Time Password is required",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          }
+        }
+      }
+    },
+    "/customer_action": {
+      "post": {
+        "x-name": "Customer Action",
+        "tags": [
+          "Customer Action Methods"
+        ],
+        "description": "Submits a customer action",
+        "parameters": [
+          {
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },
+          {
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customer_action_request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/customer_action_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer action response",
+            "schema": {
+              "$ref": "#/definitions/customer_action_response"
+            },
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Failed",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "403": {
+            "description": "Access Denied",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "450": {
+            "description": "One-Time Password is required",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -762,46 +886,48 @@
     },
     "/payees": {
       "post": {
-        "x-name":"Payees",
-        "tags":["Payments"],
+        "x-name": "Payees",
+        "tags": [
+          "Payments"
+        ],
         "description": "Get list of payees for a user",
-        "parameters":[
+        "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"payees_request",
-            "in":"body",
-            "schema":{
-              "$ref":"#/definitions/payees_request"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payees_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/payees_request"
             }
           }
         ],
@@ -817,32 +943,32 @@
             "headers": {
               "token": {
                 "description": "Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -850,46 +976,48 @@
     },
     "/categories": {
       "post": {
-        "x-name":"Categories",
-        "tags":["Transactions"],
+        "x-name": "Categories",
+        "tags": [
+          "Transactions"
+        ],
         "description": "Get transaction categories",
-        "parameters":[
+        "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"categories_request",
-            "in":"body",
-            "schema":{
-              "$ref":"#/definitions/categories_request"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "categories_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/categories_request"
             }
           }
         ],
@@ -902,35 +1030,35 @@
                 "$ref": "#/definitions/category"
               }
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -938,46 +1066,48 @@
     },
     "/merchants": {
       "post": {
-        "x-name":"Merchants",
-        "tags":["Transactions"],
+        "x-name": "Merchants",
+        "tags": [
+          "Transactions"
+        ],
         "description": "Get merchants",
-        "parameters":[
+        "parameters": [
           {
-            "name":"secret",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"token",
-            "in":"header",
-            "required":true,
-            "type":"string"
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"locale",
-            "in":"header",
-            "required":false,
-            "type":"string"
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
-            "name":"Date",
-            "in":"header",
-            "required":true,
-            "type":"string",
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
-          },          
-          {
-            "name":"request_id",
-            "in":"header",
-            "required":true,
-            "type":"string"
           },
           {
-            "name":"merchants_request",
-            "in":"body",
-            "schema":{
-              "$ref":"#/definitions/merchants_request"
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "merchants_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/merchants_request"
             }
           }
         ],
@@ -990,35 +1120,35 @@
                 "$ref": "#/definitions/merchant"
               }
             },
-            "headers":{
-              "token":{
-                "description":"Valid auth token for subsequent requests if using SSO tokens",
-                "type":"string"
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
               }
             }
           },
           "401": {
             "description": "Authentication Failed",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "403": {
             "description": "Access Denied",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "500": {
             "description": "Server Error",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "501": {
             "description": "Not Implemented",
-            "schema":{
-              "$ref":"#/definitions/error_response"
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         }
@@ -1026,95 +1156,127 @@
     }
   },
   "definitions": {
-    "error_response":{
-      "type":"object",
-      "properties":{
-        "message":{
-          "type":"string"
+    "error_response": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
         },
-        "code":{
-          "type":"string"
+        "code": {
+          "type": "string"
         },
-        "display_message_id":{
-          "type":"string"
+        "otp_details": {
+          "type": "string"
+        },
+        "display_message_id": {
+          "type": "string"
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
     },
-    "merchants_request":{
-      "type":"object",
-      "properties":{
-        "user_id":{
-          "type":"string"
-        }
-      }
-    },
-    "payees_request":{
-      "type":"object",
-      "properties":{
-        "user_id":{
-          "type":"string"
-        }
-      }
-    },
-    "categories_request":{
-      "type":"object",
-      "properties":{
-        "user_id":{
-          "type":"string"
-        }
-      }
-    },
-    "transfer_request":{
-      "type":"object",
-      "required": [ "source_account_id", "dest_account_id", "amount" ],
-      "properties":{
-        "user_id":{
-          "type":"string"
-        },
-        "source_account_id":{
-          "description": "source account of transfer",
+    "merchants_request": {
+      "type": "object",
+      "properties": {
+        "user_id": {
           "type": "string"
-        },
-        "dest_account_id":{
-          "description": "destination account of transfer",
-          "type": "string"
-        },
-        "amount":{
-          "description": "amount of transfer",
-          "type":"number",
-          "format":"float"
-        },
-        "currency_code":{
-          "description": "currency of amounts (USD, etc.)",
-          "type": "string"
-        },
-        "date":{
-          "description": "date of transfer",
-          "type":"string",
-          "format":"date-time"
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
+        }
+      }
+    },
+    "payees_request": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
+        }
+      }
+    },
+    "categories_request": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
+        }
+      }
+    },
+    "transfer_request": {
+      "type": "object",
+      "required": [
+        "source_account_id",
+        "dest_account_id",
+        "amount"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "source_account_id": {
+          "description": "source account of transfer",
+          "type": "string"
+        },
+        "dest_account_id": {
+          "description": "destination account of transfer",
+          "type": "string"
+        },
+        "amount": {
+          "description": "amount of transfer",
+          "type": "number",
+          "format": "float"
+        },
+        "currency_code": {
+          "description": "currency of amounts (USD, etc.)",
+          "type": "string"
+        },
+        "date": {
+          "description": "date of transfer",
+          "type": "string",
+          "format": "date-time"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
     },
     "payment_request": {
-      "type":"object",
-      "required": [ "source_account_id", "payee_id", "amount" ],
+      "type": "object",
+      "required": [
+        "source_account_id",
+        "payee_id",
+        "amount"
+      ],
       "properties": {
-        "user_id":{
-          "type":"string"
+        "user_id": {
+          "type": "string"
         },
         "source_account_id": {
           "description": "source account of payment",
@@ -1126,10 +1288,10 @@
         },
         "amount": {
           "description": "amount of transfer",
-          "type":"number",
-          "format":"float"
+          "type": "number",
+          "format": "float"
         },
-        "currency_code":{
+        "currency_code": {
           "description": "currency of amounts (USD, etc.)",
           "type": "string"
         },
@@ -1141,73 +1303,122 @@
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
     },
     "accounts_request": {
       "type": "object",
-      "properties":{
-        "user_id":{
-          "type":"string"
+      "properties": {
+        "user_id": {
+          "type": "string"
         },
-        "account_id":{
-          "type":"string"
-        },
-         "meta": {
+        "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
     },
-    "customer_request":{
-      "type":"object",
-      "properties":{
-        "user_id":{
-          "type":"string"
+    "customer_request": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
         }
       }
     },
-    "validate_otp_request":{
-      "type":"object",
-      "properties":{
-        "user_id":{
-          "type":"string"
+    "customer_action_request": {
+      "type": "object",
+      "required": [
+        "action",
+        "parameters"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
         },
-        "otp":{
-          "type":"string"
-        }
-      }
-    },
-    "validate_otp_response":{
-      "type":"object",
-      "properties":{
-        "user_id":{
-          "type":"string"
+        "action": {
+          "type": "string"
         },
-        "token":{
-          "type":"string"
+        "parameters": {
+          "description": "List of action parameteres",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
         }
       }
     },
-    "token_credentials":{
-      "type":"object",
-      "properties":{
+    "customer_action_response": {
+      "type": "object",
+      "properties": {
+        "reference_id": {
+          "type": "string"
+        },
+        "reference_number": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "processed",
+            "pending",
+            "cancelled",
+            "failed"
+          ]
+        },
+        "display_message_id": {
+          "type": "string"
+        },
+        "meta": {
+          "description": "List of action parameteres",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
+        }
+      }
+    },
+    "validate_otp_request": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "otp": {
+          "type": "string"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
+        }
+      }
+    },
+    "token_credentials": {
+      "type": "object",
+      "properties": {
         "meta": {
           "description": "Key value pairs acting as auth credentials to obtain the token",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
     },
-    "token_response":{
+    "token_response": {
       "type": "object",
       "properties": {
         "user_id": {
@@ -1215,99 +1426,119 @@
         },
         "token": {
           "type": "string"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
         }
       }
     },
-    "transaction_criteria":{
-      "type":"object",
-      "properties":{
-        "user_id":{
-          "type":"string"
+    "transaction_criteria": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
         },
-        "account_ids":{
-          "type":"array",
-          "items":{
-            "type":"string"
+        "account_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
-        "limit":{
-          "type":"integer",
-          "format":"int32"
+        "limit": {
+          "type": "integer",
+          "format": "int32"
         },
-        "start_date":{
-          "type":"string",
-          "format":"date-time"
+        "start_date": {
+          "type": "string",
+          "format": "date-time"
         },
-        "end_date":{
-          "type":"string",
-          "format":"date-time"
+        "end_date": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
-    "bank_locations_criteria":{
-      "type":"object",
-      "properties":{
-        "location":{
-            "$ref":"#/definitions/location"
+    "bank_locations_criteria": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/location"
         }
       }
     },
-    "meta_field":{
-      "type":"object",
-      "required": [ "name", "value" ],
-      "properties":{
-        "name":{
-          "description":"Name of data field",
-          "type":"string"
+    "name_value_pair": {
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the field",
+          "type": "string"
         },
-        "value":{
-          "description":"Value of data field",
-          "type":"string"
+        "value": {
+          "description": "Value of the field",
+          "type": "string"
         }
       }
     },
-    "location":{
-      "type":"object",
-      "properties":{
-        "address":{
-          "description":"Street address of merchant",
-          "type":"string"
+    "location": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "Street address",
+          "type": "string"
         },
-        "city":{
-          "description":"City of merchant",
-          "type":"string"
+        "city": {
+          "description": "City/Village",
+          "type": "string"
         },
-        "state":{
-          "description":"State of merchant",
-          "type":"string"
+        "state": {
+          "description": "State / Area / Region",
+          "type": "string"
         },
-        "zip":{
-          "description":"Postal code of merchant",
-          "type":"string"
+        "zip": {
+          "description": "Postal code",
+          "type": "string"
         },
-        "coordinates":{
-          "$ref":"#/definitions/coordinates"
+        "country": {
+          "description": "Country code",
+          "type": "string"
+        },
+        "coordinates": {
+          "$ref": "#/definitions/coordinates"
         }
       }
     },
-    "coordinates":{
-      "type":"object",
-      "required": [ "lat", "long" ],
-      "properties":{
-        "lat":{
-          "description":"Latitude of merchant location",
-          "type":"number",
-          "format":"float"
+    "coordinates": {
+      "type": "object",
+      "required": [
+        "lat",
+        "long"
+      ],
+      "properties": {
+        "lat": {
+          "description": "Latitude of merchant location",
+          "type": "number",
+          "format": "float"
         },
-        "long":{
-          "description":"Longitude of merchant location",
-          "type":"number",
-          "format":"float"
+        "long": {
+          "description": "Longitude of merchant location",
+          "type": "number",
+          "format": "float"
         }
       }
     },
     "customer": {
       "type": "object",
+      "required": [
+        "user_id"
+      ],
       "properties": {
         "user_id": {
           "type": "string"
@@ -1321,18 +1552,18 @@
         "last_name": {
           "type": "string"
         },
-        "email" : {
-          "type" : "string",
-          "format" : "email"
+        "email": {
+          "type": "string",
+          "format": "email"
         },
-        "mobile_number" : {
-          "type" : "string"
+        "mobile_number": {
+          "type": "string"
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
@@ -1352,15 +1583,14 @@
             "processed",
             "pending",
             "cancelled",
-            "failed",
-            "unspecified"
+            "failed"
           ]
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
@@ -1380,15 +1610,14 @@
             "processed",
             "pending",
             "cancelled",
-            "failed",
-            "unspecified"
+            "failed"
           ]
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
@@ -1398,18 +1627,6 @@
       "properties": {
         "account_id": {
           "description": "internal ID used by bank for transaction search API",
-          "type": "string"
-        },
-        "account_number": {
-          "description": "number used by kasisto - may be masked",
-          "type": "string"
-        },
-        "account_name": {
-          "description": "account name",
-          "type": "string"
-        },
-        "account_nickname": {
-          "description": "account nickname",
           "type": "string"
         },
         "account_type": {
@@ -1433,61 +1650,117 @@
             "p2p_payment"
           ]
         },
-        "currency_code": {
-          "description": "currency of amounts (USD, etc.)",
+        "account_number": {
+          "description": "number used by kasisto - may be masked",
           "type": "string"
         },
-        "available_balance": {
-          "type": "number",
-          "format":"float"
+        "account_name": {
+          "description": "account name",
+          "type": "string"
+        },
+        "account_nickname": {
+          "description": "account nickname",
+          "type": "string"
+        },
+        "account_status": {
+          "description": "Status of the account",
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive"
+          ]
+        },
+        "account_image": {
+          "description": "account image",
+          "type": "string"
         },
         "current_balance": {
           "type": "number",
-          "format":"float"
+          "format": "float"
         },
-        "available_credit": {
-          "description": "(for credit_card only)",
+        "available_balance": {
           "type": "number",
-          "format":"float"
+          "format": "float"
+        },
+        "fcy_currency_code": {
+          "description": "account name",
+          "type": "string"
+        },
+        "fcy_current_balance": {
+          "type": "number",
+          "format": "float"
+        },
+        "fcy_available_balance": {
+          "type": "number",
+          "format": "float"
         },
         "credit_limit": {
           "description": "(for credit_card only)",
           "type": "number",
-          "format":"float"
-        },
-        "payment_due_date": {
-          "description": "(for credit_card and loan)",
-          "type": "string",
-          "format":"date"
-        },
-        "payment_due_amount": {
-          "description": "(for credit_card and loan)",
-          "type": "number",
-          "format":"float"
-        },
-        "minimum_payment_due_amount": {
-          "description": "(for credit_card and loan)",
-          "type": "number",
-          "format":"float"
+          "format": "float"
         },
         "interest_rate": {
           "description": "Interest rate if applicable",
           "type": "number",
-          "format":"float"
+          "format": "float"
+        },
+        "available_credit": {
+          "description": "(for credit_card only)",
+          "type": "number",
+          "format": "float"
+        },
+        "statement_date": {
+          "description": "(for credit_card and loan)",
+          "type": "string",
+          "format": "date"
+        },
+        "payment_due_amount": {
+          "description": "(for credit_card and loan)",
+          "type": "number",
+          "format": "float"
+        },
+        "payment_due_date": {
+          "description": "(for credit_card and loan)",
+          "type": "string",
+          "format": "date"
+        },
+        "minimum_payment_due_amount": {
+          "description": "(for credit_card and loan)",
+          "type": "number",
+          "format": "float"
+        },
+        "reward_points": {
+          "description": "Number of reward points",
+          "type": "integer",
+          "format": "int32"
+        },
+        "reward_miles": {
+          "description": "Number of miles",
+          "type": "integer",
+          "format": "int32"
+        },
+        "reward_cashback": {
+          "description": "Cashback reward",
+          "type": "number",
+          "format": "float"
         },
         "can_transfer_to": {
           "description": "True if account is a valid transfer destination",
           "type": "boolean"
         },
         "can_transfer_from": {
-          "description": "True if account is a valid transfer source",
+          "description": "True if account is eligible to fee waiver",
+          "type": "boolean"
+        },
+        "can_pay_payee": {
+          "description": "True if account is a valid pay to payee source",
           "type": "boolean"
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
@@ -1505,11 +1778,11 @@
         },
         "title": {
           "description": "Short description of transaction",
-          "type":"string"
+          "type": "string"
         },
         "description": {
           "description": "Description of transaction",
-          "type":"string"
+          "type": "string"
         },
         "transaction_type": {
           "description": "Type of transaction",
@@ -1522,7 +1795,7 @@
         "amount": {
           "description": "Amount of transaction (can be positive or negative)",
           "type": "number",
-          "format":"float"
+          "format": "float"
         },
         "currency_code": {
           "description": "Currency type of the amount",
@@ -1531,16 +1804,16 @@
         "categories": {
           "description": "Category of transaction if provided",
           "type": "array",
-          "items":{
-            "type":"string"
+          "items": {
+            "type": "string"
           }
         },
         "merchant": {
           "description": "Merchant or vendor of transaction if provided",
           "type": "string"
         },
-        "location":{
-          "$ref":"#/definitions/location"
+        "location": {
+          "$ref": "#/definitions/location"
         },
         "status": {
           "description": "Status of transaction",
@@ -1554,23 +1827,23 @@
         "check_number": {
           "description": "Check number of transaction is a check",
           "type": "integer",
-          "format":"int32"
+          "format": "int32"
         },
         "transaction_date": {
           "description": "Date of transaction",
           "type": "string",
-          "format":"date-time"
+          "format": "date-time"
         },
         "post_date": {
           "description": "Date of transaction",
           "type": "string",
-          "format":"date-time"
+          "format": "date-time"
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
@@ -1587,8 +1860,7 @@
           "type": "string",
           "enum": [
             "atm",
-            "bank",
-            "bank+atm"
+            "bank"
           ]
         },
         "location_name": {
@@ -1606,102 +1878,42 @@
           "description": "The phone number of this location",
           "type": "string"
         },
-        "distance": {
-          "description": "Distance to this location",
-          "type": "string"
-        },
-        "number_of_atms": {
-          "description": "Number of ATMs at location",
-          "type": "integer",
-          "format": "int32"
-        },
-        "atm_hours": {
-          "description": "Expected hours for the ATM",
-          "type": "string"
-        },
-        "atm_deposit_cutoff": {
-          "description": "When deposits are picked up from the ATM each day",
-          "type": "array",
-          "items": {
-              "$ref":"#/definitions/day_hours"
-          }
-        },
-        "bank_deposit_cutoff": {
-          "description": "When deposits are picked up from the Bank each day",
-          "type": "array",
-          "items": {
-              "$ref":"#/definitions/day_hours"
-          }
-        },
-        "atm_languages": {
+        "services": {
           "description": "Array of languages used at the ATM",
           "type": "array",
           "items": {
-              "type": "string"
+            "type": "string"
           }
         },
-        "teller_languages": {
-          "description": "Array of languages used by the Tellers",
+        "opening_hours": {
+          "description": "Array of opening hours description",
           "type": "array",
           "items": {
-              "type": "string"
+            "type": "string"
           }
         },
-        "atm_services": {
-          "description": "Array of services supported at the ATM",
+        "opening_days": {
+          "description": "Array of opening days",
           "type": "array",
           "items": {
-              "type": "string"
+            "type": "string",
+            "enum": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday"
+            ]
           }
         },
-        "bank_services": {
-          "description": "Array of services supported at the Bank",
+        "languages": {
+          "description": "Array of languages used at the POI",
           "type": "array",
           "items": {
-              "type": "string"
+            "type": "string"
           }
-        },
-        "holiday_hours": {
-          "description": "Array of holidays with closing times",
-          "type": "array",
-          "items": {
-              "$ref":"#/definitions/day_hours"
-          }
-        },
-        "lobby_hours": {
-          "description": "Hours of operation for each day of the week",
-          "type": "array",
-          "items": {
-              "$ref":"#/definitions/day_hours"
-          }
-        }
-      }
-    },
-    "day_hours": {
-      "type": "object",
-      "required": [ "day" ],
-      "properties": {
-        "day": {
-          "description": "The day associated with the event (could be a holiday name or a day of the week)",
-          "type": "string"
-        },
-        "hours": {
-          "$ref":"#/definitions/hours"
-        }
-      }
-    },
-    "hours": {
-      "type": "object",
-      "properties": {
-        "start": {
-          "description": "Start time for a range of hours in 24 hour format as an integer.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "end": {
-          "description": "End time for a range of hours in 24 hour format as an integer.",
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -1716,18 +1928,18 @@
           "description": "Name of merchant",
           "type": "string"
         },
-        "alias":{
-          "description":"Optional alternative names for this merchant",
-          "type":"array",
-          "items":{
-            "type":"string"
+        "alias": {
+          "description": "Optional alternative names for this merchant",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
@@ -1743,18 +1955,18 @@
           "description": "Name of transaction category",
           "type": "string"
         },
-        "alias":{
-          "description":"Optional alternative names for this category",
-          "type":"array",
-          "items":{
-            "type":"string"
+        "alias": {
+          "description": "Optional alternative names for this category",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
@@ -1770,18 +1982,18 @@
           "description": "Name of payee",
           "type": "string"
         },
-        "alias":{
-          "description":"Optional alternative names for this payee",
-          "type":"array",
-          "items":{
-            "type":"string"
+        "alias": {
+          "description": "Optional alternative names for this payee",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
-          "items":{
-            "$ref": "#/definitions/meta_field"
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
           }
         }
       }
