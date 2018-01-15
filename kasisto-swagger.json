@@ -1812,6 +1812,10 @@
           "description": "Merchant or vendor of transaction if provided",
           "type": "string"
         },
+        "payee": {
+          "description": "Payee or biller of transaction if provided",
+          "type": "string"
+        },
         "location": {
           "$ref": "#/definitions/location"
         },

@@ -1,5 +1,5 @@
 # Kasisto Enterprise API Overview
-Version 1.3 beta
+Version 1.3 beta 2
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
@@ -583,6 +583,7 @@ token: string (optional)
         "string"
     ],
     "merchant": "string",
+    "payee": "string",
     "location": {
         "address": "string",
         "city": "string",
@@ -1506,6 +1507,7 @@ The list of possible messages should be defined prior to implementation.
         "string"
     ],
     "merchant": "string",
+    "payee": "string",
     "location": {
         "address": "string",
         "city": "string",
