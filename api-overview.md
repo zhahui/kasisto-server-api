@@ -993,7 +993,7 @@ POST /bank_locations HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
-token: string
+token: string (optional)
 locale: string
 request_id: string
 Date: Tue, 01 Jan 2017 00:00:00 GMT
