@@ -1756,6 +1756,10 @@
           "description": "True if account is a valid pay to payee source",
           "type": "boolean"
         },
+        "can_waive_fee": {
+          "description": "True if fees for account can be waived",
+          "type": "boolean"
+        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
