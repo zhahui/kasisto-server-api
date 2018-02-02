@@ -1760,6 +1760,10 @@
           "description": "True if fees for account can be waived",
           "type": "boolean"
         },
+        "fee_inccured": {
+          "description": "Any fees incurred on the account E.g. monthly / annual fees",
+          "type": "float"
+        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
