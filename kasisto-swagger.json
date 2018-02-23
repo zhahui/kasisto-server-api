@@ -1765,6 +1765,26 @@
           "type" : "string",
           "format" : "date"
         },
+        "available_cash_advance_limit" : {
+          "description" : "Cash advance limit for credit cards",
+          "type" : "number",
+          "format" : "float"
+        },
+        "original_tenor" : {
+            "description": "Tenor in days",
+            "type": "number",
+            "format" : "int32"
+        },
+        "maturity_date": {
+          "description": "Maturity date of account",
+          "type": "string",
+          "format": "date"
+        },       
+        "annual_fee" : {
+          "description" : "Annual fee for the account",
+          "type" : "number",
+          "format" : "float"
+        } ,
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",

@@ -412,11 +412,15 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | reward_points |  |  | x |  |  |  |
 | reward_miles |  |  | x |  |  |  |
 | reward_cashback |  |  | x |  |  |  |
-| expiration_date |  |  | x |  |  |  |
 | can_transfer_to | x | x | x | x | x | x |
 | can_transfer_from |  | x | x |  |  | x |
 | can_pay_payee |  | x | x |  |  | x |
 | can_waive_fee | x | x | x | x | x | x |
+| annual_fee |  |  | x |  |  |  |
+| expiration_date |  |  | x |  |  |  |
+| available_cash_advance_limit |  |  | x |  |  |  |
+| original_tenor | x |  |  | x | x |  |
+| maturity_date | x |  |  | x | x |  |
 
 7) For Accounts in foreign currency:
 
@@ -1216,6 +1220,11 @@ The list of possible messages should be defined prior to implementation.
     "can_transfer_from": false, 
     "can_pay_payee": false, 
     "can_waive_fee": false, 
+    "annual_fee" : 0,
+    "original_tenor" : 0,
+    "maturity_date" : "2020-01-01",
+    "expiration_date" : "2020-01-01",
+    "available_cash_advance_limit" : 0,
     "meta": [
         {
             "name": "string",
