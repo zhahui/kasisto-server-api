@@ -373,20 +373,23 @@ token: string (optional)
     "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
     "sloc","savings","wire".
 
-2) The field "account_status" in response should be one of the following: "active","inactive".
+
+2) The "account_number" of the account may optionally be masked. However, the last unique N digits in the account numbers must be provided. E.g. A credit card account number of "4515874554548888" can be returned as "8888" or "xxxxxxxxxxxx8888"    
+
+3) The field "account_status" in response should be one of the following: "active","inactive".
 Only the Credit Cards with an "inactive" status are eligible for the Credit Card Activation intent.
 
-3) The field "account_image" in response should contain the full http url to the account image.
+4) The field "account_image" in response should contain the full http url to the account image.
 All images should be hosted on a webserver. KAI doesn't provide any image hosting service.
 ```json
 "account_image": "https://www.my_bank_images_server.com/image/product_type_a.png"
 ```
 
-4) The field "payment_due_date" and "statement_date" in the response should be in "yyyy-MM-dd” Date format.
+5) The field "payment_due_date" and "statement_date" in the response should be in "yyyy-MM-dd” Date format.
 
-5) If there is no meta then pass empty array.
+6) If there is no meta then pass empty array.
 
-6) As a guidance, we show the supported features per account type in the table below.
+7) As a guidance, we show the supported features per account type in the table below.
 The mapping can change from Bank to Bank and is to be agreed with Kasisto prior to implementation : 
 
 | Feature | Certificate of deposit | Checking | Credit Card | Loan | Mortgage | Savings |
@@ -422,18 +425,17 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | original_tenor | x |  |  | x | x |  |
 | maturity_date | x |  |  | x | x |  |
 
-7) For Accounts in foreign currency:
+8) For Accounts in foreign currency:
 
     a) The fields "current_balance" and "available_balance" should be sent as amount equivalent in the default currency.
-
 
     b) The field "fcy_currency_code" should contain the currency code of the Account (JPY, EUR, etc.)
 
     c) The fields "fcy_current_balance" and "fcy_available_balance" should hold the foreign currency amounts
 
-8) For Accounts with multiple foreign currencies, KAI expects multiple Account objects in the response: One account per foreign currency.
+9) For Accounts with multiple foreign currencies, KAI expects multiple Account objects in the response: One account per foreign currency.
 
-9) Intent enabling fields:
+10) Intent enabling fields:
 
 | Field | Intent | Description |
 | --------- | -------- | -------- |
@@ -441,6 +443,8 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | can_transfer_from | Transfer | Indicates that this Account can be used as source for transfer |
 | can_pay_payee | Pay2Person | Indicates that this Account can be used for a payment to Payee |
 | can_waive_fee | FeeWaiver | Indicates that this Account is eligible to fee waiver |
+
+11) The "original_tenor" of an account is specified as the number of days. A month is assumed to be 30 days. 
 
 
 ### Transactions Methods
@@ -961,6 +965,9 @@ token: string (optional)
 }]
 ```
 
+##### Notes:
+
+1) The "category" field is a string enum with expected values ```["payee","biller"]```.
 
 ### Bank Locations Methods
 
