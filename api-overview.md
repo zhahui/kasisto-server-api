@@ -359,6 +359,10 @@ token: string (optional)
     "can_pay_payee": false, 
     "can_waive_fee": false, 
     "expiration_date": "2016-01-30",
+    "original_tenor": 0,
+    "annual_fee" : 0,
+    "available_cash_advance_limit" : 0,
+    "maturity_date": "2016-01-01",
     "meta": [
         {
             "name": "string",
