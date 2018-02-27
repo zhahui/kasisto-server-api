@@ -1,5 +1,5 @@
 # Kasisto Enterprise API Overview
-Version 1.3 beta 2
+Version 1.3 beta 3
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
@@ -358,6 +358,11 @@ token: string (optional)
     "can_transfer_from": false, 
     "can_pay_payee": false, 
     "can_waive_fee": false, 
+    "expiration_date": "2016-01-30",
+    "original_tenor": 0,
+    "annual_fee" : 0,
+    "available_cash_advance_limit" : 0,
+    "maturity_date": "2016-01-01",
     "meta": [
         {
             "name": "string",
@@ -372,20 +377,23 @@ token: string (optional)
     "cd","checking","credit_card","heloc","ira","investment","loc","loan","money_market","mortgage","overdraft_protection”,
     "sloc","savings","wire".
 
-2) The field "account_status" in response should be one of the following: "active","inactive".
+
+2) The "account_number" of the account may optionally be masked. However, the last unique N digits in the account numbers must be provided. E.g. A credit card account number of "4515874554548888" can be returned as "8888" or "xxxxxxxxxxxx8888"    
+
+3) The field "account_status" in response should be one of the following: "active","inactive".
 Only the Credit Cards with an "inactive" status are eligible for the Credit Card Activation intent.
 
-3) The field "account_image" in response should contain the full http url to the account image.
+4) The field "account_image" in response should contain the full http url to the account image.
 All images should be hosted on a webserver. KAI doesn't provide any image hosting service.
 ```json
 "account_image": "https://www.my_bank_images_server.com/image/product_type_a.png"
 ```
 
-4) The field "payment_due_date" and "statement_date" in the response should be in "yyyy-MM-dd” Date format.
+5) The field "payment_due_date" and "statement_date" in the response should be in "yyyy-MM-dd” Date format.
 
-5) If there is no meta then pass empty array.
+6) If there is no meta then pass empty array.
 
-6) As a guidance, we show the supported features per account type in the table below.
+7) As a guidance, we show the supported features per account type in the table below.
 The mapping can change from Bank to Bank and is to be agreed with Kasisto prior to implementation : 
 
 | Feature | Certificate of deposit | Checking | Credit Card | Loan | Mortgage | Savings |
@@ -408,26 +416,31 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | payment_due_amount |  |  | x | x | x |  |
 | payment_due_date |  |  | x | x | x |  |
 | minimum_payment_due_amount |  |  | x | x | x |  |
-| reward_points |  | x | x |  |  | x |
-| reward_miles |  | x | x |  |  | x |
-| reward_cashback |  | x | x |  |  | x |
+| reward_points |  |  | x |  |  |  |
+| reward_miles |  |  | x |  |  |  |
+| reward_cashback |  |  | x |  |  |  |
 | can_transfer_to | x | x | x | x | x | x |
 | can_transfer_from |  | x | x |  |  | x |
 | can_pay_payee |  | x | x |  |  | x |
 | can_waive_fee | x | x | x | x | x | x |
+| annual_fee |  |  | x |  |  |  |
+| expiration_date |  |  | x |  |  |  |
+| available_cash_advance_limit |  |  | x |  |  |  |
+| original_tenor | x |  |  | x | x |  |
+| tenor_unit | x |  |  | x | x |  |
+| maturity_date | x |  |  | x | x |  |
 
-7) For Accounts in foreign currency:
+8) For Accounts in foreign currency:
 
     a) The fields "current_balance" and "available_balance" should be sent as amount equivalent in the default currency.
-
 
     b) The field "fcy_currency_code" should contain the currency code of the Account (JPY, EUR, etc.)
 
     c) The fields "fcy_current_balance" and "fcy_available_balance" should hold the foreign currency amounts
 
-8) For Accounts with multiple foreign currencies, KAI expects multiple Account objects in the response: One account per foreign currency.
+9) For Accounts with multiple foreign currencies, KAI expects multiple Account objects in the response: One account per foreign currency.
 
-9) Intent enabling fields:
+10) Intent enabling fields:
 
 | Field | Intent | Description |
 | --------- | -------- | -------- |
@@ -436,6 +449,14 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | can_pay_payee | Pay2Person | Indicates that this Account can be used for a payment to Payee |
 | can_waive_fee | FeeWaiver | Indicates that this Account is eligible to fee waiver |
 
+11) The original tenor of an account is controlled by 2 attributes. The "original_tenor", which is an integer and the "original_tenor_unit" which is a string enum of ["year", "month", "day"]. E.g. a tenor of 3 months is represented as:
+
+```json
+{
+    "original_tenor" : 3,
+    "original_tenor_unit" : "month"
+}
+```
 
 ### Transactions Methods
 
@@ -942,6 +963,7 @@ token: string (optional)
 [{
     "payee_id": "string",
     "name": "string",
+    "category" : "string",
     "alias": [
         "string"
     ],
@@ -954,6 +976,9 @@ token: string (optional)
 }]
 ```
 
+##### Notes:
+
+1) The "category" field is a string enum with expected values ```["payee","biller"]```.
 
 ### Bank Locations Methods
 
@@ -1213,6 +1238,11 @@ The list of possible messages should be defined prior to implementation.
     "can_transfer_from": false, 
     "can_pay_payee": false, 
     "can_waive_fee": false, 
+    "annual_fee" : 0,
+    "original_tenor" : 0,
+    "maturity_date" : "2020-01-01",
+    "expiration_date" : "2020-01-01",
+    "available_cash_advance_limit" : 0,
     "meta": [
         {
             "name": "string",
