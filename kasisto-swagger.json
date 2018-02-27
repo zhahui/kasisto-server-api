@@ -1771,9 +1771,18 @@
           "format" : "float"
         },
         "original_tenor" : {
-            "description": "Tenor in days",
+            "description": "Tenor period",
             "type": "number",
             "format" : "int32"
+        },
+        "tenor_unit"  : {
+            "description": "Unit of the tenor period",
+            "type": "string",
+            "enum" : [
+              "year",
+              "month",
+              "day"
+            ]
         },
         "maturity_date": {
           "description": "Maturity date of account",

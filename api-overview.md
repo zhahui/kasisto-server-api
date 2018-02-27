@@ -427,6 +427,7 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | expiration_date |  |  | x |  |  |  |
 | available_cash_advance_limit |  |  | x |  |  |  |
 | original_tenor | x |  |  | x | x |  |
+| tenor_unit | x |  |  | x | x |  |
 | maturity_date | x |  |  | x | x |  |
 
 8) For Accounts in foreign currency:
@@ -448,7 +449,7 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | can_pay_payee | Pay2Person | Indicates that this Account can be used for a payment to Payee |
 | can_waive_fee | FeeWaiver | Indicates that this Account is eligible to fee waiver |
 
-11) The "original_tenor" of an account is specified as the number of days. A month is assumed to be 30 days. 
+11) "tenor_unit" is a string enum. The expected values are "year", "month", "day".
 
 
 ### Transactions Methods
