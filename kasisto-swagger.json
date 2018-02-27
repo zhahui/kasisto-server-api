@@ -1771,11 +1771,11 @@
           "format" : "float"
         },
         "original_tenor" : {
-            "description": "Tenor period",
+            "description": "Original tenor period",
             "type": "number",
             "format" : "int32"
         },
-        "tenor_unit"  : {
+        "original_tenor_unit"  : {
             "description": "Unit of the tenor period",
             "type": "string",
             "enum" : [
