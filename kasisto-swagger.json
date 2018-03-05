@@ -42,6 +42,9 @@
     },
     {
       "name": "Customer Action Methods"
+    },
+    {
+      "name": "Requests"
     }
   ],
   "paths": {
@@ -1153,6 +1156,78 @@
           }
         }
       }
+    },
+    "/requests": {
+      "post": {
+        "x-name": "Requests",
+        "tags": [
+          "Requests"
+        ],
+        "description": "User request transcript",
+        "parameters": [
+          {
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },
+          {
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requests_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/requests_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "requests response"
+          },
+          "401": {
+            "description": "Authentication Failed",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "403": {
+            "description": "Access Denied",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1185,6 +1260,87 @@
       "properties": {
         "user_id": {
           "type": "string"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
+        }
+      }
+    },
+    "requests_request": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "ext_session_id": {
+          "type": "string"
+        },
+        "ext_user_id": {
+          "type": "string"
+        },
+        "platform_type": {
+          "type": "string"
+        },
+        "platform_user_id": {
+          "type": "string"
+        },
+        "platform_conversation_id": {
+          "type": "string"
+        },
+        "device_type":{
+          "type": "string"
+        },
+        "device_model":{
+          "type": "string"
+        },
+        "device_os":{
+          "type": "string"
+        },
+        "device_id":{
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/location"
+        },
+        "segments":{
+          "type": "array",
+          "items":{
+            "type": "string"
+          }
+        },
+        "registered":{
+          "type": "boolean"
+        },
+        "request_text":{
+          "type": "string"
+        },
+        "response_text":{
+          "type": "string"
+        },
+        "intent":{
+          "type": "string"
+        },
+        "sub_intent":{
+          "type": "string"
+        },
+        "score":{
+          "type": "number",
+          "format": "float"
+        },
+        "elapsed_time":{
+          "type": "integer",
+          "format": "int32"
+        },
+        "date":{
+          "type": "string",
+          "format": "date-time"
         },
         "meta": {
           "description": "Optional data if needed for application",
