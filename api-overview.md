@@ -1254,13 +1254,17 @@ request_id: string
     "user_id": "string", 
     "ext_session_id": "string", 
     "ext_user_id": "string", 
-    "platform_type": "string", 
-    "platform_user_id": "string"
-    "platform_conversation_id": "string", 
-    "device_type": "string", 
-    "device_os": "string", 
-    "device_model": "string", 
-    "device_id": "string", 
+    "platform":{
+        "name": "string"
+        "user_id": "string", 
+        "conversation_id": "string", 
+    },
+    "device":{
+        "type": "string", 
+        "model": "string", 
+        "os": "string", 
+        "id": "string"
+    },
     "location": {
         "address": "string",
         "city": "string",
@@ -1272,7 +1276,7 @@ request_id: string
             "long": 0.0
         }
     },
-    "segments": [
+    "segment_names": [
         {
             "type": "string"
         }
@@ -1363,6 +1367,28 @@ token: string (optional)
     ]
 }
 ```
+
+#### platform
+
+```json
+{
+    "conversation_id": "string", 
+    "user_id": "string", 
+    "name": "string"
+}
+```
+
+#### device
+
+```json
+{
+    "type": "string", 
+    "model": "string", 
+    "os": "string", 
+    "id": "string"
+}
+```
+
 
 #### bank_location
 

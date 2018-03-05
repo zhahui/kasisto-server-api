@@ -1285,31 +1285,16 @@
         "ext_user_id": {
           "type": "string"
         },
-        "platform_type": {
-          "type": "string"
+        "platform":{
+          "$ref": "#/definitions/platform"
         },
-        "platform_user_id": {
-          "type": "string"
-        },
-        "platform_conversation_id": {
-          "type": "string"
-        },
-        "device_type":{
-          "type": "string"
-        },
-        "device_model":{
-          "type": "string"
-        },
-        "device_os":{
-          "type": "string"
-        },
-        "device_id":{
-          "type": "string"
+        "device":{
+          "$ref": "#/definitions/device"
         },
         "location": {
           "$ref": "#/definitions/location"
         },
-        "segments":{
+        "segment_names":{
           "type": "array",
           "items":{
             "type": "string"
@@ -1670,6 +1655,37 @@
           "$ref": "#/definitions/coordinates"
         }
       }
+    },
+    "platform":{
+        "type":"object",
+        "properties":{
+            "name":{
+                "type":"string"
+            },   
+            "conversation_id":{
+                "type":"string"
+            },   
+            "user_id":{
+                "type":"string"
+            }   
+        }
+    },
+    "device":{
+        "type":"object",
+        "properties":{
+            "type":{
+                "type":"string"
+            },   
+            "os":{
+                "type":"string"
+            },   
+            "model":{
+                "type":"string"
+            },   
+            "id":{
+                "type":"string"
+            }  
+        }
     },
     "coordinates": {
       "type": "object",
