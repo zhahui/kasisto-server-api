@@ -1378,6 +1378,58 @@ token: string (optional)
 }
 ```
 
+#### requests_request
+
+```json
+{
+    "session_id": "string", 
+    "user_id": "string", 
+    "ext_session_id": "string", 
+    "ext_user_id": "string", 
+    "platform":{
+        "name": "string"
+        "user_id": "string", 
+        "conversation_id": "string", 
+    },
+    "device":{
+        "type": "string", 
+        "model": "string", 
+        "os": "string", 
+        "id": "string"
+    },
+    "location": {
+        "address": "string",
+        "city": "string",
+        "state": "string",
+        "zip": "string",
+        "country": "string",
+        "coordinates": {
+            "lat": 0.0,
+            "long": 0.0
+        }
+    },
+    "segment_names": [
+        {
+            "type": "string"
+        }
+    ], 
+    "registered": "string", 
+    "request_text": "string", 
+    "response_text": "string", 
+    "intent": "string", 
+    "sub_intent": "string", 
+    "score": 0, 
+    "elapsed_time": 0, 
+    "date": "2016-01-30T00:00:00.00Z", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+}
+```
+
 #### device
 
 ```json
