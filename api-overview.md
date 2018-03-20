@@ -362,6 +362,7 @@ token: string (optional)
     "can_waive_fee": false, 
     "expiration_date": "2016-01-30",
     "original_tenor": 0,
+    "original_tenor_unit": string,
     "annual_fee" : 0,
     "available_cash_advance_limit" : 0,
     "maturity_date": "2016-01-01",
@@ -429,7 +430,7 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | expiration_date |  |  | x |  |  |  |
 | available_cash_advance_limit |  |  | x |  |  |  |
 | original_tenor | x |  |  | x | x |  |
-| tenor_unit | x |  |  | x | x |  |
+| original_tenor_unit | x |  |  | x | x |  |
 | maturity_date | x |  |  | x | x |  |
 
 8) For Accounts in foreign currency:
