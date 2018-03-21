@@ -452,7 +452,7 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 | can_pay_payee | Pay2Person | Indicates that this Account can be used for a payment to Payee |
 | can_waive_fee | FeeWaiver | Indicates that this Account is eligible to fee waiver |
 
-11) The original tenor of an account is controlled by 2 attributes. The "original_tenor", which is an integer and the "original_tenor_unit" which is a string enum of ["year", "month", "day"]. E.g. a tenor of 3 months is represented as:
+11) The original tenor of an account is controlled by 2 attributes. The "original_tenor", which is an integer and the "original_tenor_unit" which is a string from the enum of ["year", "month", "day"]. E.g. a tenor of 3 months is represented as:
 
 ```json
 {
