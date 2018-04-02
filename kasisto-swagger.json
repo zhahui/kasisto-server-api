@@ -44,7 +44,7 @@
       "name": "Customer Action Methods"
     },
     {
-      "name": "Requests"
+      "name": "Interaction"
     }
   ],
   "paths": {
@@ -1157,13 +1157,13 @@
         }
       }
     },
-    "/requests": {
+    "/interaction": {
       "post": {
-        "x-name": "Requests",
+        "x-name": "Interaction",
         "tags": [
-          "Requests"
+          "Interaction"
         ],
-        "description": "User request transcript",
+        "description": "User interaction transcript",
         "parameters": [
           {
             "name": "secret",
@@ -1191,16 +1191,16 @@
             "type": "string"
           },
           {
-            "name": "requests_request",
+            "name": "interaction_request",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/requests_request"
+              "$ref": "#/definitions/interaction_request"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "requests response"
+            "description": "interaction response"
           },
           "401": {
             "description": "Authentication Failed",
@@ -1270,7 +1270,7 @@
         }
       }
     },
-    "requests_request": {
+    "interaction_request": {
       "type": "object",
       "properties": {
         "session_id": {
@@ -1306,8 +1306,8 @@
         "request_text":{
           "type": "string"
         },
-        "response_text":{
-          "type": "string"
+        "response":{
+          "type": "object"
         },
         "intent":{
           "type": "string"
