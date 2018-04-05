@@ -23,8 +23,6 @@ Version 1.3 beta 4
   * [/bank_locations](#bank-locations)
 - [Customer Action Methods](#customer-action-methods)
   * [/customer_action](#customer-action)
-- [Requests Methods](#requests-methods)
-  * [/requests](#requests)
 
 
 ## Authentication
@@ -1207,105 +1205,7 @@ KAI will use this "display_message_id" to lookup the message to display to the c
 If no "display_message_id" is returned KAI will use a default message.
 The list of possible messages should be defined prior to implementation.
 
-### Requests Methods
 
-#### Requests
-
-```
-POST /requests
-```
-
-User request transcript
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header |
-| locale | header |
-| Date | header |
-| request_id | header |
-| [requests_request](#requests_request) | body |
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | requests response |  |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /requests HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-locale: string
-Date: string
-request_id: string
-```
-```json
-{
-    "session_id": "string", 
-    "user_id": "string", 
-    "ext_session_id": "string", 
-    "ext_user_id": "string", 
-    "platform":{
-        "name": "string"
-        "user_id": "string", 
-        "conversation_id": "string", 
-    },
-    "device":{
-        "type": "string", 
-        "model": "string", 
-        "os": "string", 
-        "id": "string"
-    },
-    "location": {
-        "address": "string",
-        "city": "string",
-        "state": "string",
-        "zip": "string",
-        "country": "string",
-        "coordinates": {
-            "lat": 0.0,
-            "long": 0.0
-        }
-    },
-    "segment_names": [
-        {
-            "type": "string"
-        }
-    ], 
-    "registered": "string", 
-    "request_text": "string", 
-    "response_text": "string", 
-    "intent": "string", 
-    "sub_intent": "string", 
-    "score": 0, 
-    "elapsed_time": 0, 
-    "date": "2016-01-30T00:00:00.00Z", 
-    "meta": [
-        {
-            "name": "string", 
-            "value": "string"
-        }
-    ], 
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-
-```
 
 
 ### Schema Definitions
@@ -1378,57 +1278,6 @@ token: string (optional)
 }
 ```
 
-#### requests_request
-
-```json
-{
-    "session_id": "string", 
-    "user_id": "string", 
-    "ext_session_id": "string", 
-    "ext_user_id": "string", 
-    "platform":{
-        "name": "string"
-        "user_id": "string", 
-        "conversation_id": "string", 
-    },
-    "device":{
-        "type": "string", 
-        "model": "string", 
-        "os": "string", 
-        "id": "string"
-    },
-    "location": {
-        "address": "string",
-        "city": "string",
-        "state": "string",
-        "zip": "string",
-        "country": "string",
-        "coordinates": {
-            "lat": 0.0,
-            "long": 0.0
-        }
-    },
-    "segment_names": [
-        {
-            "type": "string"
-        }
-    ], 
-    "registered": "string", 
-    "request_text": "string", 
-    "response_text": "string", 
-    "intent": "string", 
-    "sub_intent": "string", 
-    "score": 0, 
-    "elapsed_time": 0, 
-    "date": "2016-01-30T00:00:00.00Z", 
-    "meta": [
-        {
-            "name": "string", 
-            "value": "string"
-        }
-    ], 
-}
-```
 
 #### device
 
