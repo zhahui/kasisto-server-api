@@ -23,6 +23,8 @@ Version 1.3 beta 4
   * [/bank_locations](#bank-locations)
 - [Customer Action Methods](#customer-action-methods)
   * [/customer_action](#customer-action)
+- [Interaction Methods](#interaction-methods)
+  * [/interaction](#interaction)
 
 
 ## Authentication
@@ -1207,6 +1209,83 @@ The list of possible messages should be defined prior to implementation.
 
 
 
+### Interaction Methods
+
+#### Interaction
+
+```
+POST /interaction
+```
+
+User interaction transcript
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| locale | header |
+| Date | header |
+| request_id | header |
+| [interaction_request](#interaction_request) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | interaction response |  |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /interaction HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+locale: string
+Date: string
+request_id: string
+```
+```json
+{
+    "application": "string", 
+    "sub_intent": "string", 
+    "request_text": "string", 
+    "device": "string", 
+    "segment_names": [
+        {
+            "type": "string"
+        }
+    ], 
+    "elapsed_time": 0, 
+    "platform": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "intent": "string", 
+    "user": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
+    "interaction_type": "string", 
+    "response": {}
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+
+```
+
 
 ### Schema Definitions
 
@@ -1446,6 +1525,34 @@ The list of possible messages should be defined prior to implementation.
 }
 ```
 
+#### interaction_request
+
+```json
+{
+    "application": "string", 
+    "sub_intent": "string", 
+    "request_text": "string", 
+    "device": "string", 
+    "segment_names": [
+        {
+            "type": "string"
+        }
+    ], 
+    "elapsed_time": 0, 
+    "platform": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ], 
+    "intent": "string", 
+    "user": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
+    "interaction_type": "string", 
+    "response": {}
+}
+```
 
 #### merchant
 

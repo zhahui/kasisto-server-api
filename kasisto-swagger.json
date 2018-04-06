@@ -1651,7 +1651,7 @@
             },
             "locale":{
                 "type":"string"
-            }
+            },
             "environment":{
                 "type":"string"
             },

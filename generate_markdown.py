@@ -132,6 +132,8 @@ def generate_ref_link(obj):
 
 def generate_schema(def_obj):
     obj={}
+    if not 'properties' in def_obj:
+        return obj
     for name,prop in def_obj['properties'].iteritems():
         required=prop.get('required',False)
         if name=='meta':
