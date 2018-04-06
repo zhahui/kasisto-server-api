@@ -1273,6 +1273,17 @@
     "interaction_request": {
       "type": "object",
       "properties": {
+        "interaction_type":{
+          "type": "string",
+          "enum": [
+            "customer_input",
+            "customer_authenticated",
+            "push_message"
+          ]
+        },
+        "application":{
+          "$ref": "#/definitions/application"
+        },
         "session_id": {
           "type": "string"
         },
@@ -1655,6 +1666,26 @@
           "$ref": "#/definitions/coordinates"
         }
       }
+    },
+    "application":{
+        "type":"object",
+        "properties":{
+            "app_id":{
+                "type":"string"
+            },
+            "locale":{
+                "type":"string"
+            }
+            "environment":{
+                "type":"string"
+            },
+            "build_id":{
+                "type":"string"
+            },
+            "package_id":{
+                "type":"string"
+            }
+        }
     },
     "platform":{
         "type":"object",
