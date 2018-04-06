@@ -1274,27 +1274,13 @@
       "type": "object",
       "properties": {
         "interaction_type":{
-          "type": "string",
-          "enum": [
-            "customer_input",
-            "customer_authenticated",
-            "push_message"
-          ]
+          "type": "string"
         },
         "application":{
           "$ref": "#/definitions/application"
         },
-        "session_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "ext_session_id": {
-          "type": "string"
-        },
-        "ext_user_id": {
-          "type": "string"
+        "user":{
+          "$ref": "#/definitions/user"
         },
         "platform":{
           "$ref": "#/definitions/platform"
@@ -1302,17 +1288,11 @@
         "device":{
           "$ref": "#/definitions/device"
         },
-        "location": {
-          "$ref": "#/definitions/location"
-        },
         "segment_names":{
           "type": "array",
           "items":{
             "type": "string"
           }
-        },
-        "registered":{
-          "type": "boolean"
         },
         "request_text":{
           "type": "string"
@@ -1325,10 +1305,6 @@
         },
         "sub_intent":{
           "type": "string"
-        },
-        "score":{
-          "type": "number",
-          "format": "float"
         },
         "elapsed_time":{
           "type": "integer",
@@ -1670,7 +1646,7 @@
     "application":{
         "type":"object",
         "properties":{
-            "app_id":{
+            "application_id":{
                 "type":"string"
             },
             "locale":{
@@ -1685,6 +1661,17 @@
             "package_id":{
                 "type":"string"
             }
+        }
+    },
+    "user":{
+        "type":"object",
+        "properties":{
+           "user_id":{
+                "type":"string"
+           }, 
+           "session_id":{
+                "type":"string"
+           } 
         }
     },
     "platform":{
