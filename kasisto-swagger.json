@@ -1197,7 +1197,7 @@
             "name": "merchants_request",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/offer_request"
+              "$ref": "#/definitions/offers_request"
             }
           }
         ],
@@ -2169,7 +2169,7 @@
         }
       }
     },
-    "offer_request": {
+    "offers_request": {
       "type": "object",
       "properties": {
         "user_id": {
@@ -2180,14 +2180,9 @@
           "description": "Location of customer at time of request",
           "$ref": "#/definitions/location"
         },
-        "category_ids": {
-          "description": "List of category ids that are of interest",
-          "type": "array",
-          "items": [
-            {
-              "type": "string"
-            }
-          ]
+        "category_id": {
+          "description": "Category id to search",
+          "type": "string"
         },
         "meta": {
           "description": "Optional data if needed for application",
@@ -2196,7 +2191,10 @@
             "$ref": "#/definitions/name_value_pair"
           }
         }
-      }
+      },
+      "required": [
+        "user_id"
+      ]
     },
     "offer": {
       "type": "object",
@@ -2205,18 +2203,42 @@
           "description": "Unique identifier for the offer",
           "type": "string"
         },
-        "offer_summary": {
+        "summary": {
           "description": "Summary text of the offer",
           "type": "string",
           "example": "10% off all purchases"
         },
-        "offer_image": {
+        "image": {
           "description": "URI of image that will be displayed in bot UI for promotions",
           "type": "string",
           "format": "uri"
         },
+        "merchant": {
+          "description": "The name of merchant.",
+          "type": "string",
+          "example": "Mcdonalds"
+        },
+        "location_name": {
+          "description": "The name of the location.",
+          "type": "string",
+          "example": "McDonalds Nathan Road"
+        },
+        "location_contact_number": {
+          "description": "Contact number of the location",
+          "type": "string"
+        },
+        "location_email": {
+          "description": "Email contact of the location",
+          "type": "string"
+        },
+        "url": {
+          "description": "URI of where the customer can find out more information about the offer",
+          "type": "string",
+          "format": "uri"
+        },
         "location": {
-          "description": "Location where offer can be redeemed."
+          "description": "Location where offer can be redeemed.",
+          "$ref": "#/definitions/location"
         },
         "category_ids": {
           "description": "List of `category_id`s that are relevant to offer",
@@ -2227,15 +2249,15 @@
             }
           ]
         },
-        "offer_start_date": {
+        "start_date": {
           "type": "string",
           "format": "date"
         },
-        "offer_end_date": {
+        "end_date": {
           "type": "string",
           "format": "date"
         },
-        "offer_contents": {
+        "details": {
           "description": "Contents to be displayed (Offer details, TnCs and etc.)",
           "type": "array",
           "items": [
@@ -2244,7 +2266,16 @@
             }
           ]
         }
-      }
+      },
+      "required": [
+        "offer_id",
+        "summary",
+        "merchant",
+        "location",
+        "start_date",
+        "end_date",
+        "details"
+      ]
     }
   }
 }
