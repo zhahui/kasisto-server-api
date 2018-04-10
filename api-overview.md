@@ -1141,7 +1141,7 @@ Obtain a list of offers that can be redeemed by the user.
 ##### Sample Request / Response
 
 ```http
-POST /payees HTTP/1.1
+POST /offers HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 secret: string
@@ -1164,13 +1164,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
           "long": 0.0
         }
     },
-    "category_id" : "string",
-    "meta" : [
-        { 
-            "name" : "string",
-            "value" : "string"
-        }
-    ]
+    "category_id" : "string"
 }
 ```
 
