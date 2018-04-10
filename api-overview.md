@@ -1,5 +1,5 @@
 # Kasisto Enterprise API Overview
-Version 1.3 beta 4
+Version 1.3 beta 5
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
