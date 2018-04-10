@@ -1182,7 +1182,7 @@ token: string (optional)
         "location_name" : "string",
         "location_contact_number" : "string",
         "location_email" : "string",
-        "url" : "string",
+        "offer_url" : "string",
         "location" : {
             "address" : "string",
             "city" : "string",
@@ -1203,7 +1203,15 @@ token: string (optional)
 ]
 ```
 
+##### Notes:
 
+1) The `merchant` refers to the name of the company providing the offer. For example, "McDonalds" 
+
+2) The `location_name` is a description of the merchant location. For example, "McDonalds @ Full Win Commercial Center"
+
+3) The `offer_url` is an external webpage identified by the bank to provide detailed information about that particular offer.
+
+4) It is recommended that the text in  `details` be kept concise to avoid clutter and information overload.
 
 ### Customer Action Methods
 
@@ -1755,7 +1763,8 @@ The list of possible messages should be defined prior to implementation.
           "lat": 0.0,
           "long": 0.0
         }
-    }
+    },
+    "category" : "string"
 }
 ```
 
@@ -1770,7 +1779,7 @@ The list of possible messages should be defined prior to implementation.
         "location_name" : "string",
         "location_contact_number" : "string",
         "location_email" : "string",
-        "url" : "string",
+        "offer_url" : "string",
         "location" : {
             "address" : "string",
             "city" : "string",
@@ -1781,7 +1790,7 @@ The list of possible messages should be defined prior to implementation.
                 "long" : 0.0
             }
         },
-        "category_ids" : ["string" ],
+        "categories" : ["string"],
         "start_date" : "2018-01-01",
         "end_date" : "2018-01-01",
         "details" : [

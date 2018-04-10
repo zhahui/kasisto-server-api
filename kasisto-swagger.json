@@ -2176,6 +2176,10 @@
           "description": "_ `user_id` of the customer",
           "type": "string"
         },
+        "category": {
+          "description": "The category id of the offer",
+          "type": "string"
+        },
         "location": {
           "description": "Location of customer at time of request",
           "$ref": "#/definitions/location"
@@ -2214,7 +2218,7 @@
         "location_name": {
           "description": "The name of the location.",
           "type": "string",
-          "example": "McDonalds Nathan Road"
+          "example": "McDonalds Nathan Road - Full Win Commercial Center"
         },
         "location_contact_number": {
           "description": "Contact number of the location",
@@ -2224,7 +2228,7 @@
           "description": "Email contact of the location",
           "type": "string"
         },
-        "url": {
+        "offer_url": {
           "description": "URI of where the customer can find out more information about the offer",
           "type": "string",
           "format": "uri"
