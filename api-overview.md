@@ -1163,8 +1163,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
           "lat": 0.0,
           "long": 0.0
         }
-    },
-    "category_id" : "string"
+    }
 }
 ```
 
@@ -1178,7 +1177,7 @@ token: string (optional)
     {
         "offer_id" : "string",
         "summary" : "string",
-        "image" : "string",
+        "image_url" : "string",
         "merchant" : "string",
         "location_name" : "string",
         "location_contact_number" : "string",
@@ -1194,7 +1193,7 @@ token: string (optional)
                 "long" : 0.0
             }
         },
-        "category_ids" : ["string" ],
+        "categories" : ["string"],
         "start_date" : "2018-01-01",
         "end_date" : "2018-01-01",
         "details" : [
@@ -1203,6 +1202,8 @@ token: string (optional)
     }
 ]
 ```
+
+
 
 ### Customer Action Methods
 

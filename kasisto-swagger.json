@@ -1194,7 +1194,7 @@
             "type": "string"
           },
           {
-            "name": "merchants_request",
+            "name": "offers_request",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/offers_request"
@@ -1203,7 +1203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "merchants response",
+            "description": "offers response",
             "schema": {
               "type": "array",
               "items": {
@@ -2180,10 +2180,6 @@
           "description": "Location of customer at time of request",
           "$ref": "#/definitions/location"
         },
-        "category_id": {
-          "description": "Category id to search",
-          "type": "string"
-        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
@@ -2191,10 +2187,7 @@
             "$ref": "#/definitions/name_value_pair"
           }
         }
-      },
-      "required": [
-        "user_id"
-      ]
+      }
     },
     "offer": {
       "type": "object",
@@ -2208,7 +2201,7 @@
           "type": "string",
           "example": "10% off all purchases"
         },
-        "image": {
+        "image_url": {
           "description": "URI of image that will be displayed in bot UI for promotions",
           "type": "string",
           "format": "uri"
@@ -2240,8 +2233,8 @@
           "description": "Location where offer can be redeemed.",
           "$ref": "#/definitions/location"
         },
-        "category_ids": {
-          "description": "List of `category_id`s that are relevant to offer",
+        "categories": {
+          "description": "List of category ids that are relevant to offer",
           "type": "array",
           "items": [
             {
