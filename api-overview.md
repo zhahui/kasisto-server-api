@@ -21,6 +21,8 @@ Version 1.3 beta 4
   * [/payees](#payees)
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
+- [Offers Methods](#offers-methods)
+  * [/offers](#offers)
 - [Customer Action Methods](#customer-action-methods)
   * [/customer_action](#customer-action)
 
@@ -1032,7 +1034,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
         "city": "string",
         "state": "string", 
         "zip": "string",
-        "country": "String",
+        "country": "string",
         "coordinates": {
           "lat": 0.0,
           "long": 0.0
@@ -1104,7 +1106,109 @@ token: string (optional)
     "星期六上午九時至下午一時"
 ]
 ```
+### Offers Methods
 
+#### Offers
+
+```
+POST /offers
+```
+
+Obtain a list of offers that can be redeemed by the user.
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| token | header |
+| locale | header |
+| request_id | header |
+| Date | header |
+| [offers_request](#offers_request) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | offers response | Array of [offer](#offer) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+
+##### Sample Request / Response
+
+```http
+POST /payees HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+locale: string
+request_id: string
+Date: Tue, 01 Jan 2017 00:00:00 GMT
+```
+```json
+{
+    "user_id": "string",
+    "location": {
+        "address": "string",
+        "city": "string",
+        "state": "string", 
+        "zip": "string",
+        "country": "string",
+        "coordinates": {
+          "lat": 0.0,
+          "long": 0.0
+        }
+    },
+    "category_id" : "string",
+    "meta" : [
+        { 
+            "name" : "string",
+            "value" : "string"
+        }
+    ]
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+[
+    {
+        "offer_id" : "string",
+        "summary" : "string",
+        "image" : "string",
+        "merchant" : "string",
+        "location_name" : "string",
+        "location_contact_number" : "string",
+        "location_email" : "string",
+        "url" : "string",
+        "location" : {
+            "address" : "string",
+            "city" : "string",
+            "state" : "string",
+            "country" :"string",
+            "coordinates" : {
+                "lat" : 0.0,
+                "long" : 0.0
+            }
+        },
+        "category_ids" : ["string" ],
+        "start_date" : "2018-01-01",
+        "end_date" : "2018-01-01",
+        "details" : [
+            "string"
+        ]
+    }
+]
+```
 
 ### Customer Action Methods
 
@@ -1641,3 +1745,52 @@ The list of possible messages should be defined prior to implementation.
 }
 ```
 
+#### offers_request
+
+```json
+{
+    "user_id": "string",
+    "location": {
+        "address": "string",
+        "city": "string",
+        "state": "string", 
+        "zip": "string",
+        "country": "string",
+        "coordinates": {
+          "lat": 0.0,
+          "long": 0.0
+        }
+    }
+}
+```
+
+#### offer
+
+```json
+    {
+        "offer_id" : "string",
+        "summary" : "string",
+        "image" : "string",
+        "merchant" : "string",
+        "location_name" : "string",
+        "location_contact_number" : "string",
+        "location_email" : "string",
+        "url" : "string",
+        "location" : {
+            "address" : "string",
+            "city" : "string",
+            "state" : "string",
+            "country" :"string",
+            "coordinates" : {
+                "lat" : 0.0,
+                "long" : 0.0
+            }
+        },
+        "category_ids" : ["string" ],
+        "start_date" : "2018-01-01",
+        "end_date" : "2018-01-01",
+        "details" : [
+            "string"
+        ]
+    }
+```
