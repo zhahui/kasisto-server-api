@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.3.0 Beta 4",
+    "version": "1.3.0 Beta 5",
     "title": "Kasisto API",
     "description": "Kasisto Enterprise API",
     "contact": {
@@ -1153,6 +1153,96 @@
           }
         }
       }
+    },
+    "/offers": {
+      "post": {
+        "x-name": "Offers",
+        "tags": [
+          "Offers"
+        ],
+        "description": "Get customer offers from merchants that are partnered with the bank",
+        "parameters": [
+          {
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },
+          {
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offers_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/offers_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "offers response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/offer"
+              }
+            },
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Failed",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "403": {
+            "description": "Access Denied",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1515,36 +1605,36 @@
         }
       }
     },
-    "platform":{
-        "type":"object",
-        "properties":{
-            "name":{
-                "type":"string"
-            },   
-            "conversation_id":{
-                "type":"string"
-            },   
-            "user_id":{
-                "type":"string"
-            }   
+    "platform": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
         }
+      }
     },
-    "device":{
-        "type":"object",
-        "properties":{
-            "type":{
-                "type":"string"
-            },   
-            "os":{
-                "type":"string"
-            },   
-            "model":{
-                "type":"string"
-            },   
-            "id":{
-                "type":"string"
-            }  
+    "device": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
         }
+      }
     },
     "coordinates": {
       "type": "object",
@@ -1791,40 +1881,40 @@
           "description": "True if fees for account can be waived",
           "type": "boolean"
         },
-        "expiration_date" : {
-          "description" : "Expiration date of the account",
-          "type" : "string",
-          "format" : "date"
+        "expiration_date": {
+          "description": "Expiration date of the account",
+          "type": "string",
+          "format": "date"
         },
-        "available_cash_advance_limit" : {
-          "description" : "Cash advance limit for credit cards",
-          "type" : "number",
-          "format" : "float"
+        "available_cash_advance_limit": {
+          "description": "Cash advance limit for credit cards",
+          "type": "number",
+          "format": "float"
         },
-        "original_tenor" : {
-            "description": "Original tenor period",
-            "type": "number",
-            "format" : "int32"
+        "original_tenor": {
+          "description": "Original tenor period",
+          "type": "number",
+          "format": "int32"
         },
-        "original_tenor_unit"  : {
-            "description": "Unit of the tenor period",
-            "type": "string",
-            "enum" : [
-              "year",
-              "month",
-              "day"
-            ]
+        "original_tenor_unit": {
+          "description": "Unit of the tenor period",
+          "type": "string",
+          "enum": [
+            "year",
+            "month",
+            "day"
+          ]
         },
         "maturity_date": {
           "description": "Maturity date of account",
           "type": "string",
           "format": "date"
-        },       
-        "annual_fee" : {
-          "description" : "Annual fee for the account",
-          "type" : "number",
-          "format" : "float"
-        } ,
+        },
+        "annual_fee": {
+          "description": "Annual fee for the account",
+          "type": "number",
+          "format": "float"
+        },
         "meta": {
           "description": "Optional data if needed for application",
           "type": "array",
@@ -2069,15 +2159,116 @@
             "$ref": "#/definitions/name_value_pair"
           }
         },
-        "category" : {
-          "description" : "Category that the payee belongs to",
-          "type" : "string",
+        "category": {
+          "description": "Category that the payee belongs to",
+          "type": "string",
           "enum": [
             "payee",
             "biller"
           ]
         }
       }
+    },
+    "offers_request": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "description": "_ `user_id` of the customer",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of customer at time of request",
+          "$ref": "#/definitions/location"
+        },
+        "meta": {
+          "description": "Optional data if needed for application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/name_value_pair"
+          }
+        }
+      }
+    },
+    "offer": {
+      "type": "object",
+      "properties": {
+        "offer_id": {
+          "description": "Unique identifier for the offer",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Summary text of the offer",
+          "type": "string",
+          "example": "10% off all purchases"
+        },
+        "image_url": {
+          "description": "URI of image that will be displayed in bot UI for promotions",
+          "type": "string",
+          "format": "uri"
+        },
+        "merchant": {
+          "description": "The name of merchant.",
+          "type": "string",
+          "example": "Mcdonalds"
+        },
+        "location_name": {
+          "description": "The name of the location.",
+          "type": "string",
+          "example": "McDonalds Nathan Road - Full Win Commercial Center"
+        },
+        "location_contact_number": {
+          "description": "Contact number of the location",
+          "type": "string"
+        },
+        "location_email": {
+          "description": "Email contact of the location",
+          "type": "string"
+        },
+        "offer_url": {
+          "description": "URI of where the customer can find out more information about the offer",
+          "type": "string",
+          "format": "uri"
+        },
+        "location": {
+          "description": "Location where offer can be redeemed.",
+          "$ref": "#/definitions/location"
+        },
+        "categories": {
+          "description": "List of category ids that are relevant to offer",
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "details": {
+          "description": "Contents to be displayed (Offer details, TnCs and etc.)",
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "offer_id",
+        "summary",
+        "merchant",
+        "location",
+        "start_date",
+        "end_date",
+        "details"
+      ]
     }
   }
 }
