@@ -1163,7 +1163,8 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
           "lat": 0.0,
           "long": 0.0
         }
-    }
+    },
+    "category" : "string"
 }
 ```
 
@@ -1193,7 +1194,6 @@ token: string (optional)
                 "long" : 0.0
             }
         },
-        "categories" : ["string"],
         "start_date" : "2018-01-01",
         "end_date" : "2018-01-01",
         "details" : [
@@ -1763,8 +1763,7 @@ The list of possible messages should be defined prior to implementation.
           "lat": 0.0,
           "long": 0.0
         }
-    },
-    "category" : "string"
+    }
 }
 ```
 

@@ -2176,10 +2176,6 @@
           "description": "_ `user_id` of the customer",
           "type": "string"
         },
-        "category": {
-          "description": "The category id of the offer",
-          "type": "string"
-        },
         "location": {
           "description": "Location of customer at time of request",
           "$ref": "#/definitions/location"
