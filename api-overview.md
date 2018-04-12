@@ -1204,13 +1204,13 @@ token: string (optional)
 
 ##### Notes:
 
-1) The `merchant` refers to the name of the company providing the offer. For example, "McDonalds" 
+1) The `merchant` refers to the name of the company providing the offer. For example, "ABC Restaurant" 
 
-2) The `location_name` is a description of the merchant location. For example, "McDonalds @ Full Win Commercial Center"
+2) The `location_name` is a description of the merchant location. For example, "ABC Restaurant @ Full Win Commercial Center"
 
 3) The `offer_url` is an external webpage identified by the bank to provide detailed information about that particular offer.
 
-4) It is recommended that the text in  `details` be kept concise to avoid clutter and information overload.
+4) The text in  `details` should be kept concise to avoid clutter and information overload.
 
 ### Customer Action Methods
 
