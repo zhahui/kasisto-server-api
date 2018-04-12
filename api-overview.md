@@ -1163,8 +1163,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
           "lat": 0.0,
           "long": 0.0
         }
-    },
-    "category" : "string"
+    }
 }
 ```
 
