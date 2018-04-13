@@ -1177,13 +1177,12 @@ token: string (optional)
     {
         "offer_id" : "string",
         "summary" : "string",
-        "image_url" : "string",
+        "image" : "string",
         "merchant" : "string",
         "location_name" : "string",
         "location_contact_number" : "string",
         "location_email" : "string",
         "offer_url" : "string",
-        "categories" : ["string"],
         "location" : {
             "address" : "string",
             "city" : "string",
@@ -1194,6 +1193,7 @@ token: string (optional)
                 "long" : 0.0
             }
         },
+        "categories" : ["string"],
         "start_date" : "2018-01-01",
         "end_date" : "2018-01-01",
         "details" : [
