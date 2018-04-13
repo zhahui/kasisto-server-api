@@ -2209,12 +2209,12 @@
         "merchant": {
           "description": "The name of merchant.",
           "type": "string",
-          "example": "Mcdonalds"
+          "example": "ABC Restaurant"
         },
         "location_name": {
           "description": "The name of the location.",
           "type": "string",
-          "example": "McDonalds Nathan Road - Full Win Commercial Center"
+          "example": "ABC Restaurant Nathan Road - Full Win Commercial Center"
         },
         "location_contact_number": {
           "description": "Contact number of the location",
