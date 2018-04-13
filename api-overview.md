@@ -1177,7 +1177,7 @@ token: string (optional)
     {
         "offer_id" : "string",
         "summary" : "string",
-        "image" : "string",
+        "image_url" : "string",
         "merchant" : "string",
         "location_name" : "string",
         "location_contact_number" : "string",
@@ -1773,7 +1773,7 @@ The list of possible messages should be defined prior to implementation.
     {
         "offer_id" : "string",
         "summary" : "string",
-        "image" : "string",
+        "image_url" : "string",
         "merchant" : "string",
         "location_name" : "string",
         "location_contact_number" : "string",
