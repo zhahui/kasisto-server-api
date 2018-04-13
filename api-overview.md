@@ -1183,6 +1183,7 @@ token: string (optional)
         "location_contact_number" : "string",
         "location_email" : "string",
         "offer_url" : "string",
+        "categories" : ["string"],
         "location" : {
             "address" : "string",
             "city" : "string",
