@@ -1,7 +1,8 @@
 import json
+from collections import OrderedDict
 
 def generate_markdown(input_filename):
-    spec=json.loads(open(input_filename,'r').read())
+    spec=json.loads(open(input_filename,'r').read(),object_pairs_hook=OrderedDict)
     print '# Kasisto Enterprise API Overview'
     print 'Version 1.2'
     print ''
@@ -104,20 +105,23 @@ def generate_markdown(input_filename):
         print '#### '+name
         print ''
         print '```json'
-        print json.dumps(generate_schema(def_obj),indent=4)
+        print json.dumps(generate_schema(spec,def_obj),indent=4)
         print '```'
         print ''
 
-def de_ref(spec,obj):
+def de_ref(spec,obj,dumps=True):
     if obj is not None:
         if '$ref' in obj:
             ref=obj['$ref'].replace('#/definitions/','')
             ref_obj=spec['definitions'].get(ref)
             if ref_obj is not None:
-                return json.dumps(generate_schema(ref_obj),indent=4)
+                if dumps:
+                    return json.dumps(generate_schema(spec,ref_obj),indent=4)
+                else:
+                    return generate_schema(spec,ref_obj)
         else:
             if obj.get('type')=='array':
-                return '['+de_ref(spec,obj.get('items'))+']'
+                return '['+de_ref(spec,obj.get('items'),dumps)+']'
     return ''
 
 def generate_ref_link(obj):
@@ -130,8 +134,8 @@ def generate_ref_link(obj):
                 return 'Array of '+generate_ref_link(obj.get('items'))
     return ''
 
-def generate_schema(def_obj):
-    obj={}
+def generate_schema(spec,def_obj):
+    obj=OrderedDict()
     if not 'properties' in def_obj:
         return obj
     for name,prop in def_obj['properties'].iteritems():
@@ -149,7 +153,7 @@ def generate_schema(def_obj):
                         obj[name]='2016-01-30T00:00:00.000+0000'
                     else:
                         if prop.get('type')=='object':
-                            obj[name]=generate_schema(prop)
+                            obj[name]=de_ref(spec,prop,dumps=False) 
                         else:
                             if prop.get('type')=='array':
                                 obj[name]=[prop.get('items')]

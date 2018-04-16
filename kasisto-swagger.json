@@ -1277,15 +1277,19 @@
           "type": "string"
         },
         "application":{
+            "type":"object",
           "$ref": "#/definitions/application"
         },
         "user":{
+            "type":"object",
           "$ref": "#/definitions/user"
         },
         "platform":{
+            "type":"object",
           "$ref": "#/definitions/platform"
         },
         "device":{
+            "type":"object",
           "$ref": "#/definitions/device"
         },
         "segment_names":{

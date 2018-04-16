@@ -181,6 +181,14 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
+    "user_id": "string", 
+    "otp": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -1252,15 +1260,38 @@ request_id: string
 ```
 ```json
 {
-    "application": "string", 
-    "sub_intent": "string", 
-    "request_text": "string", 
-    "device": "string", 
+    "interaction_type": "string", 
+    "application": {
+        "application_id": "string", 
+        "locale": "string", 
+        "environment": "string", 
+        "build_id": "string", 
+        "package_id": "string"
+    }, 
+    "user": {
+        "user_id": "string", 
+        "session_id": "string"
+    }, 
+    "platform": {
+        "name": "string", 
+        "conversation_id": "string", 
+        "user_id": "string"
+    }, 
+    "device": {
+        "type": "string", 
+        "os": "string", 
+        "model": "string", 
+        "id": "string"
+    }, 
     "segment_names": [
         {
             "type": "string"
         }
     ], 
+    "request_text": "string", 
+    "response": "", 
+    "intent": "string", 
+    "sub_intent": "string", 
     "elapsed_time": 0, 
     "platform": "string", 
     "meta": [
@@ -1268,12 +1299,7 @@ request_id: string
             "name": "string", 
             "value": "string"
         }
-    ], 
-    "intent": "string", 
-    "user": "string", 
-    "date": "2016-01-30T00:00:00.000+0000", 
-    "interaction_type": "string", 
-    "response": {}
+    ] 
 }
 ```
 
@@ -1397,7 +1423,18 @@ token: string (optional)
         "string"
     ],
     "opening_days": [
-        "string"
+        {
+            "type": "string", 
+            "enum": [
+                "monday", 
+                "tuesday", 
+                "wednesday", 
+                "thursday", 
+                "friday", 
+                "saturday", 
+                "sunday"
+            ]
+        }
     ],
     "languages": [
         "string"
@@ -1529,15 +1566,38 @@ token: string (optional)
 
 ```json
 {
-    "application": "string", 
-    "sub_intent": "string", 
-    "request_text": "string", 
-    "device": "string", 
+    "interaction_type": "string", 
+    "application": {
+        "application_id": "string", 
+        "locale": "string", 
+        "environment": "string", 
+        "build_id": "string", 
+        "package_id": "string"
+    }, 
+    "user": {
+        "user_id": "string", 
+        "session_id": "string"
+    }, 
+    "platform": {
+        "name": "string", 
+        "conversation_id": "string", 
+        "user_id": "string"
+    }, 
+    "device": {
+        "type": "string", 
+        "os": "string", 
+        "model": "string", 
+        "id": "string"
+    }, 
     "segment_names": [
         {
             "type": "string"
         }
     ], 
+    "request_text": "string", 
+    "response": "", 
+    "intent": "string", 
+    "sub_intent": "string", 
     "elapsed_time": 0, 
     "platform": "string", 
     "meta": [
