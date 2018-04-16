@@ -1284,16 +1284,14 @@ request_id: string
         "id": "string"
     }, 
     "segment_names": [
-        {
-            "type": "string"
-        }
+        "string"
     ], 
     "request_text": "string", 
     "response": "", 
     "intent": "string", 
     "sub_intent": "string", 
     "elapsed_time": 0, 
-    "platform": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string", 
@@ -1383,6 +1381,17 @@ token: string (optional)
 }
 ```
 
+#### application
+
+```json
+{
+    "application_id": "string", 
+    "locale": "string", 
+    "environment": "string", 
+    "build_id": "string", 
+    "package_id": "string"
+}
+```
 
 #### device
 
@@ -1590,27 +1599,20 @@ token: string (optional)
         "id": "string"
     }, 
     "segment_names": [
-        {
-            "type": "string"
-        }
+        "string"
     ], 
     "request_text": "string", 
-    "response": "", 
+    "response": {}, 
     "intent": "string", 
     "sub_intent": "string", 
     "elapsed_time": 0, 
-    "platform": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string", 
             "value": "string"
         }
-    ], 
-    "intent": "string", 
-    "user": "string", 
-    "date": "2016-01-30T00:00:00.000+0000", 
-    "interaction_type": "string", 
-    "response": {}
+    ]
 }
 ```
 

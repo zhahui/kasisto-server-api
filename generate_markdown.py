@@ -156,7 +156,11 @@ def generate_schema(spec,def_obj):
                             obj[name]=de_ref(spec,prop,dumps=False) 
                         else:
                             if prop.get('type')=='array':
-                                obj[name]=[prop.get('items')]
+                                p=prop.get('items')
+                                if 'type' in p and p['type']=='string':
+                                    obj[name]=['string']
+                                else:
+                                    obj[name]=[prop.get('items')]
                             else:
                                 obj[name]='string'
     return obj
