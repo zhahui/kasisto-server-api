@@ -1287,7 +1287,7 @@ request_id: string
         "string"
     ], 
     "request_text": "string", 
-    "response": "", 
+    "response": {}, 
     "intent": "string", 
     "sub_intent": "string", 
     "elapsed_time": 0, 
