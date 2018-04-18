@@ -121,7 +121,21 @@ def de_ref(spec,obj,dumps=True):
                     return generate_schema(spec,ref_obj)
         else:
             if obj.get('type')=='array':
-                return '['+de_ref(spec,obj.get('items'),dumps)+']'
+                if dumps:
+                    return '['+de_ref(spec,obj.get('items'),dumps)+']'
+                else:
+                    return [de_ref(spec,obj.get('items'),dumps)]
+        if 'type' in obj:
+            if obj.get('type')=='object':
+                if dumps:
+                    return "{}"
+                else:
+                    return {}
+            if obj.get('type')=='array':
+                if dumps:
+                    return "[]"
+                else:
+                    return []
     return ''
 
 def generate_ref_link(obj):
@@ -160,7 +174,7 @@ def generate_schema(spec,def_obj):
                                 if 'type' in p and p['type']=='string':
                                     obj[name]=['string']
                                 else:
-                                    obj[name]=[prop.get('items')]
+                                    obj[name]=de_ref(spec,prop,dumps=False)
                             else:
                                 obj[name]='string'
     return obj

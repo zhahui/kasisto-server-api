@@ -1302,7 +1302,8 @@
           "type": "string"
         },
         "response":{
-          "type": "object"
+          "type": "object",
+          "$ref":"#/definitions/interaction_request_response"
         },
         "intent":{
           "type": "string"
@@ -1678,6 +1679,60 @@
            } 
         }
     },
+    "interaction_request_response":{
+        "type":"object",
+        "properties":{
+            "message_contents":{
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/message_content"
+              }
+            },   
+            "quick_replies":{
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/quick_reply"
+              }
+            },   
+            "alternative_questions":{
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+            }   
+        }
+    },
+    "message_content":
+      {
+        "type":"object",
+        "properties":{
+            "type":{
+                "type":"string"
+            },
+            "payload":{
+                "type":"object"
+            },
+            "segment_name":
+            {
+                "type":"string"
+            }
+        }
+      },
+    "quick_reply":
+      {
+        "type":"object",
+        "properties":{
+            "type":{
+                "type":"string"
+            },
+            "payload":{
+                "type":"string"
+            },
+            "display_text":{
+                "type":"string"
+            }
+        }
+      },
     "platform":{
         "type":"object",
         "properties":{

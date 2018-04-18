@@ -1287,7 +1287,25 @@ request_id: string
         "string"
     ], 
     "request_text": "string", 
-    "response": {}, 
+    "response": {
+        "message_contents": [
+            {
+                "type": "string", 
+                "payload": {}, 
+                "segment_name": "string"
+            }
+        ], 
+        "quick_replies": [
+            {
+                "type": "string", 
+                "payload": "string", 
+                "display_text": "string"
+            }
+        ], 
+        "alternative_questions": [
+            "string"
+        ]
+    }, 
     "intent": "string", 
     "sub_intent": "string", 
     "elapsed_time": 0, 
@@ -1602,7 +1620,25 @@ token: string (optional)
         "string"
     ], 
     "request_text": "string", 
-    "response": {}, 
+    "response": {
+        "message_contents": [
+            {
+                "type": "string", 
+                "payload": {}, 
+                "segment_name": "string"
+            }
+        ], 
+        "quick_replies": [
+            {
+                "type": "string", 
+                "payload": "string", 
+                "display_text": "string"
+            }
+        ], 
+        "alternative_questions": [
+            "string"
+        ]
+    }, 
     "intent": "string", 
     "sub_intent": "string", 
     "elapsed_time": 0, 
@@ -1612,6 +1648,30 @@ token: string (optional)
             "name": "string", 
             "value": "string"
         }
+    ]
+}
+```
+
+#### interaction_request_response
+
+```json
+{
+    "message_contents": [
+        {
+            "type": "string", 
+            "payload": {}, 
+            "segment_name": "string"
+        }
+    ], 
+    "quick_replies": [
+        {
+            "type": "string", 
+            "payload": "string", 
+            "display_text": "string"
+        }
+    ], 
+    "alternative_questions": [
+        "string"
     ]
 }
 ```
@@ -1700,6 +1760,16 @@ token: string (optional)
     ],
     "date": "2016-01-30T00:00:00Z",
     "currency_code": "string"
+}
+```
+
+#### quick_reply
+
+```json
+{
+    "type": "string", 
+    "payload": "string", 
+    "display_text": "string"
 }
 ```
 
