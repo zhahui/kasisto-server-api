@@ -1,4 +1,4 @@
-# Kasisto Dynamic Guided Conversations<br>Webhook API Overview
+# Kasisto Dynamic Guided Conversations<br>NLG Message Templates
 
 ### Version information
 *Version* : 0.9 alpha 1
@@ -18,9 +18,9 @@
 
 ## Message structure 
 
-With Dynamic Guided Conversations, the Webhook is in charge of the generation of the messages to display to the user. The message content generated can contain variable types of elements to provide the user with rich content.
+With Dynamic Guided Conversations, the webhook is in charge of the generation of the messages to display to the user. The message content generated can contain variable types of elements to provide the user with rich content.
 
-Each time KAI invokes the Webhook, the webhook generates a message to the user.
+Each time KAI invokes the webhook, the webhook generates a message to the user.
 
 The message content can contain multiple elements:
 
