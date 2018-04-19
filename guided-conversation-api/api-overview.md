@@ -145,7 +145,7 @@ token: string (optional)
     "form_state": "pending_user",
     "request_user_input": {
         "name": "card_expiry_date",
-        "type": "Datetime"
+        "type": "DATETIME"
     }
 }
 ```
@@ -227,6 +227,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 3) The *user_inputs* bloc contains the *name* of the field that the Webhook asked to capture in the previous call.
 
 4) The data in the *value* field is normalized:
+
 | Input type | Pattern | Comment |
 | --------- | -------- | -------- |
 | Boolean | "true" / "false" | String value of the boolean |
