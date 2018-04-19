@@ -83,7 +83,7 @@ For this sample conversation, KAI would be trained with the following form:
 ## Interruptions
 A user may, in the middle of a guided form, ask the system an *out-of-form* question instead of answering the last form question he was presented with. For example, a form may ask the user how much money he is willing to put down on the mortgage he is applying for. At that point the user may decide to find out how much money he has in his accounts and ask the system "What are my balances?". 
 
-For each form, KAI can allow access to certain *Intents*. KAI can allow the user to check his account information. The mechanism can also be used to enable VpaGetAnswer (all FAQs) during a form, thus enabling users to learn more about the form or other products while they are in the process of completing the form. 
+For each form, KAI can allow access to certain *Intents*. KAI can allow the user to check his account information. The mechanism can also be used to enable *FAQ* (all FAQs) or *Definition* (all banking glossaries)  during a form, thus enabling users to learn more about the form or other products while they are in the process of completing the form. 
 
 When KAI interprets a question as out of form, it provides an answer to that question, and then asks again the last form question, which it had already asked, before the user entered the out-of-form question, and which the user has not responded to yet. 
 
