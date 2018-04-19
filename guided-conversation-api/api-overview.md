@@ -30,10 +30,10 @@ Server implementations should return a 403 HTTP status code response if authoriz
 The Kasisto API requests include a unique request identifier. This identifier is provided as a request_id field in the HTTP Request header. This request_id can be used to track the requests when investigating execution logs.
 
 ## Exception handling
-All the service in the Kasisto API should follow the same exception handling mechanism.
+All services using the Kasisto API should follow the same exception handling mechanism.
 
-1) When the customer is authenticated, KAI receives a token from the Bank. (Please check the KAI Conversational API specs for details on the available login flows)
-<br>Once KAI has a token for a customer, it provides it in the HTTP headers fields of the request.<br>The Bank's services are in charge of verifying the access rights before returning the data.
+1) When the customer is authenticated, KAI receives a token from the Server. (Please check the KAI Conversational API specs for details on the available login flows)
+<br>Once KAI has a token for a customer, it provides it in the HTTP headers fields of the request.<br>The Server's services are in charge of verifying the access rights before returning the data.
 
 2) When a service executes successfully, it should return a HTTP status 200.
 
@@ -43,6 +43,7 @@ All the service in the Kasisto API should follow the same exception handling mec
 | ------ | ----------- | ----------- | 
 | 401 | Authentication Failed | The backend service failed to authenticate the user.<br>This error can occur when the token provided by KAI is invalid or missing.| 
 | 403 | Access Denied |  The token provided by KAI is invalid or it expired.<br>KAI should obtain another token before retrying the call. |
+| 450 | One-Time Password is required | *not yet supported* |
 | 500 | Server Error | A server error occurred when processing the request.<br>When this error is returned, KAI terminates the form input and take over the conversation. |
 
 ## Guided Conversation Methods
@@ -72,6 +73,7 @@ This service initiates a new conversation between the User and the Webhook.
 | 200 | conversation response | [conversation_response](#conversation_response) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
 
 #### Sample Request 
@@ -103,15 +105,17 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 
     a) If the user is authenticated, KAI will include a session *token* in the HTTP request header and a *user_id* in the request payload.
 
-    b) If the user is not authenticated, the 2 fields will not be set.
+    b) If the user is not authenticated, the 2 fields **will not be set**.
 
     c) The Webhook should check for authorizations as explained in the [Exception handling](#exception-handling) section. 
 
     d) For unauthenticated users, depending on the form the Webhook should ask the user to login or allow him to proceed unauthenticated.
 
-2) When KAI starts a new conversation, it sends the form name to use in the *form_name* field. 
+2) When KAI starts a new conversation, it sends the form name to use in the *form_name* field.
 
-3) If the user's' sentence contains *slots*, KAI identifies the *slots* values and push them to the service in the *user_inputs* structure.  
+*sasha*: this would require that all form_names be unique - if there is not CRUD for form_names, it may be difficult to enforce. Should we allow form_name but return a KAI_form_id and require that be submitted in start_conversation - that way we can guarantee uniqueness. Thoughts?
+
+3) If the user's sentence contains *slots*, KAI identifies the *slots* values and pushes them to the service in the *user_inputs* structure.  
 
 4) The definition of the *form name* and for the possible *slots* should be in sync between KAI and the Webhook. For each form, we should define a shared definition:
 
@@ -153,7 +157,7 @@ token: string (optional)
 3) The *form_state* field indicates to KAI the status of the form.
 Possible values are [ *pending_user*, *completed*, *cancelled*, *failed* ].
 
-4) If the Webhook needs an additional user inputs to process the user request, it can ask KAI to capture it with a *request_user_input* block.
+4) If the Webhook needs additional user inputs to process the user request, it can ask KAI to capture it with a *request_user_input* block.
 The *request_user_input* specifies:
 
     a) The *name* of the input to be captured. 
@@ -230,7 +234,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 
 #### Sample Response 
 
-This service uses the exact same response object as the *Start conversation* service.
+This service uses the exact same response object as the *start_conversation* service.
 
 ## Schema Definitions
 

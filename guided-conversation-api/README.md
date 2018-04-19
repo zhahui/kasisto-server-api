@@ -13,7 +13,7 @@
 
 This document describes the Kasisto Enterprise API Specification for Dynamic Guided Conversations.
 
-Dynamic Guided Conversations are simple conversation that can be added to KAI. The main difference with traditional intents is that KAI delegates the execution of the conversation to a Bank component called *Guided Conversation Webhook*. During the conversation, this Webhook takes over KAI to orchestrate the interactions with the user. It uses KAI as a NLU processing engine only. 
+Dynamic Guided Conversations are simple conversation that can be added to KAI. The main difference with traditional intents is that KAI delegates the execution of the conversation to a Server component called *Guided Conversation Webhook*. During the conversation, this Webhook takes over KAI to orchestrate the interactions with the user. It uses KAI as a NLU processing engine and to process other requests such as FAQs or other intents implemented by KAI.
 
 ## Quick links
 
@@ -23,7 +23,7 @@ This section is an introduction to the Dymanic Guided Conversation framework ill
 
 - [Webhook API Overview](api-overview.md)
 
-This section details the Service rthat needs to be implemented by the Bank as part of the *Guided Conversation Webhook*.
+This section details the Service that needs to be implemented by the Server as part of the *Guided Conversation Webhook*.
 
 - [NLG Message templates](nlg-message-templates.md)
 
@@ -31,6 +31,6 @@ This section details the different message templates available to *Guided Conver
 
 - [NLU User input types](nlu-input-types.md)
 
-This section details the different type of data the Guided Conversation Webhook* can ask KAI to capture form the user inputs.
+This section details the different type of data the Guided Conversation Webhook* can ask KAI to capture from the user inputs.
 
 

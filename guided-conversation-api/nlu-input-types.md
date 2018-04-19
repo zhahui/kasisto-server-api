@@ -76,7 +76,7 @@ Captures any string from the user input.
 }
 ```
 
-The captured Boolean will be sent to the Webhook mostly unprocessed as KAI can't use NLU on strings. Using strings is not recommended.
+The captured String will be sent to the Webhook mostly unprocessed as KAI can't use NLU on strings. Using strings is not generally recommended as it puts the burden of interpretation to the Webhool
 
 ### Date
 
