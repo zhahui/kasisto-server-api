@@ -1175,7 +1175,7 @@
         "tags": [
           "Interaction"
         ],
-        "description": "User interaction transcript",
+        "description": "This service receives the user interaction transcripts as they occur.",
         "parameters": [
           {
             "name": "secret",
@@ -1213,7 +1213,7 @@
         ],
         "responses": {
           "200": {
-            "description": "interaction response"
+            "description": "The request has succeeded"
           },
           "401": {
             "description": "Authentication Failed",

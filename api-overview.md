@@ -1,5 +1,5 @@
 # Kasisto Enterprise API Overview
-Version 1.3 beta 4
+Version 1.3 beta 5
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
@@ -1334,7 +1334,7 @@ User interaction transcript
 
 | Status | Description | Schema |
 | ------ | ----------- | ------ |
-| 200 | interaction response |  |
+| 200 | The request has succeeded |  |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
