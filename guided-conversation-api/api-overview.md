@@ -226,15 +226,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 
 3) The *user_inputs* bloc contains the *name* of the field that the Webhook asked to capture in the previous call.
 
-4) The data in the *value* field is normalized:
-
-| Input type | Pattern | Comment |
-| --------- | -------- | -------- |
-| Boolean | "true" / "false" | String value of the boolean |
-| Number | - | String value of the number |
-| String | - | Contains the full text input from the user |
-| Datetime | "yyyy-MM-dd’T’HH:mm:ssZ" | In ISO-8601 format |
-| Email | xxx@xxx.xxx | Email address |
+4) The data in the *value* field is normalized as explained in [NLU User input types](nlu-input-types.md)
 
 #### Sample Response 
 
