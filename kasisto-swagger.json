@@ -41,7 +41,7 @@
       "name": "Bank Locations"
     },
     {
-      "name": "Customer Action Methods"
+      "name": "Customer Action"
     },
     {
       "name": "Interaction"
@@ -54,7 +54,7 @@
         "tags": [
           "Customer"
         ],
-        "description": "Get access token for a customer",
+        "description": "Gets an access token for a customer.",
         "parameters": [
           {
             "name": "secret",
@@ -73,6 +73,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -129,7 +130,7 @@
         "tags": [
           "Customer"
         ],
-        "description": "Validate One-Time Password and return new user token",
+        "description": "This service validates a One-Time Password and returns a new user token",
         "parameters": [
           {
             "name": "secret",
@@ -154,6 +155,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -228,7 +230,7 @@
         "tags": [
           "Customer"
         ],
-        "description": "Get customer object",
+        "description": "Gets the customer details.", 
         "parameters": [
           {
             "name": "secret",
@@ -253,6 +255,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -322,7 +325,7 @@
         "tags": [
           "Accounts"
         ],
-        "description": "Get customer accounts",
+        "description": "Gets the list of all the customer's accounts.",
         "parameters": [
           {
             "name": "secret",
@@ -347,6 +350,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -419,7 +423,7 @@
         "tags": [
           "Transactions"
         ],
-        "description": "Search customer transactions",
+        "description": "Searches the customer's transactions.",
         "parameters": [
           {
             "name": "secret",
@@ -444,6 +448,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -516,7 +521,7 @@
         "tags": [
           "Bank Locations"
         ],
-        "description": "Search for bank locations",
+        "description": "Searches for bank locations.",
         "parameters": [
           {
             "name": "secret",
@@ -541,6 +546,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -613,7 +619,7 @@
         "tags": [
           "Payments"
         ],
-        "description": "Pay funds to a payee",
+        "description": "Pays funds to a payee.",
         "parameters": [
           {
             "name": "secret",
@@ -638,6 +644,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -706,7 +713,7 @@
         "tags": [
           "Transfers"
         ],
-        "description": "Transfer funds between two accounts",
+        "description": "Transfers funds between two accounts of a customer.",
         "parameters": [
           {
             "name": "secret",
@@ -731,6 +738,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -797,9 +805,9 @@
       "post": {
         "x-name": "Customer Action",
         "tags": [
-          "Customer Action Methods"
+          "Customer Action"
         ],
-        "description": "Submits a customer action",
+        "description": "This service is a generic service that allows the customer to submit different type of requests.",
         "parameters": [
           {
             "name": "secret",
@@ -824,6 +832,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -893,7 +902,7 @@
         "tags": [
           "Payments"
         ],
-        "description": "Get list of payees for a user",
+        "description": "Gets the list of payees for a user.",
         "parameters": [
           {
             "name": "secret",
@@ -918,6 +927,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -1008,6 +1018,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -1073,7 +1084,7 @@
         "tags": [
           "Transactions"
         ],
-        "description": "Get merchants",
+        "description": "Get the list of merchants for this user.",
         "parameters": [
           {
             "name": "secret",
@@ -1098,6 +1109,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -1182,6 +1194,7 @@
             "in": "header",
             "required": true,
             "type": "string",
+              "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -1274,7 +1287,14 @@
       "type": "object",
       "properties": {
         "interaction_type":{
-          "type": "string"
+          "type": "string",
+          "enum": [
+              "USER_INPUT",
+              "PUSH_MESSAGE",
+              "LIVE_CHAT_OPTION_DISPLAYED",
+              "LOGOUT",
+              "ENTER_TOKEN"
+          ]
         },
         "application":{
             "type":"object",
@@ -1599,7 +1619,8 @@
       "type": "object",
       "properties": {
         "location": {
-          "$ref": "#/definitions/location"
+            "type":"object",
+            "$ref": "#/definitions/location"
         }
       }
     },
@@ -1644,6 +1665,7 @@
           "type": "string"
         },
         "coordinates": {
+            "type":"object",
           "$ref": "#/definitions/coordinates"
         }
       }
@@ -1707,7 +1729,15 @@
         "type":"object",
         "properties":{
             "type":{
-                "type":"string"
+                "type":"string",
+                  "enum": [
+                      "TEXT",
+                      "BUTTON",
+                      "MEDIUM",
+                      "CONTAINER",
+                      "EVENT",
+                      "CARD"
+                  ]
             },
             "payload":{
                 "type":"object"
@@ -1723,7 +1753,11 @@
         "type":"object",
         "properties":{
             "type":{
-                "type":"string"
+                "type":"string",
+                  "enum": [
+                      "TEXT",
+                      "LOCATION"
+                  ]
             },
             "payload":{
                 "type":"string"
@@ -2104,6 +2138,7 @@
           "type": "string"
         },
         "location": {
+            "type":"object",
           "$ref": "#/definitions/location"
         },
         "status": {
@@ -2163,6 +2198,7 @@
           "type": "string"
         },
         "location": {
+            "type":"object",
           "$ref": "#/definitions/location"
         },
         "phone_number": {
@@ -2185,7 +2221,7 @@
         },
         "opening_days": {
           "description": "Array of opening days",
-          "type": "array",
+          "type": "string",
           "items": {
             "type": "string",
             "enum": [

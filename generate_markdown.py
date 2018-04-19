@@ -75,7 +75,10 @@ def generate_markdown(input_filename):
                     print 'Accept: application/json'
                     for param in method_obj['parameters']:
                         if param['in']=='header':
-                            print param['name']+': string'
+                            if param['name']=='Date':
+                                print 'Date: "Tue, 01 Jan 2017 00:00:00 GMT"'
+                            else:
+                                print param['name']+': string'
                     print '```'
                     print '```json'
                     for param in method_obj['parameters']:
@@ -158,7 +161,10 @@ def generate_schema(spec,def_obj):
             obj['meta']=[{'name':'string','value':'string'}]
         else:
             if prop.get('type')=='number' or prop.get('type')=='integer':
-                obj[name]=0
+                if prop.get('format')=='float':
+                    obj[name]=0.0
+                else:
+                    obj[name]=0
             else:
                 if prop.get('format')=='date':
                     obj[name]='2016-01-30'
@@ -176,7 +182,13 @@ def generate_schema(spec,def_obj):
                                 else:
                                     obj[name]=de_ref(spec,prop,dumps=False)
                             else:
-                                obj[name]='string'
+                                if prop.get('type')=='boolean':
+                                    obj[name]=True
+                                else:
+                                    if 'enum' in prop:
+                                        obj[name]=prop['enum']
+                                    else:
+                                        obj[name]='string'
     return obj
 
 if __name__=='__main__':
