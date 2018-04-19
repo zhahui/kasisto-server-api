@@ -34,7 +34,7 @@ The following sequence diagram illustrate a sample Dynamic Guided Conversation.
 Using its knowledge, KAI identifies the form to trigger as "Renew Card" and the card number specified by the user.
 KAI invokes the Server's Guided Conversation Webhook to start a new conversation.
 
-3. The Server's Webhook initiates the form input and process the provided data.
+3. The Server's Webhook initiates the form input and processes the provided data.
 The card number is valid for this user and the form detects that it also needs the expiration date of the card.
 The Webhook builds a question for the user "Sure, What is the expiration date of your card?" and asks KAI to capture another parameter that is a date.
 
@@ -44,7 +44,7 @@ The Webhook builds a question for the user "Sure, What is the expiration date of
 
 6. KAI detects that the input contains a date as expected and sends the date to the Server's Webhook.
 
-7. The Server's Webhook validates that the date is correct. As the date is incorrect, the Webhook asks for the date again and builds a new message for the user: "The date you entered is invalid. What is the expiration date of your card?"
+7. The Server's Webhook validates that the date is correct. If the date is incorrect, the Webhook asks for the date again and builds a new message for the user: "The date you entered is invalid. What is the expiration date of your card?"
 
 8. KAI push the message to the User.
 
