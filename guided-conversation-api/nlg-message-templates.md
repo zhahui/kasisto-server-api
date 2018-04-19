@@ -8,7 +8,8 @@
 *Contact* : Kasisto  
 *Contact Email* : info@kasisto.com
 
-## Overview
+## Table of Contents
+- [Multi-language support](#multi-language-support)
 - [Message structure](#message-structure)
     + [Text message](#text-message)
     + [Button message](#button-message)
@@ -16,11 +17,15 @@
     + [Carousel message](#carousel-message)
     + [List message](#list-message)
 
+## Multi-language support
+
+It should be noted that Server's implementing Webhooks are responsible for supporting internationalization when interpreting results as well as generating user outputs through NLG. KAI requests sent to the Webhook include the HTTP request header parameter *locale*. This parameter can be used to distinguish different locales before generating a response.
+
 ## Message structure 
 
-With Dynamic Guided Conversations, the webhook is in charge of the generation of the messages to display to the user. The message content generated can contain variable types of elements to provide the user with rich content.
+With Dynamic Guided Conversations, the Webhook is in charge of the generation of the messages to display to the user. The message content generated can contain variable types of elements to provide the user with rich content.
 
-Each time KAI invokes the webhook, the webhook generates a message to the user.
+Each time KAI invokes the Webhook, the Webhook generates a message to the user.
 
 The message content can contain multiple elements:
 

@@ -8,7 +8,7 @@
 *Contact* : Kasisto  
 *Contact Email* : info@kasisto.com
 
-## Overview
+## Table of Contents
 - [User input types](#user-input-types)
   * [Boolean](#boolean)
   * [Number](#number)
@@ -17,7 +17,7 @@
   * [Email](#email)
   * [Currency Code](#currency-code)
   * [List of options](#list-of-options)
--[Custom types](#custom-types)
+- [Custom types](#custom-types)
 - [Schema definitions](#schema-definitions)
 
 ## User input types
@@ -76,7 +76,7 @@ Captures any string from the user input.
 }
 ```
 
-The captured String will be sent to the Webhook mostly unprocessed as KAI can't use NLU on strings. Using strings is not generally recommended as it puts the burden of interpretation to the Webhool
+The captured String will be sent to the Webhook mostly unprocessed as KAI can't use NLU on strings. Using strings is not generally recommended as it puts the burden of interpretation to the Webhook.
 
 ### Date
 
@@ -138,15 +138,33 @@ Captures an input from a pre-defined list of options.
         "name": "string",
         "type": "OPTIONS",
         "options": [
-            {"value": "option1", "title": "First option"},
-            {"value": "option2", "title": "Second option"},
-            {"value": "option3", "title": "Third option"}
+            {
+                "value": "2345",
+                "enabled": true,
+                "medium": {
+                    "medium_url": "http:///www.xxxbank.com/visa_card.jpg",
+                },
+                "title": "Visa (2345)",
+                "subtitle": "Expiring 20/10/2020",
+                "label": "Renew card 2345"
+            },
+            {
+                "value": "3456",
+                "enabled": true,
+                "medium": {
+                    "medium_url": "http:///www.xxxbank.com/amex_card.jpg",
+                },
+                "title": "Amex (3456)",
+                "subtitle": "Expiring 10/02/2024",
+                "label": "Renew card 3456"
+            }
         ]
     }
 }
 ```
 
 KAI porpose the list of available options to the user. The user select one.
+
 KAI sends the selected *value* to the Webhook.
 
 ## Custom types

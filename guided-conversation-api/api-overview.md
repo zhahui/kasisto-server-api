@@ -8,10 +8,11 @@
 *Contact* : Kasisto  
 *Contact Email* : info@kasisto.com
 
-## Overview
+## Table of Contents
 - [Authentication](#authentication)
 - [Authorization](#authorization)
 - [Tracking](#tracking)
+- [Multi-language support](#multi-language-support)
 - [Exception handling](#exception-handling)
 - [Guided Conversation Methods](#guided-conversation-methods)
   * [/start_conversation](#start-conversation)
@@ -19,7 +20,7 @@
 - [Schema definitions](#schema-definitions)
 
 ## Authentication
-The Kasisto API requires all requests to include a secret key header value used for request authentication.  Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
+The Kasisto API requires all requests to include a secret key header value used for request authentication. Kasisto will include the secret key header in each request from our servers. API implementations must validate the secret is correct.
 Server implementations should return a 401 HTTP status code response if authentication fails.
 
 ## Authorization
@@ -28,6 +29,9 @@ Server implementations should return a 403 HTTP status code response if authoriz
 
 ## Tracking
 The Kasisto API requests include a unique request identifier. This identifier is provided as a request_id field in the HTTP Request header. This request_id can be used to track the requests when investigating execution logs.
+
+## Multi-language support
+It should be noted that Server's implementing Webhooks are responsible for supporting internationalization when interpreting results as well as generating user outputs through NLG. KAI requests sent to the Webhook include the HTTP request header parameter *locale*. This parameter can be used to distinguish different locales before generating a response.
 
 ## Exception handling
 All services using the Kasisto API should follow the same exception handling mechanism.
@@ -111,9 +115,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
 
     d) For unauthenticated users, depending on the form the Webhook should ask the user to login or allow him to proceed unauthenticated.
 
-2) When KAI starts a new conversation, it sends the form name to use in the *form_name* field.
-
-*sasha*: this would require that all form_names be unique - if there is not CRUD for form_names, it may be difficult to enforce. Should we allow form_name but return a KAI_form_id and require that be submitted in start_conversation - that way we can guarantee uniqueness. Thoughts?
+2) When KAI starts a new conversation, it sends the form name to use in the *form_name* field. Note that *form_name* is the unique identifier of a form. Different forms can't share the same name.
 
 3) If the user's sentence contains *slots*, KAI identifies the *slots* values and pushes them to the service in the *user_inputs* structure.  
 
@@ -191,6 +193,7 @@ This service submits a user input to the Webhook to continue an existing convers
 | 200 | conversation response | [conversation_response](#conversation_response) |
 | 401 | Authentication Failed | [error_response](#error_response) |
 | 403 | Access Denied | [error_response](#error_response) |
+| 450 | One-Time Password is required | [error_response](#error_response) |
 | 500 | Server Error | [error_response](#error_response) |
 
 #### Sample Request 
@@ -289,6 +292,7 @@ This service uses the exact same response object as the *start_conversation* ser
 {
     "message": "string",
     "code": "string",
+    "otp_details": "string",
     "meta": [
         {
             "name": "string",
