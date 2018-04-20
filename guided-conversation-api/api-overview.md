@@ -142,7 +142,7 @@ token: string (optional)
             }
         }
     ],
-    "form_state": "pending_user",
+    "form_state": "PENDING_USER",
     "request_user_input": {
         "name": "card_expiry_date",
         "type": "DATETIME"
@@ -157,7 +157,15 @@ token: string (optional)
 2) The Webhook is in charge of the Natural Language Generation (NLG). It will create all the messages sent to the user to ask for clarifications or to provide him with information. KAI will only pass-through the messages. Check [NLG Message templates](nlg-message-templates.md) for more details.
 
 3) The *form_state* field indicates to KAI the status of the form.
-Possible values are [ *pending_user*, *completed*, *cancelled*, *failed* ].
+Possible values are [ *PENDING_USER*, *CANCELLED*, *COMPLETED*, *FAILED* ].
+
+    a) *PENDING_USER*: The form expects additional details and is pending a response from the user.
+
+    b) *CANCELLED*: The form input was cancelled by the user. No additional user input required.
+
+    c) *COMPLETED*: The form input was completed and the user was informed. No additional user input required.
+
+    d) *FAILED*: The form input failed. It could be that the user is not elligible or the requested service is not available. No additional user input required.
 
 4) If the Webhook needs additional user inputs to process the user request, it can ask KAI to capture it with a *request_user_input* block.
 The *request_user_input* specifies:
