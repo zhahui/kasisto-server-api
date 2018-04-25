@@ -21,8 +21,6 @@ Version 1.3 beta 5
   * [/payees](#payees)
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
-- [Offers Methods](#offers-methods)
-  * [/offers](#offers)
 - [Customer Action Methods](#customer-action-methods)
   * [/customer_action](#customer-action)
 - [Interaction Methods](#interaction-methods)
@@ -1426,7 +1424,7 @@ The list of possible messages should be defined prior to implementation.
 POST /interaction
 ```
 
-User interaction transcript
+This service receives the user interaction transcripts as they occur. (Only available from 2.0.1 onward.)
 
 ##### Request Parameters
 
@@ -2294,52 +2292,3 @@ token: string (optional)
 }
 ```
 
-#### offers_request
-
-```json
-{
-    "user_id": "string",
-    "location": {
-        "address": "string",
-        "city": "string",
-        "state": "string", 
-        "zip": "string",
-        "country": "string",
-        "coordinates": {
-          "lat": 0.0,
-          "long": 0.0
-        }
-    }
-}
-```
-
-#### offer
-
-```json
-    {
-        "offer_id" : "string",
-        "summary" : "string",
-        "image_url" : "string",
-        "merchant" : "string",
-        "location_name" : "string",
-        "location_contact_number" : "string",
-        "location_email" : "string",
-        "offer_url" : "string",
-        "location" : {
-            "address" : "string",
-            "city" : "string",
-            "state" : "string",
-            "country" :"string",
-            "coordinates" : {
-                "lat" : 0.0,
-                "long" : 0.0
-            }
-        },
-        "categories" : ["string"],
-        "start_date" : "2018-01-01",
-        "end_date" : "2018-01-01",
-        "details" : [
-            "string"
-        ]
-    }
-```

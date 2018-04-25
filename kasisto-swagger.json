@@ -1175,7 +1175,7 @@
         "tags": [
           "Interaction"
         ],
-        "description": "This service receives the user interaction transcripts as they occur.",
+        "description": "This service receives the user interaction transcripts as they occur. (Only available from 2.0.1 onward.)",
         "parameters": [
           {
             "name": "secret",
@@ -1793,7 +1793,6 @@
             }   
 
         }
-      }
     },
     "device": {
       "type": "object",

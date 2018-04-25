@@ -122,13 +122,13 @@ def de_ref(spec,obj,dumps=True):
                     return json.dumps(generate_schema(spec,ref_obj),indent=4)
                 else:
                     return generate_schema(spec,ref_obj)
-        else:
+        
+        if 'type' in obj:
             if obj.get('type')=='array':
                 if dumps:
                     return '['+de_ref(spec,obj.get('items'),dumps)+']'
                 else:
                     return [de_ref(spec,obj.get('items'),dumps)]
-        if 'type' in obj:
             if obj.get('type')=='object':
                 if dumps:
                     return "{}"
