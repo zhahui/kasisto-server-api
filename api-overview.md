@@ -1412,7 +1412,10 @@ request_id: string
             }
         ], 
         "alternative_questions": [
-            "string"
+            {
+                "question_id": "string", 
+                "question": "string"
+            }
         ]
     }, 
     "intent": "string", 
@@ -1519,6 +1522,15 @@ token: string (optional)
             "value": "string"
         }
     ]
+}
+```
+
+#### alternative_question
+
+```json
+{
+    "question_id": "string", 
+    "question": "string"
 }
 ```
 
@@ -1792,7 +1804,10 @@ token: string (optional)
             }
         ], 
         "alternative_questions": [
-            "string"
+            {
+                "question_id": "string", 
+                "question": "string"
+            }
         ]
     }, 
     "intent": "string", 
@@ -1837,7 +1852,10 @@ token: string (optional)
         }
     ], 
     "alternative_questions": [
-        "string"
+        {
+            "question_id": "string", 
+            "question": "string"
+        }
     ]
 }
 ```

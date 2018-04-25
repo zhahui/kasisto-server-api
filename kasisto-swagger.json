@@ -1719,7 +1719,7 @@
             "alternative_questions":{
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/alternative_question"
                   }
             }   
         }
@@ -1763,6 +1763,18 @@
                 "type":"string"
             },
             "display_text":{
+                "type":"string"
+            }
+        }
+      },
+    "alternative_question":
+      {
+        "type":"object",
+        "properties":{
+            "question_id":{
+                "type":"string"
+            },
+            "question":{
                 "type":"string"
             }
         }
