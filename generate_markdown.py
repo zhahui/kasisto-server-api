@@ -1,7 +1,8 @@
 import json
+from collections import OrderedDict
 
 def generate_markdown(input_filename):
-    spec=json.loads(open(input_filename,'r').read())
+    spec=json.loads(open(input_filename,'r').read(),object_pairs_hook=OrderedDict)
     print '# Kasisto Enterprise API Overview'
     print 'Version 1.2'
     print ''
@@ -74,7 +75,10 @@ def generate_markdown(input_filename):
                     print 'Accept: application/json'
                     for param in method_obj['parameters']:
                         if param['in']=='header':
-                            print param['name']+': string'
+                            if param['name']=='Date':
+                                print 'Date: "Tue, 01 Jan 2017 00:00:00 GMT"'
+                            else:
+                                print param['name']+': string'
                     print '```'
                     print '```json'
                     for param in method_obj['parameters']:
@@ -104,20 +108,37 @@ def generate_markdown(input_filename):
         print '#### '+name
         print ''
         print '```json'
-        print json.dumps(generate_schema(def_obj),indent=4)
+        print json.dumps(generate_schema(spec,def_obj),indent=4)
         print '```'
         print ''
 
-def de_ref(spec,obj):
+def de_ref(spec,obj,dumps=True):
     if obj is not None:
         if '$ref' in obj:
             ref=obj['$ref'].replace('#/definitions/','')
             ref_obj=spec['definitions'].get(ref)
             if ref_obj is not None:
-                return json.dumps(generate_schema(ref_obj),indent=4)
-        else:
+                if dumps:
+                    return json.dumps(generate_schema(spec,ref_obj),indent=4)
+                else:
+                    return generate_schema(spec,ref_obj)
+        
+        if 'type' in obj:
             if obj.get('type')=='array':
-                return '['+de_ref(spec,obj.get('items'))+']'
+                if dumps:
+                    return '['+de_ref(spec,obj.get('items'),dumps)+']'
+                else:
+                    return [de_ref(spec,obj.get('items'),dumps)]
+            if obj.get('type')=='object':
+                if dumps:
+                    return "{}"
+                else:
+                    return {}
+            if obj.get('type')=='array':
+                if dumps:
+                    return "[]"
+                else:
+                    return []
     return ''
 
 def generate_ref_link(obj):
@@ -130,15 +151,20 @@ def generate_ref_link(obj):
                 return 'Array of '+generate_ref_link(obj.get('items'))
     return ''
 
-def generate_schema(def_obj):
-    obj={}
+def generate_schema(spec,def_obj):
+    obj=OrderedDict()
+    if not 'properties' in def_obj:
+        return obj
     for name,prop in def_obj['properties'].iteritems():
         required=prop.get('required',False)
         if name=='meta':
             obj['meta']=[{'name':'string','value':'string'}]
         else:
             if prop.get('type')=='number' or prop.get('type')=='integer':
-                obj[name]=0
+                if prop.get('format')=='float':
+                    obj[name]=0.0
+                else:
+                    obj[name]=0
             else:
                 if prop.get('format')=='date':
                     obj[name]='2016-01-30'
@@ -147,12 +173,22 @@ def generate_schema(def_obj):
                         obj[name]='2016-01-30T00:00:00.000+0000'
                     else:
                         if prop.get('type')=='object':
-                            obj[name]=generate_schema(prop)
+                            obj[name]=de_ref(spec,prop,dumps=False) 
                         else:
                             if prop.get('type')=='array':
-                                obj[name]=[prop.get('items')]
+                                p=prop.get('items')
+                                if 'type' in p and p['type']=='string':
+                                    obj[name]=['string']
+                                else:
+                                    obj[name]=de_ref(spec,prop,dumps=False)
                             else:
-                                obj[name]='string'
+                                if prop.get('type')=='boolean':
+                                    obj[name]=True
+                                else:
+                                    if 'enum' in prop:
+                                        obj[name]=prop['enum']
+                                    else:
+                                        obj[name]='string'
     return obj
 
 if __name__=='__main__':

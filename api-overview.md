@@ -5,15 +5,15 @@ Version 1.3 beta 5
 - [Authorization](#authorization)
 - [Schema](#schema)
 - [Customer Methods](#customer-methods)
+  * [/token](#token)
   * [/validate_otp](#validate-otp)
   * [/customer](#customer)
-  * [/token](#token)
 - [Accounts Methods](#accounts-methods)
   * [/accounts](#accounts)
 - [Transactions Methods](#transactions-methods)
-  * [/merchants](#merchants)
   * [/transactions](#transactions)
   * [/categories](#categories)
+  * [/merchants](#merchants)
 - [Transfers Methods](#transfers-methods)
   * [/transfer](#transfer)
 - [Payments Methods](#payments-methods)
@@ -21,10 +21,10 @@ Version 1.3 beta 5
   * [/payees](#payees)
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
-- [Offers Methods](#offers-methods)
-  * [/offers](#offers)
 - [Customer Action Methods](#customer-action-methods)
   * [/customer_action](#customer-action)
+- [Interaction Methods](#interaction-methods)
+  * [/interaction](#interaction)
 
 
 ## Authentication
@@ -67,13 +67,83 @@ All the service in the Kasisto API should follow the same exception handling mec
 
 ### Customer Methods
 
+#### Token
+
+```
+POST /token
+```
+
+Gets an access token for a customer.
+
+This service is used for the Authentication pass-through mechanism. (Please check the KAI Conversational API specs for details on this login flow)
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| locale | header |
+| Date | header |
+| request_id | header |
+| [token_credentials](#token_credentials) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | token response | [token_response](#token_response) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /token HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
+request_id: string
+```
+```json
+{
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ]
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+{
+    "user_id": "string", 
+    "token": "string",
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
+}
+```
+
 #### Validate OTP
 
 ```
 POST /validate_otp
 ```
 
-This service validates a One-Time Password and return new user token.
+This service validates a One-Time Password and returns a new user token
 
 ##### Request Parameters
 
@@ -82,8 +152,8 @@ This service validates a One-Time Password and return new user token.
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [validate_otp_request](#validate_otp_request) | body |
 
 ##### Responses
@@ -108,13 +178,19 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
+    "user_id": "string", 
     "otp": "string",
-    "user_id": "string"
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -125,8 +201,14 @@ token: string (optional)
 ```
 ```json
 {
+    "user_id": "string", 
     "token": "string",
-    "user_id": "string"
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -152,8 +234,8 @@ Gets the customer details.
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [customer_request](#customer_request) | body |
 
 ##### Responses
@@ -176,11 +258,19 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
+    "user_id": "string", 
+    "otp": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -192,11 +282,11 @@ token: string (optional)
 ```json
 {
     "user_id": "string",
+    "full_name": "string", 
     "first_name": "string",
     "last_name": "string",
-    "full_name": "string",
     "email": "string",
-    "mobile_number" : "string",
+    "mobile_number": "string", 
     "meta": [
         {
             "name": "string",
@@ -212,69 +302,6 @@ token: string (optional)
 
 2) The user_id is mandatory in the service response as this field is used by KAI to identify unique customers.
 
-#### Token
-
-```
-POST /token
-```
-
-Gets an access token for a customer.
-
-This service is used for the Authentication pass-through mechanism. (Please check the KAI Conversational API specs for details on this login flow)
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header |
-| locale | header |
-| request_id | header |
-| Date | header |
-| [token_credentials](#token_credentials) | body |
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | token response | [token_response](#token_response) |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /token HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-locale: string
-request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
-```
-```json
-{
-    "meta": [
-        {
-            "name": "string",
-            "value": "string"
-        }
-    ]
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-{
-    "token": "string",
-    "user_id": "string"
-}
-```
 
 
 ### Accounts Methods
@@ -294,8 +321,8 @@ Gets the list of all the customer's accounts.
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [accounts_request](#accounts_request) | body |
 
 ##### Responses
@@ -318,12 +345,18 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
-    "user_id": "string"
+    "user_id": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -335,37 +368,60 @@ token: string (optional)
 ```json
 [{
     "account_id": "string",
-    "account_type": "string",
+    "account_type": [
+        "cd", 
+        "checking", 
+        "credit_card", 
+        "heloc", 
+        "ira", 
+        "investment", 
+        "loc", 
+        "loan", 
+        "money_market", 
+        "mortgage", 
+        "overdraft_protection", 
+        "sloc", 
+        "savings", 
+        "wire", 
+        "p2p_payment"
+    ], 
     "account_number": "string",
     "account_name": "string",
     "account_nickname": "string",
+    "account_status": [
+        "active", 
+        "inactive"
+    ], 
     "account_image": "string",
-    "account_status": "string", 
-    "current_balance": 0,
-    "available_balance": 0,
+    "current_balance": 0.0, 
+    "available_balance": 0.0, 
     "fcy_currency_code": "string",
-    "fcy_current_balance": 0,
-    "fcy_available_balance": 0,
-    "credit_limit": 0,
-    "interest_rate": 0,
-    "available_credit": 0,
-    "statement_date": "2016-01-01",
-    "payment_due_amount": 0,
+    "fcy_current_balance": 0.0, 
+    "fcy_available_balance": 0.0, 
+    "credit_limit": 0.0, 
+    "interest_rate": 0.0, 
+    "available_credit": 0.0, 
+    "statement_date": "2016-01-30", 
+    "payment_due_amount": 0.0, 
     "payment_due_date": "2016-01-30",
-    "minimum_payment_due_amount": 0,
+    "minimum_payment_due_amount": 0.0, 
     "reward_points": 0,
     "reward_miles": 0,
-    "reward_cashback": 0,
-    "can_transfer_to": false, 
-    "can_transfer_from": false, 
-    "can_pay_payee": false, 
-    "can_waive_fee": false, 
+    "reward_cashback": 0.0, 
+    "can_transfer_to": true, 
+    "can_transfer_from": true, 
+    "can_pay_payee": true, 
+    "can_waive_fee": true, 
     "expiration_date": "2016-01-30",
+    "available_cash_advance_limit": 0.0, 
     "original_tenor": 0,
-    "original_tenor_unit": string,
-    "annual_fee" : 0,
-    "available_cash_advance_limit" : 0,
-    "maturity_date": "2016-01-01",
+    "original_tenor_unit": [
+        "year", 
+        "month", 
+        "day"
+    ], 
+    "maturity_date": "2016-01-30", 
+    "annual_fee": 0.0, 
     "meta": [
         {
             "name": "string",
@@ -463,74 +519,6 @@ The mapping can change from Bank to Bank and is to be agreed with Kasisto prior 
 
 ### Transactions Methods
 
-#### Merchants
-
-```
-POST /merchants
-```
-
-Gets the list of merchants for this user.
-
-##### Request Parameters
-
-| Parameter | Location |
-| --------- | -------- |
-| secret | header |
-| token | header |
-| locale | header |
-| request_id | header |
-| Date | header |
-| [merchants_request](#merchants_request) | body |
-
-##### Responses
-
-| Status | Description | Schema |
-| ------ | ----------- | ------ |
-| 200 | merchants response | Array of [merchant](#merchant) |
-| 401 | Authentication Failed | [error_response](#error_response) |
-| 403 | Access Denied | [error_response](#error_response) |
-| 500 | Server Error | [error_response](#error_response) |
-| 501 | Not Implemented | [error_response](#error_response) |
-
-##### Sample Request / Response
-
-```http
-POST /merchants HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-secret: string
-token: string
-locale: string
-request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
-```
-```json
-{
-    "user_id": "string"
-}
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-token: string (optional)
-```
-```json
-[{
-    "merchant_id": "string",
-    "name": "string",
-    "alias": [
-        "string"
-    ],
-    "meta": [
-        {
-            "name": "string",
-            "value": "string"
-        }
-    ]
-}]
-```
-
 #### Transactions
 
 ```
@@ -546,8 +534,8 @@ Searches the customer's transactions.
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [transaction_criteria](#transaction_criteria) | body |
 
 ##### Responses
@@ -570,18 +558,18 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
     "user_id": "string",
-    "limit": 0,
     "account_ids": [
         "string"
     ],
-    "end_date": "2017-08-01T03:59:59Z",
-    "start_date": "2017-07-01T04:00Z"
+    "limit": 0, 
+    "start_date": "2016-01-30T00:00:00.000+0000", 
+    "end_date": "2016-01-30T00:00:00.000+0000"
 }
 ```
 
@@ -592,17 +580,16 @@ token: string (optional)
 ```
 ```json
 [{
-    "transaction_id": "string",
-    "transaction_type": "string",
     "account_id": "string",
-    "currency_code": "string",
-    "amount": 0,
-    "description": "string",
+    "transaction_id": "string", 
     "title": "string",
-    "status": "string",
-    "post_date": "2016-01-30T00:00:00Z",
-    "transaction_date": "2016-01-30T00:00:00Z",
-    "check_number": 0,
+    "description": "string", 
+    "transaction_type": [
+        "credit", 
+        "debit"
+    ], 
+    "amount": 0.0, 
+    "currency_code": "string", 
     "categories": [
         "string"
     ],
@@ -619,6 +606,14 @@ token: string (optional)
           "long": 0.0
         }
     },
+    "status": [
+        "posted", 
+        "pending", 
+        "cancelled"
+    ], 
+    "check_number": 0, 
+    "transaction_date": "2016-01-30T00:00:00.000+0000", 
+    "post_date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string",
@@ -665,8 +660,8 @@ Get transaction categories
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [categories_request](#categories_request) | body |
 
 ##### Responses
@@ -688,12 +683,18 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
-    "user_id": "string"
+    "user_id": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -705,6 +706,80 @@ token: string (optional)
 ```json
 [{
     "category_id": "string",
+    "name": "string",
+    "alias": [
+        "string"
+    ],
+    "meta": [
+        {
+            "name": "string",
+            "value": "string"
+        }
+    ]
+}]
+```
+
+#### Merchants
+
+```
+POST /merchants
+```
+
+Gets the list of merchants for this user.
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| token | header |
+| locale | header |
+| Date | header |
+| request_id | header |
+| [merchants_request](#merchants_request) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | merchants response | Array of [merchant](#merchant) |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /merchants HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+token: string
+locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
+request_id: string
+```
+```json
+{
+    "user_id": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+[{
+    "merchant_id": "string",
     "name": "string",
     "alias": [
         "string"
@@ -738,8 +813,8 @@ This service can be used to transfer money from one account to another or to exe
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [transfer_request](#transfer_request) | body |
 
 ##### Responses
@@ -762,23 +837,23 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
     "user_id": "string", 
-    "dest_account_id": "string",
     "source_account_id": "string",
-    "amount": 0,
+    "dest_account_id": "string", 
+    "amount": 0.0, 
+    "currency_code": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "date": "2016-01-30T00:00:00Z",
-    "currency_code": "string"
+    ]
 }
 ```
 
@@ -791,13 +866,18 @@ token: string (optional)
 {
     "transfer_id": "string",
     "reference_number": "string",
+    "status": [
+        "processed", 
+        "pending", 
+        "cancelled", 
+        "failed"
+    ], 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "status": "string"
+    ]
 }
 ```
 
@@ -834,8 +914,8 @@ Pays funds to a payee.
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [payment_request](#payment_request) | body |
 
 ##### Responses
@@ -858,23 +938,23 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
     "user_id": "string", 
-    "payee_id": "string", 
     "source_account_id": "string",
-    "amount": 0,
+    "payee_id": "string", 
+    "amount": 0.0, 
+    "currency_code": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "date": "2016-01-30T00:00:00Z",
-    "currency_code": "string"
+    ]
 }
 ```
 
@@ -887,13 +967,18 @@ token: string (optional)
 {
     "payment_id": "string",
     "reference_number": "string",
+    "status": [
+        "processed", 
+        "pending", 
+        "cancelled", 
+        "failed"
+    ], 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "status": "string"
+    ]
 }
 ```
 
@@ -925,8 +1010,8 @@ Gets the list of payees for a user.
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [payees_request](#payees_request) | body |
 
 ##### Responses
@@ -948,12 +1033,18 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
-    "user_id": "string"
+    "user_id": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -966,7 +1057,6 @@ token: string (optional)
 [{
     "payee_id": "string",
     "name": "string",
-    "category" : "string",
     "alias": [
         "string"
     ],
@@ -975,6 +1065,10 @@ token: string (optional)
             "name": "string",
             "value": "string"
         }
+    ], 
+    "category": [
+        "payee", 
+        "biller"
     ]
 }]
 ```
@@ -1000,8 +1094,8 @@ Searches for bank locations.
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [bank_locations_criteria](#bank_locations_criteria) | body |
 
 ##### Responses
@@ -1024,8 +1118,8 @@ Accept: application/json
 secret: string
 token: string (optional)
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
@@ -1035,6 +1129,7 @@ Date: Tue, 01 Jan 2017 00:00:00 GMT
         "city": "string",
         "state": "string", 
         "zip": "string",
+        "country": "string", 
         "country": "string",
         "coordinates": {
           "lat": 0.0,
@@ -1052,7 +1147,10 @@ token: string (optional)
 ```json
 [{
     "location_id": "string",
-    "location_type": "string",
+    "location_type": [
+        "atm", 
+        "bank"
+    ], 
     "location_name": "string",
     "location_url": "string",
     "location": {
@@ -1064,18 +1162,16 @@ token: string (optional)
         "coordinates": {
             "lat": 0.0,
             "long": 0.0
-        },
+        }
     },
     "phone_number": "string",
     "services": [
         "string"
     ],
-    "opening_days": [
-        "string"
-    ],
     "opening_hours": [
         "string"
     ],
+    "opening_days": "string", 
     "languages": [
         "string"
     ]
@@ -1231,8 +1327,8 @@ This service is a generic service that allows the customer to submit different t
 | secret | header |
 | token | header |
 | locale | header |
-| request_id | header |
 | Date | header |
+| request_id | header |
 | [customer_action_request](#customer_action_request) | body |
 
 ##### Responses
@@ -1255,14 +1351,14 @@ Accept: application/json
 secret: string
 token: string
 locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
 request_id: string
-Date: Tue, 01 Jan 2017 00:00:00 GMT
 ```
 ```json
 {
     "user_id": "string",
     "action": "string",
-    "parameters:": [
+    "parameters": [
         { 
             "name": "string", 
             "value": "string"
@@ -1280,7 +1376,12 @@ token: string (optional)
 {
     "reference_id": "string",
     "reference_number": "string",
-    "status": "string",
+    "status": [
+        "processed", 
+        "pending", 
+        "cancelled", 
+        "failed"
+    ], 
     "display_message_id": "string",
     "meta": [
         {
@@ -1315,6 +1416,136 @@ The list of possible messages should be defined prior to implementation.
 
 
 
+### Interaction Methods
+
+#### Interaction
+
+```
+POST /interaction
+```
+
+This service receives the user interaction transcripts as they occur. (Only available from 2.0.1 onward.)
+
+##### Request Parameters
+
+| Parameter | Location |
+| --------- | -------- |
+| secret | header |
+| locale | header |
+| Date | header |
+| request_id | header |
+| [interaction_request](#interaction_request) | body |
+
+##### Responses
+
+| Status | Description | Schema |
+| ------ | ----------- | ------ |
+| 200 | The request has succeeded |  |
+| 401 | Authentication Failed | [error_response](#error_response) |
+| 403 | Access Denied | [error_response](#error_response) |
+| 500 | Server Error | [error_response](#error_response) |
+| 501 | Not Implemented | [error_response](#error_response) |
+
+##### Sample Request / Response
+
+```http
+POST /interaction HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+secret: string
+locale: string
+Date: "Tue, 01 Jan 2017 00:00:00 GMT"
+request_id: string
+```
+```json
+{
+    "interaction_type": [
+        "USER_INPUT", 
+        "PUSH_MESSAGE", 
+        "LIVE_CHAT_OPTION_DISPLAYED", 
+        "LOGOUT", 
+        "ENTER_TOKEN"
+    ], 
+    "application": {
+        "application_id": "string", 
+        "locale": "string", 
+        "environment": "string", 
+        "build_id": "string", 
+        "package_id": "string"
+    }, 
+    "user": {
+        "user_id": "string", 
+        "session_id": "string"
+    }, 
+    "platform": {
+        "name": "string", 
+        "conversation_id": "string", 
+        "user_id": "string"
+    }, 
+    "device": {
+        "type": "string", 
+        "os": "string", 
+        "model": "string", 
+        "id": "string"
+    }, 
+    "segment_names": [
+        "string"
+    ], 
+    "request_text": "string", 
+    "response": {
+        "message_contents": [
+            {
+                "type": [
+                    "TEXT", 
+                    "BUTTON", 
+                    "MEDIUM", 
+                    "CONTAINER", 
+                    "EVENT", 
+                    "CARD"
+                ], 
+                "payload": {}, 
+                "segment_name": "string"
+            }
+        ], 
+        "quick_replies": [
+            {
+                "type": [
+                    "TEXT", 
+                    "LOCATION"
+                ], 
+                "payload": "string", 
+                "display_text": "string"
+            }
+        ], 
+        "alternative_questions": [
+            {
+                "question_id": "string", 
+                "question": "string"
+            }
+        ]
+    }, 
+    "intent": "string", 
+    "sub_intent": "string", 
+    "elapsed_time": 0, 
+    "date": "2016-01-30T00:00:00.000+0000", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ] 
+}
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+token: string (optional)
+```
+```json
+
+```
+
 
 ### Schema Definitions
 
@@ -1323,36 +1554,60 @@ The list of possible messages should be defined prior to implementation.
 ```json
 {
     "account_id": "string",
-    "account_type": "string",
+    "account_type": [
+        "cd", 
+        "checking", 
+        "credit_card", 
+        "heloc", 
+        "ira", 
+        "investment", 
+        "loc", 
+        "loan", 
+        "money_market", 
+        "mortgage", 
+        "overdraft_protection", 
+        "sloc", 
+        "savings", 
+        "wire", 
+        "p2p_payment"
+    ], 
     "account_number": "string",
     "account_name": "string",
     "account_nickname": "string",
+    "account_status": [
+        "active", 
+        "inactive"
+    ], 
     "account_image": "string",
-    "account_status": "string", 
-    "current_balance": 0,
-    "available_balance": 0,
+    "current_balance": 0.0, 
+    "available_balance": 0.0, 
     "fcy_currency_code": "string",
-    "fcy_current_balance": 0,
-    "fcy_available_balance": 0,
-    "credit_limit": 0,
-    "interest_rate": 0,
-    "available_credit": 0,
-    "statement_date": "2016-01-01",
-    "payment_due_amount": 0,
+    "fcy_current_balance": 0.0, 
+    "fcy_available_balance": 0.0, 
+    "credit_limit": 0.0, 
+    "interest_rate": 0.0, 
+    "available_credit": 0.0, 
+    "statement_date": "2016-01-30", 
+    "payment_due_amount": 0.0, 
     "payment_due_date": "2016-01-30",
-    "minimum_payment_due_amount": 0,
+    "minimum_payment_due_amount": 0.0, 
     "reward_points": 0,
     "reward_miles": 0,
-    "reward_cashback": 0,
-    "can_transfer_to": false, 
-    "can_transfer_from": false, 
-    "can_pay_payee": false, 
-    "can_waive_fee": false, 
-    "annual_fee" : 0,
-    "original_tenor" : 0,
-    "maturity_date" : "2020-01-01",
-    "expiration_date" : "2020-01-01",
-    "available_cash_advance_limit" : 0,
+    "reward_cashback": 0.0, 
+    "can_transfer_to": true, 
+    "can_transfer_from": true, 
+    "can_pay_payee": true, 
+    "can_waive_fee": true, 
+    "expiration_date": "2016-01-30", 
+    "available_cash_advance_limit": 0.0, 
+    "original_tenor": 0, 
+    "original_tenor_unit": [
+        "year", 
+        "month", 
+        "day"
+    ], 
+    "maturity_date": "2016-01-30", 
+    "annual_fee": 0.0, 
     "meta": [
         {
             "name": "string",
@@ -1376,35 +1631,36 @@ The list of possible messages should be defined prior to implementation.
 }
 ```
 
-#### platform
+#### alternative_question
 
 ```json
 {
-    "conversation_id": "string", 
-    "user_id": "string", 
-    "name": "string"
+    "question_id": "string", 
+    "question": "string"
 }
 ```
 
-
-#### device
+#### application
 
 ```json
 {
-    "type": "string", 
-    "model": "string", 
-    "os": "string", 
-    "id": "string"
+    "application_id": "string", 
+    "locale": "string", 
+    "environment": "string", 
+    "build_id": "string", 
+    "package_id": "string"
 }
 ```
-
 
 #### bank_location
 
 ```json
 {
     "location_id": "string",
-    "location_type": "string",
+    "location_type": [
+        "atm", 
+        "bank"
+    ], 
     "location_name": "string",
     "location_url": "string",
     "location": {
@@ -1457,7 +1713,13 @@ The list of possible messages should be defined prior to implementation.
 
 ```json
 {
-    "user_id": "string"
+    "user_id": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -1479,29 +1741,31 @@ The list of possible messages should be defined prior to implementation.
 }
 ```
 
+#### coordinates
+
+```json
+{
+    "lat": 0.0, 
+    "long": 0.0
+}
+```
+
 #### customer
 
 ```json
 {
+    "user_id": "string", 
+    "full_name": "string", 
     "first_name": "string",
     "last_name": "string",
-    "user_id": "string",
+    "email": "string", 
+    "mobile_number": "string", 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "full_name": "string",
-    "email": "string",
-    "mobile_number" : "string"
-}
-```
-
-#### customer_request
-
-```json
-{
+    ]
 }
 ```
 
@@ -1511,7 +1775,7 @@ The list of possible messages should be defined prior to implementation.
 {
     "user_id": "string",
     "action": "string",
-    "parameters:": [
+    "parameters": [
         { 
             "name": "string", 
             "value": "string"
@@ -1526,7 +1790,12 @@ The list of possible messages should be defined prior to implementation.
 {
     "reference_id": "string",
     "reference_number": "string",
-    "status": "string",
+    "status": [
+        "processed", 
+        "pending", 
+        "cancelled", 
+        "failed"
+    ], 
     "display_message_id": "string",
     "meta": [
         {
@@ -1537,13 +1806,37 @@ The list of possible messages should be defined prior to implementation.
 }
 ```
 
+#### customer_request
+
+```json
+{
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
+}
+```
+
+#### device
+
+```json
+{
+    "type": "string", 
+    "os": "string", 
+    "model": "string", 
+    "id": "string"
+}
+```
+
 #### error_response
 
 ```json
 {
     "message": "string",
     "code": "string",
-    "otp_details": null,
+    "otp_details": "string", 
     "display_message_id": "string", 
     "meta": [
         {
@@ -1554,6 +1847,140 @@ The list of possible messages should be defined prior to implementation.
 }
 ```
 
+#### interaction_request
+
+```json
+{
+    "interaction_type": [
+        "USER_INPUT", 
+        "PUSH_MESSAGE", 
+        "LIVE_CHAT_OPTION_DISPLAYED", 
+        "LOGOUT", 
+        "ENTER_TOKEN"
+    ], 
+    "application": {
+        "application_id": "string", 
+        "locale": "string", 
+        "environment": "string", 
+        "build_id": "string", 
+        "package_id": "string"
+    }, 
+    "user": {
+        "user_id": "string", 
+        "session_id": "string"
+    }, 
+    "platform": {
+        "name": "string", 
+        "conversation_id": "string", 
+        "user_id": "string"
+    }, 
+    "device": {
+        "type": "string", 
+        "os": "string", 
+        "model": "string", 
+        "id": "string"
+    }, 
+    "segment_names": [
+        "string"
+    ], 
+    "request_text": "string", 
+    "response": {
+        "message_contents": [
+            {
+                "type": [
+                    "TEXT", 
+                    "BUTTON", 
+                    "MEDIUM", 
+                    "CONTAINER", 
+                    "EVENT", 
+                    "CARD"
+                ], 
+                "payload": {}, 
+                "segment_name": "string"
+            }
+        ], 
+        "quick_replies": [
+            {
+                "type": [
+                    "TEXT", 
+                    "LOCATION"
+                ], 
+                "payload": "string", 
+                "display_text": "string"
+            }
+        ], 
+        "alternative_questions": [
+            {
+                "question_id": "string", 
+                "question": "string"
+            }
+        ]
+    }, 
+    "intent": "string", 
+    "sub_intent": "string", 
+    "elapsed_time": 0, 
+    "date": "2016-01-30T00:00:00.000+0000", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
+}
+```
+
+#### interaction_request_response
+
+```json
+{
+    "message_contents": [
+        {
+            "type": [
+                "TEXT", 
+                "BUTTON", 
+                "MEDIUM", 
+                "CONTAINER", 
+                "EVENT", 
+                "CARD"
+            ], 
+            "payload": {}, 
+            "segment_name": "string"
+        }
+    ], 
+    "quick_replies": [
+        {
+            "type": [
+                "TEXT", 
+                "LOCATION"
+            ], 
+            "payload": "string", 
+            "display_text": "string"
+        }
+    ], 
+    "alternative_questions": [
+        {
+            "question_id": "string", 
+            "question": "string"
+        }
+    ]
+}
+```
+
+#### location
+
+```json
+{
+    "address": "string", 
+    "city": "string", 
+    "state": "string", 
+    "zip": "string", 
+    "country": "string", 
+    "coordinates": {
+        "lat": 0.0, 
+        "long": 0.0
+    }
+}
+```
 
 #### merchant
 
@@ -1577,7 +2004,39 @@ The list of possible messages should be defined prior to implementation.
 
 ```json
 {
-    "user_id": "string"
+    "user_id": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
+}
+```
+
+#### message_content
+
+```json
+{
+    "type": [
+        "TEXT", 
+        "BUTTON", 
+        "MEDIUM", 
+        "CONTAINER", 
+        "EVENT", 
+        "CARD"
+    ], 
+    "payload": {}, 
+    "segment_name": "string"
+}
+```
+
+#### name_value_pair
+
+```json
+{
+    "name": "string", 
+    "value": "string"
 }
 ```
 
@@ -1595,6 +2054,10 @@ The list of possible messages should be defined prior to implementation.
             "name": "string",
             "value": "string"
         }
+    ], 
+    "category": [
+        "payee", 
+        "biller"
     ]
 }
 ```
@@ -1603,7 +2066,13 @@ The list of possible messages should be defined prior to implementation.
 
 ```json
 {
-    "user_id": "string"
+    "user_id": "string", 
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -1613,13 +2082,18 @@ The list of possible messages should be defined prior to implementation.
 {
     "payment_id": "string",
     "reference_number": "string",
+    "status": [
+        "processed", 
+        "pending", 
+        "cancelled", 
+        "failed"
+    ], 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "status": "string"
+    ]
 }
 ```
 
@@ -1628,17 +2102,53 @@ The list of possible messages should be defined prior to implementation.
 ```json
 {
     "user_id": "string", 
-    "payee_id": "string", 
     "source_account_id": "string",
-    "amount": 0,
+    "payee_id": "string", 
+    "amount": 0.0, 
+    "currency_code": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "date": "2016-01-30T00:00:00Z",
-    "currency_code": "string"
+    ]
+}
+```
+
+#### platform
+
+```json
+{
+    "name": "string", 
+    "conversation_id": "string", 
+    "user_id": "string"
+}
+```
+
+#### quick_reply
+
+```json
+{
+    "type": [
+        "TEXT", 
+        "LOCATION"
+    ], 
+    "payload": "string", 
+    "display_text": "string"
+}
+```
+
+#### token_credentials
+
+```json
+{
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -1646,8 +2156,14 @@ The list of possible messages should be defined prior to implementation.
 
 ```json
 {
+    "user_id": "string", 
     "token": "string",
-    "user_id": "string"
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
+        }
+    ]
 }
 ```
 
@@ -1655,17 +2171,16 @@ The list of possible messages should be defined prior to implementation.
 
 ```json
 {
-    "transaction_id": "string",
-    "transaction_type": "string",
     "account_id": "string",
-    "currency_code": "string",
-    "amount": 0,
-    "description": "string",
+    "transaction_id": "string", 
     "title": "string",
-    "status": "string",
-    "post_date": "2016-01-30T00:00:00Z",
-    "transaction_date": "2016-01-30T00:00:00Z",
-    "check_number": 0,
+    "description": "string", 
+    "transaction_type": [
+        "credit", 
+        "debit"
+    ], 
+    "amount": 0.0, 
+    "currency_code": "string", 
     "categories": [
         "string"
     ],
@@ -1681,7 +2196,15 @@ The list of possible messages should be defined prior to implementation.
           "lat": 0.0,
           "long": 0.0
         }
-    },
+    }, 
+    "status": [
+        "posted", 
+        "pending", 
+        "cancelled"
+    ], 
+    "check_number": 0, 
+    "transaction_date": "2016-01-30T00:00:00.000+0000", 
+    "post_date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string",
@@ -1696,12 +2219,12 @@ The list of possible messages should be defined prior to implementation.
 ```json
 {
     "user_id": "string",
-    "limit": 0,
     "account_ids": [
         "string"
     ],
-    "end_date": "2016-01-30T00:00:00Z",
-    "start_date": "2016-01-29T00:00:00Z"
+    "limit": 0, 
+    "start_date": "2016-01-30T00:00:00.000+0000", 
+    "end_date": "2016-01-30T00:00:00.000+0000"
 }
 ```
 
@@ -1711,13 +2234,18 @@ The list of possible messages should be defined prior to implementation.
 {
     "transfer_id": "string",
     "reference_number": "string",
+    "status": [
+        "processed", 
+        "pending", 
+        "cancelled", 
+        "failed"
+    ], 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "status": "string"
+    ]
 }
 ```
 
@@ -1726,17 +2254,26 @@ The list of possible messages should be defined prior to implementation.
 ```json
 {
     "user_id": "string", 
-    "dest_account_id": "string",
     "source_account_id": "string",
-    "amount": 0,
+    "dest_account_id": "string", 
+    "amount": 0.0, 
+    "currency_code": "string", 
+    "date": "2016-01-30T00:00:00.000+0000", 
     "meta": [
         {
             "name": "string",
             "value": "string"
         }
-    ],
-    "date": "2016-01-30T00:00:00Z",
-    "currency_code": "string"
+    ]
+}
+```
+
+#### user
+
+```json
+{
+    "user_id": "string", 
+    "session_id": "string"
 }
 ```
 
@@ -1744,57 +2281,14 @@ The list of possible messages should be defined prior to implementation.
 
 ```json
 {
+    "user_id": "string", 
     "otp": "string",
-    "user_id": "string"
-}
-```
-
-#### offers_request
-
-```json
-{
-    "user_id": "string",
-    "location": {
-        "address": "string",
-        "city": "string",
-        "state": "string", 
-        "zip": "string",
-        "country": "string",
-        "coordinates": {
-          "lat": 0.0,
-          "long": 0.0
+    "meta": [
+        {
+            "name": "string", 
+            "value": "string"
         }
-    }
+    ]
 }
 ```
 
-#### offer
-
-```json
-    {
-        "offer_id" : "string",
-        "summary" : "string",
-        "image_url" : "string",
-        "merchant" : "string",
-        "location_name" : "string",
-        "location_contact_number" : "string",
-        "location_email" : "string",
-        "offer_url" : "string",
-        "location" : {
-            "address" : "string",
-            "city" : "string",
-            "state" : "string",
-            "country" :"string",
-            "coordinates" : {
-                "lat" : 0.0,
-                "long" : 0.0
-            }
-        },
-        "categories" : ["string"],
-        "start_date" : "2018-01-01",
-        "end_date" : "2018-01-01",
-        "details" : [
-            "string"
-        ]
-    }
-```
