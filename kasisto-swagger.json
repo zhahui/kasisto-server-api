@@ -2413,11 +2413,9 @@
         "categories": {
           "description": "List of category ids that are relevant to offer",
           "type": "array",
-          "items": [
-            {
+          "items": {
               "type": "string"
-            }
-          ]
+          }
         },
         "start_date": {
           "type": "string",
@@ -2430,11 +2428,9 @@
         "details": {
           "description": "Contents to be displayed (Offer details, TnCs and etc.)",
           "type": "array",
-          "items": [
-            {
+          "items": {
               "type": "string"
-            }
-          ]
+          }
         }
       },
       "required": [
