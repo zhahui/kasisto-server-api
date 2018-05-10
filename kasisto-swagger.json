@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.3.0 Beta 5",
+    "version": "1.3.0 Beta 6",
     "title": "Kasisto API",
     "description": "Kasisto Enterprise API",
     "contact": {
@@ -2413,11 +2413,9 @@
         "categories": {
           "description": "List of category ids that are relevant to offer",
           "type": "array",
-          "items": [
-            {
+          "items": {
               "type": "string"
-            }
-          ]
+          }
         },
         "start_date": {
           "type": "string",
@@ -2430,11 +2428,9 @@
         "details": {
           "description": "Contents to be displayed (Offer details, TnCs and etc.)",
           "type": "array",
-          "items": [
-            {
+          "items": {
               "type": "string"
-            }
-          ]
+          }
         }
       },
       "required": [

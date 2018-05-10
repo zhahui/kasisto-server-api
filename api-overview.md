@@ -1,5 +1,5 @@
 # Kasisto Enterprise API Overview
-Version 1.3 beta 5
+Version 1.3 beta 6
 
 - [Authentication](#authentication)
 - [Authorization](#authorization)
@@ -21,6 +21,8 @@ Version 1.3 beta 5
   * [/payees](#payees)
 - [Bank Locations Methods](#bank-locations-methods)
   * [/bank_locations](#bank-locations)
+- [Offers Methods](#offers-methods)
+  * [/offers](#offers) 
 - [Customer Action Methods](#customer-action-methods)
   * [/customer_action](#customer-action)
 - [Interaction Methods](#interaction-methods)
