@@ -41,6 +41,9 @@
       "name": "Bank Locations"
     },
     {
+      "name": "Offers"
+    },
+    {
       "name": "Customer Action"
     },
     {
@@ -73,7 +76,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -155,7 +158,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -255,7 +258,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -350,7 +353,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -448,7 +451,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -546,7 +549,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -613,6 +616,96 @@
         }
       }
     },
+    "/offers": {
+      "post": {
+        "x-name": "Offers",
+        "tags": [
+          "Offers"
+        ],
+        "description": "Get customer offers from merchants that are partnered with the bank",
+        "parameters": [
+          {
+            "name": "secret",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Date",
+            "in": "header",
+            "required": true,
+            "type": "date-time",
+            "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
+          },
+          {
+            "name": "request_id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offers_request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/offers_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "offers response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/offer"
+              }
+            },
+            "headers": {
+              "token": {
+                "description": "Valid auth token for subsequent requests if using SSO tokens",
+                "type": "string"
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication Failed",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "403": {
+            "description": "Access Denied",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "501": {
+            "description": "Not Implemented",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          }
+        }
+      }
+    },
     "/payment": {
       "post": {
         "x-name": "Payment",
@@ -644,7 +737,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -738,7 +831,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -832,7 +925,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -927,7 +1020,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -1018,7 +1111,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -1109,7 +1202,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
@@ -1194,7 +1287,7 @@
             "in": "header",
             "required": true,
             "type": "string",
-              "format":"date-time",
+            "format":"date-time",
             "description": "The date and time that the message was sent (in HTTP-date format as defined by RFC 7231)"
           },
           {
