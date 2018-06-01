@@ -140,6 +140,10 @@ token: string (optional)
 }
 ```
 
+##### Notes:
+
+The ```/token``` operation should return at least 1 token type. I.e. ```token``` and ```refresh_token``` cannot both be blank.
+
 #### Validate OTP
 
 ```
